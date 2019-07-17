@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blueDark</item>
+        <item name="colorPrimaryDark">@color/blueDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:background">@color/blueDark</item>
+        <item name="android:textSize">@dimen/ll_margin</item>
+        <item name="android:textColor">@color/fontColour</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="user_profile_row">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">@dimen/text_input_spacing</item>
+    </style>
+    <style name="user_profile_key">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textSize">@dimen/user_profile_text_size</item>
+        <item name="android:layout_width">95sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="user_profile_value">
+        <item name="android:layout_marginLeft">@dimen/ll_margin</item>
+        <item name="android:layout_width">125sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">@dimen/user_profile_text_size</item>
+    </style>
+    <style name="small_text_style">
+        <item name="android:textSize">@dimen/ll_margin</item>
+        <item name="android:textColor">@color/blueDark</item>
+    </style>
+    <style name="heading_style">
+        <item name="android:textColor">@color/cardview_dark_background</item>
+        <item name="android:textSize">@dimen/text_input_spacing</item>
+    </style>
+    <style name="question_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/lightGray</item>
+        <item name="android:textSize">@dimen/twenty_four_sp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="sub_heading_style">
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@color/veryLightGray</item>
+    </style>
+
+
+</resources>

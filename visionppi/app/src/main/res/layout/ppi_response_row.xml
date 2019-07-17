@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/search_bar"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                    android:text="RadioButton"
+                    android:textSize="@dimen/user_profile_text_size"
+                    android:layout_width="140sp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/response_btn"
+                    android:layout_weight="4"
+                    />
+        <TextView
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="@dimen/user_profile_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/response_score" android:layout_weight="1"/>
+
+    </LinearLayout>
+</LinearLayout>
