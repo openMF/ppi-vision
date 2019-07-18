@@ -15,6 +15,14 @@ import kotlinx.android.synthetic.main.activity_computer_vision.*
 import android.content.pm.PackageManager
 import androidx.recyclerview.widget.GridLayoutManager
 import org.mifos.visionppi.adapters.SelectedImageAdapter
+import android.R.attr.data
+import androidx.core.app.NotificationCompat.getExtras
+
+
+
+
+
+
 
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
@@ -22,6 +30,9 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
     private var images = ArrayList<Bitmap?>()
     private val PICK_FROM_GALLERY = 1
+    private val CAMERA_REQUEST = 2
+    private val MY_CAMERA_PERMISSION_CODE = 100
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +40,10 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
         upload_from_gallery_btn.setOnClickListener {
             fetchFromGallery()
+        }
+
+        open_camera_btn.setOnClickListener {
+            fetchFromCamera()
         }
 
         selected_images_list.layoutManager = GridLayoutManager(this, 3)
@@ -54,8 +69,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 val ACTIVITY_SELECT_IMAGE = 1234
                 startActivityForResult(i, ACTIVITY_SELECT_IMAGE)
-
-                showToastMessage("The number of images ="+images.size.toString())
+                
                 selected_images_list.adapter = SelectedImageAdapter(images, this)
             }
         } catch (e: Exception) {
@@ -65,7 +79,17 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     }
 
     override fun fetchFromCamera() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        try {
+            if (ActivityCompat.checkSelfPermission(applicationContext,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
+            }
+            else {
+                val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(cameraIntent, CAMERA_REQUEST)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun analyzeImages() {
@@ -98,6 +122,11 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
             }
         }
 
+        if (requestCode === CAMERA_REQUEST && resultCode === Activity.RESULT_OK) {
+            val photoCaptured = data?.getExtras()?.get("data") as Bitmap
+            images.add(photoCaptured)
+        }
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -109,8 +138,18 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                         Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(galleryIntent, PICK_FROM_GALLERY)
                 } else {
-                    showToastMessage("Cannot open gallery")
+                    showToastMessage(getString(R.string.cant_open_gallery))
                 }
+        }
+
+        if (requestCode === MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show()
+                val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(cameraIntent, CAMERA_REQUEST)
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
