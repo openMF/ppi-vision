@@ -11,5 +11,4 @@ interface MainMVPView:MVPView {
     fun search(string: String)
     fun searchError()
     fun searchUnsuccessful()
-    //fun showToastMessage(string: String)
 }

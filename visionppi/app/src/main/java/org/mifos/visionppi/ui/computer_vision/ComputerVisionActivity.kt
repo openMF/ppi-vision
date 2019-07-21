@@ -15,14 +15,6 @@ import kotlinx.android.synthetic.main.activity_computer_vision.*
 import android.content.pm.PackageManager
 import androidx.recyclerview.widget.GridLayoutManager
 import org.mifos.visionppi.adapters.SelectedImageAdapter
-import android.R.attr.data
-import androidx.core.app.NotificationCompat.getExtras
-
-
-
-
-
-
 
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
@@ -47,7 +39,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         }
 
         selected_images_list.layoutManager = GridLayoutManager(this, 3)
-        selected_images_list.adapter = SelectedImageAdapter(images, this)
+        selected_images_list.adapter = SelectedImageAdapter(images, this, {position: Int -> imageRemove(position) })
     }
 
     override fun fetchFromGallery() {
@@ -69,8 +61,8 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 val ACTIVITY_SELECT_IMAGE = 1234
                 startActivityForResult(i, ACTIVITY_SELECT_IMAGE)
-                
-                selected_images_list.adapter = SelectedImageAdapter(images, this)
+
+                selected_images_list.adapter = SelectedImageAdapter(images, this, {position: Int -> imageRemove(position)})
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -132,7 +124,6 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             PICK_FROM_GALLERY ->
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     val galleryIntent =
                         Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -144,13 +135,19 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
         if (requestCode === MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show()
+                showToastMessage("Camera permission granted")
                 val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST)
             } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show()
+                showToastMessage("Camera permission denied")
             }
         }
+    }
+
+    fun imageRemove(position : Int){
+        images.removeAt(position)
+        selected_images_list.adapter = SelectedImageAdapter(images, this, {position: Int -> imageRemove(position)})
+
     }
 
 }

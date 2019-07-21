@@ -10,5 +10,4 @@ interface ComputerVisionMVPView : MVPView {
 
     fun analyzeImages()
 
-    //fun showToastMessage(string: String)
 }

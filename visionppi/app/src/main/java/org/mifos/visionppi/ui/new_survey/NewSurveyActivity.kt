@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.new_survey_toolbar.*
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.QuestionAdapter
 import org.mifos.visionppi.objects.PPISurvey
+import org.mifos.visionppi.objects.Response
 import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
 
@@ -42,10 +43,14 @@ class NewSurveyActivity : AppCompatActivity() , NewSurveyMVPView {
         snapHelper.attachToRecyclerView(ppi_survey)
         ppi_survey.layoutManager = LinearLayoutManager(this)
         ppi_survey.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-        ppi_survey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext)
+        ppi_survey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext, { response: Response -> onResponseClicked(response) })
     }
 
     override fun showToastMessage(string: String) {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
+    }
+
+    fun onResponseClicked( response: Response) {
+        showToastMessage(response.text)
     }
 }

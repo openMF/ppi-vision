@@ -26,7 +26,7 @@ class NewSurveyPresenter : BasePresenter<NewSurveyMVPView>() {
 
         try {
 
-            var response = get(url = url, headers = header, auth= BasicAuthorization("mifos", "password"))
+            var response = get(url = url, headers = header, auth= BasicAuthorization("mifos", "PASSWORD"))
 
             if (response.statusCode == 200) {
 
