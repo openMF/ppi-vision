@@ -49,4 +49,5 @@
     <string name="upload_from_gallery">Upload from gallery</string>
     <string name="analyze_images">Analyze Images</string>
     <string name="cant_open_gallery">Cannot open gallery</string>
+    <string name="cv_logo">cv_logo</string>
 </resources>

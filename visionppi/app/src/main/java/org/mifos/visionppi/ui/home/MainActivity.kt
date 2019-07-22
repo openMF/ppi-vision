@@ -2,13 +2,13 @@ package org.mifos.visionppi.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +43,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         search_btn.setOnClickListener {
-            search(search_query.text.toString())
+
+            search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            if(search_query.text.toString().length == 0)
+                searchError()
+
+            else
+                search(search_query.text.toString())
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -64,15 +70,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
@@ -80,7 +82,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_profile -> {
                 val intent = Intent(applicationContext, UserProfileActivity::class.java)
@@ -110,7 +111,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun search(string: String) {
 
-        clientList = mMainPresenter.searchClients(string, applicationContext)
+        clientList = mMainPresenter.searchClients(string, applicationContext, this)
+
+        if(clientList.size==0)
+            searchUnsuccessful()
+
         client_search_list.adapter = ClientSearchAdapter(clientList, this, { item -> onClick(item)})
     }
 

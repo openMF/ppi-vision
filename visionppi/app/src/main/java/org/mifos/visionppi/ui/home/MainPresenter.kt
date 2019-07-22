@@ -1,5 +1,6 @@
 package org.mifos.visionppi.ui.home
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
@@ -10,6 +11,7 @@ import org.mifos.visionppi.R
 import org.mifos.visionppi.api.APIEndPoint
 import org.mifos.visionppi.base.BasePresenter
 import org.mifos.visionppi.objects.Client
+import org.mifos.visionppi.utils.PrefManager
 
 /**
  * Created by Apoorva M K on 27/06/19.
@@ -18,7 +20,7 @@ import org.mifos.visionppi.objects.Client
 class MainPresenter : BasePresenter<MainMVPView>() {
 
 
-    fun searchClients(query: String, context:Context) : MutableList<Client> {
+    fun searchClients(query: String, context:Context, activity: Activity) : MutableList<Client> {
 
         var searchResult : MutableList<Client> = mutableListOf<Client>()
         val url = context.getString(R.string.demoURL).plus(APIEndPoint.SEARCH)
@@ -28,10 +30,14 @@ class MainPresenter : BasePresenter<MainMVPView>() {
         val payload = mapOf("query" to query, "exactMatch" to "false")
         val header = mapOf(
             "Fineract-Platform-TenantId" to tenantId)
+        val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name),Context.MODE_PRIVATE)
+        val mPrefManager = PrefManager()
+        val username = sharedPref.getString(mPrefManager.USERNAME, " ")
+        val password = sharedPref.getString(mPrefManager.PASSWORD, " ")
 
 
         try {
-            val response = get(url = url, params = payload, headers = header, auth= BasicAuthorization("mifos", "PASSWORD"))
+            val response = get(url = url, params = payload, headers = header, auth= BasicAuthorization(username, password))
 
             if (response.statusCode == 200) {
 

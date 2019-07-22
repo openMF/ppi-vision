@@ -9,7 +9,9 @@ import org.mifos.visionppi.objects.User
 
 class PrefManager {
 
-    public val USER_DETAILS = "user_details"
+    val USER_DETAILS = "user_details"
+    val USERNAME = "username"
+    val PASSWORD = "password"
     private val gson :Gson = Gson()
 
     private fun putString(preferenceKey :String, preferenceValue: String, activity:Activity, context: Context){
@@ -26,5 +28,10 @@ class PrefManager {
 
     fun saveUser(user: User, context: Context, activity: Activity){
         putString(USER_DETAILS, gson.toJson(user), activity, context)
+    }
+
+    fun saveLoginCredentials( username : String, password: String, context: Context, activity: Activity) {
+        putString(USERNAME, username, activity, context)
+        putString(PASSWORD, password, activity, context)
     }
 }

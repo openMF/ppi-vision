@@ -31,17 +31,15 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="fill_parent">
 
-        <RadioGroup android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/responses"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="100"
-                android:layout_margin="@dimen/ll_margin"/>
-        </RadioGroup>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/responses"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1000"
+                    android:layout_margin="@dimen/ll_margin"/>
         <Button
                 android:text="@string/submit_survey"
                 android:layout_width="match_parent"

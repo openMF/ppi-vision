@@ -40,6 +40,8 @@ class LoginPresenter : BasePresenter<LoginMVPView>(){
                 var jsonString = obj.toString()
                 var user = gson.fromJson(jsonString, User::class.java)
                 mPrefManager.saveUser(user, context, activity)
+                mPrefManager.saveLoginCredentials(username, password, context, activity)
+
                 return true
             }
         }catch (e : Exception)

@@ -14,6 +14,7 @@
             android:layout_height="80sp"
             app:srcCompat="@drawable/eye"
             android:id="@+id/imageView3"
+            android:contentDescription="@string/cv_logo"
             android:layout_marginBottom="@dimen/large_spacing"/>
     <Button
             android:text="@string/open_camera"
@@ -37,6 +38,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selected_images_list"
             android:layout_width="match_parent"
+            android:background="@drawable/search_bar"
             android:layout_height="200dp"/>
     <Button
             android:text="@string/analyze_images"

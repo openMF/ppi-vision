@@ -6,9 +6,12 @@
         android:background="@color/blueDark">
 
     <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_menu_camera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/eye"
+            android:scaleType="fitCenter"
+            android:background="@color/cardview_light_background"
+            style="@style/Button"
             android:id="@+id/computer_vision"/>
 
 

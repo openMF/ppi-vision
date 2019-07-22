@@ -34,7 +34,7 @@ class NewSurveyActivity : AppCompatActivity() , NewSurveyMVPView {
     }
 
     override fun getSurveyQuestions() {
-        mPPISurvey = mNewSurveyPresenter.getSurvey(1, applicationContext)
+        mPPISurvey = mNewSurveyPresenter.getSurvey(1, applicationContext, this)
         renderSurvey(mPPISurvey)
     }
 
