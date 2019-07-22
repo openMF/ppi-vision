@@ -20,7 +20,7 @@ import org.mifos.visionppi.adapters.SelectedImageAdapter
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
 
-    private var images = ArrayList<Bitmap?>()
+    private val images = ArrayList<Bitmap?>()
     private val PICK_FROM_GALLERY = 1
     private val CAMERA_REQUEST = 2
     private val MY_CAMERA_PERMISSION_CODE = 100
@@ -110,6 +110,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
                 val yourSelectedImage = BitmapFactory.decodeFile(filePath)
                 images.add(yourSelectedImage)
+                selected_images_list.adapter = SelectedImageAdapter(images, this, {position: Int -> imageRemove(position)})
 
             }
         }
@@ -117,6 +118,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         if (requestCode === CAMERA_REQUEST && resultCode === Activity.RESULT_OK) {
             val photoCaptured = data?.getExtras()?.get("data") as Bitmap
             images.add(photoCaptured)
+            selected_images_list.adapter = SelectedImageAdapter(images, this, {position: Int -> imageRemove(position)})
         }
 
     }
