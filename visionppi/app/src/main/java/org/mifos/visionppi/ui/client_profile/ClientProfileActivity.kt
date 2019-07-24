@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityClientProfileBinding
 import org.mifos.visionppi.objects.Client
-import org.mifos.visionppi.ui.new_survey.NewPPISurveyActivity
 import org.mifos.visionppi.ui.new_survey.NewSurveyActivity
 
 /**
@@ -27,7 +26,7 @@ class ClientProfileActivity : AppCompatActivity() , ClientProfileMVPView {
         setClientDetails(clientDetails)
 
         binding.newSurveyBtn.setOnClickListener {
-            val intent= Intent(applicationContext, NewPPISurveyActivity::class.java)
+            val intent= Intent(applicationContext, NewSurveyActivity::class.java)
             startActivity(intent)
         }
 
