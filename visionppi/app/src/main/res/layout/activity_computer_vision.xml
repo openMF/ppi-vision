@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity"
+        android:padding="@dimen/twenty_four_sp">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="80sp"
+            app:srcCompat="@drawable/eye"
+            android:id="@+id/imageView3"
+            android:contentDescription="@string/cv_logo"
+            android:layout_marginBottom="@dimen/large_spacing"/>
+    <Button
+            android:text="@string/open_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/open_camera_btn"
+            android:layout_marginBottom="@dimen/twenty_four_sp"
+            style="@style/Button"/>
+    <Button
+            android:text="@string/upload_from_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/upload_from_gallery_btn"
+            style="@style/Button"
+            android:layout_marginBottom="@dimen/twenty_four_sp"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/selected_images_list"
+            android:layout_width="match_parent"
+            android:background="@drawable/search_bar"
+            android:layout_height="200dp"/>
+    <Button
+            android:text="@string/analyze_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Button"
+            android:id="@+id/analyze_images"
+            android:layout_marginTop="@dimen/ll_margin"/>
+
+    </LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

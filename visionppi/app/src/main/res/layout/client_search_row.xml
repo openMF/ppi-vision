@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/client_search_row"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              style="@style/Button"
+              android:clickable="true"
+              android:background="@drawable/list_selector"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/foursp_margin">
+
+    <TextView
+            android:id="@+id/client_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:padding="@dimen/foursp_margin"/>
+
+    <TextView
+            android:id="@+id/client_account_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dfsd"
+            android:textSize="@dimen/ll_margin"
+            android:paddingLeft="@dimen/foursp_margin"
+            android:paddingBottom="@dimen/foursp_margin"/>
+
+</LinearLayout>
