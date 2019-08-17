@@ -44,7 +44,7 @@ class Network(private val baseUrl: String, enableLog: Boolean) {
 
         val headerAuthorizationInterceptor = Interceptor() {
             var request = it.request()
-            val headers = request.headers.newBuilder().add("Authorization","Bearer ya29.c.ElpnB2TbBnZuDEvLWDUEYpkyk6Bv6nD-en97MUSt8e1X7Rpdrikwuhp4A0c-p4E_klNKHKhSlsulo64WgpP7nvL0T6w5903KHYSMglHwwGEgjBnkYxRf_hx6U3A").build()
+            val headers = request.headers.newBuilder().add("Authorization","Bearer ya29.c.ElpnBwkNMM03GFQ5I1hBa_ZCk25lWwHezHCz6ObNB8LAyKx0DQm0WySPPFqDwSHtnDe6Yy9tNYpBU2WnpJXAo2edDrFqvBYdMgFCcikONPEnEdcmP-PGdk6Jp54").build()
             request = request.newBuilder().headers(headers).build()
             return@Interceptor it.proceed(request)
         }

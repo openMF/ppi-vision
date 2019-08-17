@@ -11,9 +11,12 @@ import androidx.core.app.ActivityCompat
 import org.mifos.visionppi.R
 import android.graphics.BitmapFactory
 import android.app.Activity
+import android.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_computer_vision.*
 import android.content.pm.PackageManager
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.dialog_cv_result_layout.*
+import kotlinx.android.synthetic.main.dialog_cv_result_layout.view.*
 import org.mifos.visionppi.adapters.SelectedImageAdapter
 import kotlin.math.roundToInt
 
@@ -26,6 +29,14 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private val PICK_FROM_GALLERY = 1
     private val CAMERA_REQUEST = 2
     private val MY_CAMERA_PERMISSION_CODE = 100
+
+    companion object {
+        var objectsDetected = "None"
+        fun getObjects():String { return objectsDetected }
+        fun setObjects(string: String){
+            objectsDetected = string
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +55,15 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
         analyze_images.setOnClickListener {
             analyzeImages()
+        }
+
+        view_results.setOnClickListener {
+            var mBuilder = AlertDialog.Builder(this)
+            var mView = layoutInflater.inflate(R.layout.dialog_cv_result_layout, null)
+            mBuilder.setView(mView)
+            mView.objects_detected.setText(objectsDetected)
+            mBuilder.show()
+
         }
     }
 

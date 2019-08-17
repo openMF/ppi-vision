@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent" android:paddingBottom="@dimen/text_input_spacing">
 
     <TextView
             android:text="Objects Detected"
@@ -20,12 +20,4 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/ll_margin"
             android:paddingRight="@dimen/ll_margin" android:paddingBottom="@dimen/ll_margin"/>
-    <Button
-            android:id="@+id/use_cv_tool"
-            style="@style/Button"
-            android:text="@string/use_computer_vision_tool"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/text_input_spacing"
-            android:layout_marginRight="@dimen/text_input_spacing"/>
 </LinearLayout>

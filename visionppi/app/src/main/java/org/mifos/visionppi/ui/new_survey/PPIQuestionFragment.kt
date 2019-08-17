@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.dialog_cv_result_layout.*
-import kotlinx.android.synthetic.main.new_survey_toolbar.*
 import kotlinx.android.synthetic.main.new_survey_toolbar.view.*
 import kotlinx.android.synthetic.main.new_survey_toolbar.view.computer_vision
 import kotlinx.android.synthetic.main.ppi_question_layout.view.*
@@ -33,6 +31,7 @@ class PPIQuestionFragment( var questionData: Question, val mContext: Context, va
         view.computer_vision.setOnClickListener {
                 val intent = Intent(mContext, ComputerVisionActivity::class.java)
                 startActivity(intent)
+
         }
         return view
     }

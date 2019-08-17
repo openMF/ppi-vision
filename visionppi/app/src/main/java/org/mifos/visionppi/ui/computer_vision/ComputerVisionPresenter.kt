@@ -1,18 +1,14 @@
 package org.mifos.visionppi.ui.computer_vision
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Base64
 import android.util.Log
-import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.startActivity
-import org.mifos.visionppi.R
+import android.widget.Toast
 import org.mifos.visionppi.base.BasePresenter
 import java.io.ByteArrayOutputStream
 import org.mifos.visionppi.objects.*
-import org.mifos.visionppi.ui.new_survey.NewPPISurveyActivity
 import kotlin.collections.ArrayList
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,6 +39,8 @@ class ComputerVisionPresenter : BasePresenter<ComputerVisionMVPView>(){
                 override fun onResponse(call: Call<PayloadResult>?, response: Response<PayloadResult>?) {
                     if (response!!.isSuccessful) {
                         Log.d("Hello", response.body().toString())
+                        ComputerVisionActivity.setObjects("${response?.body()?.items?.first()?.displayName}")
+                        Toast.makeText(context, "Image Analysis Complete", Toast.LENGTH_LONG)
                     }
                 }
 
