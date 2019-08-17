@@ -1,4 +1,3 @@
 package org.mifos.visionppi.objects
 
-class VisionAPIPayload {
-}
+data class VisionAPIPayload(var payload: Payload)

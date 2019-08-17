@@ -50,4 +50,7 @@
     <string name="analyze_images">Analyze Images</string>
     <string name="cant_open_gallery">Cannot open gallery</string>
     <string name="cv_logo">cv_logo</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="camera_permission_granted">Camera permission granted</string>
+    <string name="use_computer_vision_tool">Use Computer Vision Tool</string>
 </resources>

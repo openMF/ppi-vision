@@ -4,4 +4,28 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+            android:text="Objects Detected"
+            style="@style/heading_text_style"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView2"
+            android:padding="@dimen/ll_margin"/>
+    <TextView
+            android:id="@+id/objects_detected"
+            android:text="None"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="@dimen/user_profile_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/ll_margin"
+            android:paddingRight="@dimen/ll_margin" android:paddingBottom="@dimen/ll_margin"/>
+    <Button
+            android:id="@+id/use_cv_tool"
+            style="@style/Button"
+            android:text="@string/use_computer_vision_tool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_input_spacing"
+            android:layout_marginRight="@dimen/text_input_spacing"/>
 </LinearLayout>
