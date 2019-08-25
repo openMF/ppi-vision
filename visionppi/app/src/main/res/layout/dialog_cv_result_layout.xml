@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:paddingBottom="@dimen/text_input_spacing">
+
+    <TextView
+            android:text="Objects Detected"
+            style="@style/heading_text_style"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView2"
+            android:padding="@dimen/ll_margin"/>
+    <TextView
+            android:id="@+id/objects_detected"
+            android:text="None"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="@dimen/user_profile_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/ll_margin"
+            android:paddingRight="@dimen/ll_margin" android:paddingBottom="@dimen/ll_margin"/>
+</LinearLayout>

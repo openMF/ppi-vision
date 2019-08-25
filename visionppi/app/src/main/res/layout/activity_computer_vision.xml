@@ -16,20 +16,27 @@
             android:id="@+id/imageView3"
             android:contentDescription="@string/cv_logo"
             android:layout_marginBottom="@dimen/large_spacing"/>
-    <Button
-            android:text="@string/open_camera"
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/open_camera_btn"
-            android:layout_marginBottom="@dimen/twenty_four_sp"
-            style="@style/Button"/>
-    <Button
-            android:text="@string/upload_from_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/upload_from_gallery_btn"
-            style="@style/Button"
-            android:layout_marginBottom="@dimen/twenty_four_sp"/>
+            android:layout_height="wrap_content">
+        <Button
+                android:text="@string/open_camera"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/open_camera_btn"
+                android:layout_marginBottom="@dimen/twenty_four_sp"
+                style="@style/Button" android:layout_marginEnd="@dimen/text_input_spacing"/>
+        <Button
+                android:text="@string/upload_from_gallery"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/upload_from_gallery_btn"
+                style="@style/Button"
+                android:layout_marginBottom="@dimen/twenty_four_sp"/>
+    </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -46,6 +53,14 @@
             android:layout_height="wrap_content"
             style="@style/Button"
             android:id="@+id/analyze_images"
+            android:layout_marginTop="@dimen/ll_margin"/>
+
+    <Button
+            android:text="View Results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Button"
+            android:id="@+id/view_results"
             android:layout_marginTop="@dimen/ll_margin"/>
 
     </LinearLayout>

@@ -60,6 +60,11 @@
         <item name="android:textSize">20dp</item>
         <item name="android:background">@color/veryLightGray</item>
     </style>
+    <style name="heading_text_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/twenty_four_sp</item>
+        <item name="android:textColor">@color/cardview_light_background</item>
+    </style>
 
 
 </resources>

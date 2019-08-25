@@ -46,8 +46,11 @@
     <string name="points">Points</string>
     <string name="submit_survey">Submit Survey</string>
     <string name="open_camera">Open Camera</string>
-    <string name="upload_from_gallery">Upload from gallery</string>
+    <string name="upload_from_gallery">Open gallery</string>
     <string name="analyze_images">Analyze Images</string>
     <string name="cant_open_gallery">Cannot open gallery</string>
     <string name="cv_logo">cv_logo</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="camera_permission_granted">Camera permission granted</string>
+    <string name="use_computer_vision_tool">Use Computer Vision Tool</string>
 </resources>

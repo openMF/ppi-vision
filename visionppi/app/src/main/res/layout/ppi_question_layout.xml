@@ -3,6 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <include layout="@layout/new_survey_toolbar"/>
 
     <TextView
             android:text=""

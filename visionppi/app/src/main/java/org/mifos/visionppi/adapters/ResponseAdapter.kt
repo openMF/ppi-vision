@@ -36,7 +36,7 @@ class ResponseAdapter(var responseList: List<Response>,var context: Context, val
             responseButton.setOnClickListener {
                 responseButton.isChecked = true
                 buttonSelected = adapterPosition
-                responseClicked(response)
+                //responseClicked(response)
                 notifyDataSetChanged()
             }
         }
