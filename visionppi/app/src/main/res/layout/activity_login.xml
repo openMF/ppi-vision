@@ -65,7 +65,8 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
