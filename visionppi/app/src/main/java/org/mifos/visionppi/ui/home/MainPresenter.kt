@@ -37,7 +37,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
 
 
         try {
-            val response = get(url = url, params = payload, headers = header, auth= BasicAuthorization(username, password))
+            val response = get(url = url, params = payload, headers = header, auth= BasicAuthorization(username!!, password!!))
 
             if (response.statusCode == 200) {
 

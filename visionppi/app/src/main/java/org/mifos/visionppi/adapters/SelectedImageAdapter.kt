@@ -5,6 +5,8 @@ import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.image_grid_layout.view.*
 import org.mifos.visionppi.R
@@ -19,7 +21,7 @@ class SelectedImageAdapter(val items : ArrayList<Bitmap?>, val context: Context,
 
 
     override fun onBindViewHolder(holder: SelectedImageViewHolder, position: Int) {
-        holder.selected_image_imageview.setImageBitmap(items.get(position))
+        holder.selectedImageImageView!!.setImageBitmap(items.get(position))
         holder.setItem(position)
 
 
@@ -30,10 +32,10 @@ class SelectedImageAdapter(val items : ArrayList<Bitmap?>, val context: Context,
     }
 
     inner class SelectedImageViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        val selected_image_imageview = view.selected_image
-        val removeButton = view.remove_button
+        val selectedImageImageView : ImageView? = view.selected_image
+        val removeButton : ImageButton? = view.remove_button
         fun setItem(position : Int){
-            removeButton.setOnClickListener { removeImage(position) }
+            removeButton!!.setOnClickListener { removeImage(position) }
         }
     }
 
