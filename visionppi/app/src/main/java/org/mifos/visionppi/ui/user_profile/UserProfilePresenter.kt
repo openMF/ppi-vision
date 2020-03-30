@@ -21,9 +21,7 @@ class UserProfilePresenter : BasePresenter<UserProfileMVPView>(){
         val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name),Context.MODE_PRIVATE)
         val userJsonString = sharedPref.getString(mPrefManager.USER_DETAILS, " ")
 
-        val user = gson.fromJson(userJsonString, User::class.java)
-
-        return user
+        return gson.fromJson(userJsonString, User::class.java)
 
     }
 }

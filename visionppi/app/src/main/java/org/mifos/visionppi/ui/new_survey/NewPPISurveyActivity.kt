@@ -44,7 +44,7 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getCount(): Int = mPPISurvey.questionDatas.size
 
-        override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas.get(position), applicationContext, { response: Response -> onResponseClicked(response) })
+        override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas.get(position), applicationContext) { response: Response -> onResponseClicked(response) }
     }
 
 

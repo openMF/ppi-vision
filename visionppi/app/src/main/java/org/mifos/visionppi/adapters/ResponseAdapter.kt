@@ -21,10 +21,10 @@ class ResponseAdapter(var responseList: List<Response>,var context: Context, val
     }
 
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
-        holder.responseButton.setText(responseList.get(position).text)
+        holder.responseButton.text = responseList.get(position).text
         holder.responseScore.text = responseList.get(position).value.toString()
         holder.responseButton.isChecked = position== this.buttonSelected
-        holder.setItem(responseList.get(position), responseClicked)
+        holder.setItem(responseList[position], responseClicked)
     }
 
     inner class ResponseViewHolder(var view: View) : RecyclerView.ViewHolder(view) {

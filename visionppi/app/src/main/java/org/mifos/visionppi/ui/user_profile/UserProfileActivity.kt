@@ -32,12 +32,12 @@ class UserProfileActivity : AppCompatActivity(), UserProfileMVPView{
 
     override fun setUserDetails() {
 
-        binding.usernameValue.setText(user.username)
-        binding.userIdValue.setText(user.userId.toString())
-        binding.officeNameValue.setText(user.officeName)
-        binding.officeIdValue.setText(user.officeId.toString())
-        binding.staffIdValue.setText(user.staffId.toString())
-        binding.staffDispNameValue.setText(user.staffDisplayName)
+        binding.usernameValue.text = user.username
+        binding.userIdValue.text = user.userId.toString()
+        binding.officeNameValue.text = user.officeName
+        binding.officeIdValue.text = user.officeId.toString()
+        binding.staffIdValue.text = user.staffId.toString()
+        binding.staffDispNameValue.text = user.staffDisplayName
 
     }
 

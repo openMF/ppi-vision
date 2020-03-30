@@ -35,10 +35,10 @@ class LoginPresenter : BasePresenter<LoginMVPView>(){
             if (response.statusCode == 200) {
 
                 val obj: JSONObject = response.jsonObject
-                var gson: Gson = Gson()
-                var mPrefManager = PrefManager()
-                var jsonString = obj.toString()
-                var user = gson.fromJson(jsonString, User::class.java)
+                val gson: Gson = Gson()
+                val mPrefManager = PrefManager()
+                val jsonString = obj.toString()
+                val user = gson.fromJson(jsonString, User::class.java)
                 mPrefManager.saveUser(user, context, activity)
                 mPrefManager.saveLoginCredentials(username, password, context, activity)
 
