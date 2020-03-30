@@ -1,6 +1,5 @@
 package org.mifos.visionppi.objects
 
-import java.util.*
 
 
 data class PPISurvey (var id:Int,

@@ -9,7 +9,6 @@ import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityClientProfileBinding
 import org.mifos.visionppi.objects.Client
 import org.mifos.visionppi.ui.new_survey.NewPPISurveyActivity
-import org.mifos.visionppi.ui.new_survey.NewSurveyActivity
 
 /**
  * Created by Apoorva M K 01/07/2019
