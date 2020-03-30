@@ -8,88 +8,104 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
     >
+
         <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/twenty_four_sp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="169dp"
                 android:layout_marginStart="@dimen/ll_margin"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/twenty_four_sp"
                 android:layout_marginEnd="@dimen/text_input_spacing"
                 android:layout_marginBottom="@dimen/text_input_spacing"
-                android:padding="@dimen/ll_margin" app:layout_constraintHorizontal_bias="1.0"
+                android:orientation="horizontal"
+                android:padding="@dimen/ll_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.725">
 
             <ImageView
-                    android:layout_width="167dp"
-                    android:layout_height="107dp"
-                    app:srcCompat="@drawable/mifos_logo"
-                    android:id="@+id/imageView"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/to"/>
-            <ImageView
-                    android:layout_width="185dp"
-                    android:layout_height="130dp"
-                    app:srcCompat="@drawable/ppi_logo"
                     android:id="@+id/imageView2"
+                    android:layout_width="185dp"
+                    android:layout_height="138dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/to"/>
+                    android:contentDescription="@string/to"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ppi_logo" />
         </LinearLayout>
 
 
         <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="225dp"
                 android:layout_margin="@dimen/ll_margin"
-                android:layout_marginBottom="@dimen/ll_margin"
-                android:layout_marginEnd="@dimen/ll_margin"
-                android:layout_marginLeft="@dimen/ll_margin"
-                android:layout_marginRight="@dimen/ll_margin"
-                android:layout_marginTop="@dimen/ll_margin"
                 android:layout_marginStart="@dimen/ll_margin"
+                android:layout_marginLeft="@dimen/ll_margin"
+                android:layout_marginTop="@dimen/ll_margin"
+                android:layout_marginEnd="@dimen/ll_margin"
+                android:layout_marginRight="@dimen/ll_margin"
+                android:layout_marginBottom="@dimen/ll_margin"
                 android:clipToPadding="false"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/text_input_spacing">
 
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="96dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_username2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/input_username" android:id="@+id/et_username"
-                        android:layout_marginBottom="@dimen/text_input_spacing"/>
+                        android:layout_marginBottom="@dimen/text_input_spacing"
+                        android:layout_weight="1"
+                        android:hint="@string/input_username" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/text_input_spacing"
+                        android:hint="@string/input_username" />
 
                 <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/input_password"
                             android:layout_marginBottom="@dimen/text_input_spacing"
-                            android:id="@+id/et_password"
-                            android:inputType="textPassword"/>
+                            android:hint="@string/input_password"
+                            android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <Button
-                    android:text="@string/login_btn_text"
+                    android:id="@+id/login_btn"
+                    style="@style/Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/login_btn"
-                    android:layout_marginTop="@dimen/ll_margin"
-                    android:paddingLeft="@dimen/text_input_spacing"
-                    android:paddingRight="@dimen/text_input_spacing"
-                    android:paddingStart="@dimen/text_input_spacing"
-                    android:paddingEnd="@dimen/text_input_spacing"
                     android:layout_marginLeft="@dimen/text_input_spacing"
+                    android:layout_marginTop="@dimen/ll_margin"
                     android:layout_marginRight="@dimen/text_input_spacing"
-                    style="@style/Button"/>
+                    android:paddingStart="@dimen/text_input_spacing"
+                    android:paddingLeft="@dimen/text_input_spacing"
+                    android:paddingEnd="@dimen/text_input_spacing"
+                    android:paddingRight="@dimen/text_input_spacing"
+                    android:text="@string/login_btn_text" />
         </LinearLayout>
+
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="167dp"
+                android:layout_height="232dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:contentDescription="@string/to"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/mifos_logo" />
     </LinearLayout>
 </layout>
