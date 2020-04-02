@@ -62,13 +62,14 @@
 
 
         <Button
-                android:text="@string/search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/search_btn"
                 style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ll_margin"
                 android:layout_marginBottom="@dimen/text_input_spacing"
-                android:layout_marginTop="@dimen/ll_margin"/>
+                android:enabled="false"
+                android:text="@string/search" />
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/client_search_list"

@@ -2,6 +2,8 @@ package org.mifos.visionppi.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -40,6 +42,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         client_search_list.layoutManager = LinearLayoutManager(this)
+        search_btn.alpha = 0.5F
+        search_query.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(p0.toString().trim().isEmpty()){
+                    search_btn?.isEnabled = false
+                    search_btn.alpha = 0.5F
+                }else{
+                    search_btn.isEnabled = true
+                    search_btn.alpha = 1.0F
+                }
+            }
+
+        })
 
 
         search_btn.setOnClickListener {
