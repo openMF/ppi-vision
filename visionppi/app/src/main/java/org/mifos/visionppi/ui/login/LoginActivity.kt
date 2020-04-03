@@ -1,6 +1,8 @@
 package org.mifos.visionppi.ui.login
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +34,11 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.loginBtn.setOnClickListener {
-            login()
+            if (networkAvailable(this)) {
+                login()
+            } else {
+                showToastMessage("Internet connection not available. Please check network settings")
+            }
         }
 
     }
@@ -79,6 +85,12 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
 
     override fun onLoginError() {
         showToastMessage(getString(R.string.login_fail))
+    }
+
+    private fun networkAvailable (activity:AppCompatActivity): Boolean{
+        val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return  networkInfo != null && networkInfo.isConnected
     }
 
 }
