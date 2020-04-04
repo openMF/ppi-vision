@@ -3,6 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="org.mifos.visionppi">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -18,6 +19,7 @@
         <activity
                 android:name=".ui.computer_vision.ComputerVisionActivity"
                 android:label="Computer Vision">
+
         </activity>
         <activity
                 android:name=".ui.home.MainActivity"

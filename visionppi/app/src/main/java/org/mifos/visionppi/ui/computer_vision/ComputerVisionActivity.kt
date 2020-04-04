@@ -13,8 +13,10 @@ import android.graphics.BitmapFactory
 import android.app.Activity
 import kotlinx.android.synthetic.main.activity_computer_vision.*
 import android.content.pm.PackageManager
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import org.mifos.visionppi.adapters.SelectedImageAdapter
+import org.mifos.visionppi.utils.ConnectionDetector
 
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
@@ -24,6 +26,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private val PICK_FROM_GALLERY = 1
     private val CAMERA_REQUEST = 2
     private val MY_CAMERA_PERMISSION_CODE = 100
+    lateinit var cd : ConnectionDetector
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +41,22 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
             fetchFromCamera()
         }
 
+        cd = ConnectionDetector()
+        cd.isConnectingToInternet(this@ComputerVisionActivity)
+
+        analyze_images.setOnClickListener {
+            if (cd.isConnectingToInternet(this@ComputerVisionActivity)) {
+                Toast.makeText(applicationContext,
+                    "net is there", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(applicationContext,
+                    "no net", Toast.LENGTH_LONG).show()
+            }
+        }
+
         selected_images_list.layoutManager = GridLayoutManager(this, 3)
         selected_images_list.adapter = SelectedImageAdapter(images, this, {position: Int -> imageRemove(position) })
+
     }
 
     override fun fetchFromGallery() {
