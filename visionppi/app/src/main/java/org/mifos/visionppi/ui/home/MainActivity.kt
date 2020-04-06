@@ -1,5 +1,6 @@
 package org.mifos.visionppi.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
@@ -8,7 +9,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,9 +55,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 search(search_query.text.toString())
         }
 
-        val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        )
+        val toggle: ActionBarDrawerToggle = object :
+            ActionBarDrawerToggle(
+                this,
+                drawer_layout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+            ) {
+
+            override
+            fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                val inputMethodManager: InputMethodManager =
+                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+            }
+        }
+
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
