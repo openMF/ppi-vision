@@ -77,19 +77,22 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <Button
-                    android:text="@string/login_btn_text"
+                    android:id="@+id/login_btn"
+                    style="@style/Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/login_btn"
-                    android:layout_marginTop="@dimen/ll_margin"
-                    android:paddingLeft="@dimen/text_input_spacing"
-                    android:paddingRight="@dimen/text_input_spacing"
-                    android:paddingStart="@dimen/text_input_spacing"
-                    android:paddingEnd="@dimen/text_input_spacing"
                     android:layout_marginLeft="@dimen/text_input_spacing"
+                    android:layout_marginTop="@dimen/ll_margin"
                     android:layout_marginRight="@dimen/text_input_spacing"
-                    style="@style/Button"/>
+                    android:alpha="0.5"
+                    android:enabled="false"
+                    android:paddingStart="@dimen/text_input_spacing"
+                    android:paddingLeft="@dimen/text_input_spacing"
+                    android:paddingEnd="@dimen/text_input_spacing"
+                    android:paddingRight="@dimen/text_input_spacing"
+                    android:text="@string/login_btn_text" />
         </LinearLayout>
     </LinearLayout>
 </layout>

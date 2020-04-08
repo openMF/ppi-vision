@@ -8,6 +8,9 @@ import androidx.databinding.DataBindingUtil
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityLoginBinding
 import android.os.StrictMode
+import android.text.Editable
+import android.text.TextWatcher
+import kotlinx.android.synthetic.main.activity_login.*
 import org.mifos.visionppi.ui.home.MainActivity
 
 
@@ -31,6 +34,52 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
         }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+
+        binding.etUsername.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(et_password.text.toString().isNotEmpty() && et_username.text.toString().isNotEmpty()) {
+                    login_btn.alpha = 1.0F
+                    login_btn.isEnabled = true
+                }
+                else{
+                    login_btn.alpha = 0.5F
+                    login_btn.isEnabled = false
+                }
+            }
+
+        })
+
+        binding.etPassword.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(et_password.text.toString().isNotEmpty() && et_username.text.toString().isNotEmpty()) {
+                    login_btn.alpha = 1.0F
+                    login_btn.isEnabled = true
+                }
+                else{
+                    login_btn.alpha = 0.5F
+                    login_btn.isEnabled = false
+                }
+            }
+
+        })
+        binding.loginBtn.alpha = 0.5F
+        binding.loginBtn.isEnabled = false
+
         binding.loginBtn.setOnClickListener {
             login()
         }
