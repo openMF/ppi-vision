@@ -91,6 +91,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.share -> {
+                val sendIntent = Intent()
+                sendIntent.action = Intent.ACTION_SEND
+                sendIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(R.string.install_vision).toString() + "\n" + getString(R.string.download_link)
+                )
+                sendIntent.type = "text/plain"
+                startActivity(sendIntent)
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
