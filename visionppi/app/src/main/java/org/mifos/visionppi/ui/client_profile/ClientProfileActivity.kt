@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityClientProfileBinding
 import org.mifos.visionppi.objects.Client
@@ -25,6 +26,10 @@ class ClientProfileActivity : AppCompatActivity() , ClientProfileMVPView {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_client_profile)
         val clientDetails = intent.getParcelableExtra("client") as Client
         setClientDetails(clientDetails)
+
+        setSupportActionBar(appToolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = "Client Profile"
 
         binding.newSurveyBtn.setOnClickListener {
             val intent= Intent(applicationContext, NewPPISurveyActivity::class.java)
