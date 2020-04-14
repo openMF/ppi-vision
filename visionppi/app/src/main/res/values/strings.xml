@@ -39,7 +39,7 @@
     <string name="account_no">Account No.:</string>
     <string name="mobile_no">Mobile No.:</string>
     <string name="take_new_survey">Take New Survey</string>
-    <string name="view_previous_surveys">View Previous Surveys</string>
+    <string name="view_previous_surveys">Previous Surveys</string>
     <string name="client_type">Client Type:</string>
     <string name="exception">Exception:</string>
     <string name="response">Response</string>
