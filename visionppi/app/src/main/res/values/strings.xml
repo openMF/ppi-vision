@@ -53,4 +53,6 @@
     <string name="analyze_images">Analyze Images</string>
     <string name="cant_open_gallery">Cannot open gallery</string>
     <string name="cv_logo">cv_logo</string>
+    <string name="search_query">Enter name/account number of client</string>
+    <string name="search_results">Client Results</string>
 </resources>
