@@ -75,6 +75,7 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
     override fun onLoginSuccessful() {
         val intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onLoginError() {
