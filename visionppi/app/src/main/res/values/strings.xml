@@ -7,7 +7,7 @@
     <string name="login_success">Login Successful</string>
     <string name="login_fail">Incorrect credentials entered</string>
     <string name="invalid_username">Invalid username length</string>
-    <string name="invalid_passlen">Invalid password lenghth</string>
+    <string name="invalid_passlen">Invalid password length</string>
     <string name="tenantId">default</string>
     <string name="contentType">application/json</string>
     <string name="demoURL">https://demo.openmf.org/fineract-provider/api/v1/</string>
