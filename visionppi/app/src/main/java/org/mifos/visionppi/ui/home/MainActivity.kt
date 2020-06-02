@@ -1,5 +1,6 @@
 package org.mifos.visionppi.ui.home
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -57,8 +58,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
                 if (search_query.text.toString().length == 0)
                     searchError()
-                else
+                else {
+                    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
                     search(search_query.text.toString())
+                }
             } else {
                 showToastMessage("Internet connection not available. Please check network settings")
             }

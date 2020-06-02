@@ -34,11 +34,6 @@ class ClientProfileActivity : AppCompatActivity() , ClientProfileMVPView {
             val intent= Intent(applicationContext, NewPPISurveyActivity::class.java)
             startActivity(intent)
         }
-
-        setSupportActionBar(appToolbar)
-        val actionBar = supportActionBar
-        actionBar?.title = "Client Profile"
-
     }
     override fun setClientDetails(client : Client) {
         binding.clientIdValue.text = client.entityId.toString()
