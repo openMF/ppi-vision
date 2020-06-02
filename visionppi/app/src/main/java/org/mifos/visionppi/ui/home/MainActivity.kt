@@ -2,6 +2,7 @@ package org.mifos.visionppi.ui.home
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
@@ -52,12 +53,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         search_btn.setOnClickListener {
 
-            search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
-            if(search_query.text.toString().length == 0)
-                searchError()
-
-            else
-                search(search_query.text.toString())
+            if (networkAvailable(this)) {
+                search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
+                if (search_query.text.toString().length == 0)
+                    searchError()
+                else
+                    search(search_query.text.toString())
+            } else {
+                showToastMessage("Internet connection not available. Please check network settings")
+            }
         }
 
         val toggle: ActionBarDrawerToggle = object :
@@ -85,6 +89,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    private fun networkAvailable (activity:AppCompatActivity): Boolean{
+        val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return  networkInfo != null && networkInfo.isConnected
     }
 
     override fun onBackPressed() {
