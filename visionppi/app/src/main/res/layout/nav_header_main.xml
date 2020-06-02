@@ -13,6 +13,12 @@
         android:orientation="vertical"
         android:gravity="bottom">
 
+    <LinearLayout
+            android:id="@+id/profile_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true">
+
     <ImageView
             android:layout_width="98dp"
             android:layout_height="90dp"
@@ -28,5 +34,5 @@
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-
+    </LinearLayout>
 </LinearLayout>
