@@ -26,6 +26,10 @@ class ClientProfileActivity : AppCompatActivity() , ClientProfileMVPView {
         val clientDetails = intent.getParcelableExtra("client") as Client
         setClientDetails(clientDetails)
 
+        setSupportActionBar(appToolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = "Client Profile"
+
         binding.newSurveyBtn.setOnClickListener {
             val intent= Intent(applicationContext, NewPPISurveyActivity::class.java)
             startActivity(intent)

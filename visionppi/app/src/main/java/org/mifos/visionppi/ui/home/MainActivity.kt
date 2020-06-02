@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         client_search_list.layoutManager = LinearLayoutManager(this)
 
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = "Vision PPI"
+
 
         search_btn.setOnClickListener {
 
