@@ -15,6 +15,8 @@
     <string name="profile">Profile</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="install_vision">Download the Vision PPI to ease the process of filing PPI Surveys by automating the process.</string>
+    <string name="download_link">Download Now: https://github.com/openMF/ppi-vision</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
@@ -23,6 +25,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="my_profile">My Profile</string>
     <string name="home">Home</string>
+    <string name="share">Share App</string>
     <string name="user_profile">user_profile</string>
     <string name="username_key">Username:</string>
     <string name="user_id">User ID:</string>
