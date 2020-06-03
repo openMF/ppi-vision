@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,20 +52,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val actionBar = supportActionBar
         actionBar?.title = getString(R.string.app_name)
 
-        search_btn.setOnClickListener {
-
-            if (networkAvailable(this)) {
-                search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
-                if (search_query.text.toString().length == 0)
-                    searchError()
-                else {
-                    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
-                    search(search_query.text.toString())
-                }
-            } else {
-                showToastMessage("Internet connection not available. Please check network settings")
+        search_query.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                return@OnEditorActionListener true
             }
+            false
+        })
+
+        search_btn.setOnClickListener {
+            performSearch()
         }
 
         val toggle: ActionBarDrawerToggle = object :
@@ -92,6 +89,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    private fun performSearch() {
+        if (networkAvailable(this)) {
+            search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            if (search_query.text.toString().length == 0)
+                searchError()
+            else {
+                val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
+                search(search_query.text.toString())
+            }
+        } else {
+            showToastMessage("Internet connection not available. Please check network settings")
+        }
     }
 
     private fun networkAvailable (activity:AppCompatActivity): Boolean{
