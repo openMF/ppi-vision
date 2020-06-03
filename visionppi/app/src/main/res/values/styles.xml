@@ -33,7 +33,8 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginBottom">@dimen/ll_margin</item>
+        <item name="android:layout_marginTop">@dimen/margin</item>
+        <item name="android:layout_marginBottom">@dimen/margin</item>
     </style>
     <style name="user_profile_key">
         <item name="android:layout_gravity">center_horizontal</item>
