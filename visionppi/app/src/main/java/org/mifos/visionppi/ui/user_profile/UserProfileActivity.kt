@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.objects.User
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityUserProfileBinding
@@ -22,6 +23,11 @@ class UserProfileActivity : AppCompatActivity(), UserProfileMVPView{
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_profile)
+
+        setSupportActionBar(appToolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = "User Profile"
+
         getUserDetails()
     }
 

@@ -7,7 +7,7 @@
     <string name="login_success">Login Successful</string>
     <string name="login_fail">Incorrect credentials entered</string>
     <string name="invalid_username">Invalid username length</string>
-    <string name="invalid_passlen">Invalid password lenghth</string>
+    <string name="invalid_passlen">Invalid password length</string>
     <string name="tenantId">default</string>
     <string name="contentType">application/json</string>
     <string name="demoURL">https://demo.openmf.org/fineract-provider/api/v1/</string>
@@ -15,6 +15,8 @@
     <string name="profile">Profile</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="install_vision">Download the Vision PPI to ease the process of filing PPI Surveys by automating the process.</string>
+    <string name="download_link">Download Now: https://github.com/openMF/ppi-vision</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
@@ -23,6 +25,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="my_profile">My Profile</string>
     <string name="home">Home</string>
+    <string name="share">Share App</string>
     <string name="user_profile">user_profile</string>
     <string name="username_key">Username:</string>
     <string name="user_id">User ID:</string>
@@ -39,7 +42,7 @@
     <string name="account_no">Account No.:</string>
     <string name="mobile_no">Mobile No.:</string>
     <string name="take_new_survey">Take New Survey</string>
-    <string name="view_previous_surveys">View Previous Surveys</string>
+    <string name="view_previous_surveys">Previous Surveys</string>
     <string name="client_type">Client Type:</string>
     <string name="exception">Exception:</string>
     <string name="response">Response</string>
@@ -50,4 +53,6 @@
     <string name="analyze_images">Analyze Images</string>
     <string name="cant_open_gallery">Cannot open gallery</string>
     <string name="cv_logo">cv_logo</string>
+    <string name="search_query">Enter name/account number of client</string>
+    <string name="search_results">Client Results</string>
 </resources>

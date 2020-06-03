@@ -1,7 +1,9 @@
 package org.mifos.visionppi.ui.home
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
@@ -12,12 +14,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ClientSearchAdapter
 import org.mifos.visionppi.databinding.ActivityMainBinding
@@ -44,15 +48,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         client_search_list.layoutManager = LinearLayoutManager(this)
 
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = getString(R.string.app_name)
+
+        search_query.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch()
+                return@OnEditorActionListener true
+            }
+            false
+        })
 
         search_btn.setOnClickListener {
-
-            search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
-            if(search_query.text.toString().length == 0)
-                searchError()
-
-            else
-                search(search_query.text.toString())
+            performSearch()
         }
 
         val toggle: ActionBarDrawerToggle = object :
@@ -63,20 +72,44 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
             ) {
-
             override
             fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
                 val inputMethodManager: InputMethodManager =
                     getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+
+                profile_section.setOnClickListener {
+                    val intent = Intent(applicationContext, UserProfileActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
-
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    private fun performSearch() {
+        if (networkAvailable(this)) {
+            search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            if (search_query.text.toString().length == 0)
+                searchError()
+            else {
+                val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
+                search(search_query.text.toString())
+            }
+        } else {
+            showToastMessage("Internet connection not available. Please check network settings")
+        }
+    }
+
+    private fun networkAvailable (activity:AppCompatActivity): Boolean{
+        val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return  networkInfo != null && networkInfo.isConnected
     }
 
     override fun onBackPressed() {
@@ -87,7 +120,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -97,7 +130,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
         }
-    }
+    }*/
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -108,6 +141,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> {
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
+            }
+            R.id.share -> {
+                val sendIntent = Intent()
+                sendIntent.action = Intent.ACTION_SEND
+                sendIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(R.string.install_vision).toString() + "\n" + getString(R.string.download_link)
+                )
+                sendIntent.type = "text/plain"
+                startActivity(sendIntent)
             }
         }
 

@@ -2,7 +2,6 @@ package org.mifos.visionppi.utils
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
 import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.User

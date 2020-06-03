@@ -13,6 +13,11 @@
                 android:icon="@drawable/outline_home_black_18dp"
                 android:title="@string/home"/>
 
+        <item
+                android:id="@+id/share"
+                android:icon="@drawable/ic_share"
+                android:title="@string/share"/>
+
     </group>
 
 </menu>
