@@ -44,7 +44,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
                 val obj: JSONArray = response.jsonArray
                 var gson: Gson = Gson()
 
-                for ( i in 0..(obj.length()-1))
+                for ( i in 0 until obj.length())
                 {
                     Log.i("i",i.toString())
                     val boo = searchResult.add(gson.fromJson(obj.getJSONObject(i).toString(),Client::class.java))

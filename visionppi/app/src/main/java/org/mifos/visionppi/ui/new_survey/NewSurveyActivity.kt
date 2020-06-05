@@ -43,7 +43,7 @@ class NewSurveyActivity : AppCompatActivity() , NewSurveyMVPView {
         snapHelper.attachToRecyclerView(ppi_survey)
         ppi_survey.layoutManager = LinearLayoutManager(this)
         ppi_survey.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-        ppi_survey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext, { response: Response -> onResponseClicked(response) })
+        ppi_survey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext) { response: Response -> onResponseClicked(response) }
     }
 
     override fun showToastMessage(string: String) {
