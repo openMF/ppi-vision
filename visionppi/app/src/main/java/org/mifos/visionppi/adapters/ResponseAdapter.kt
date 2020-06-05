@@ -20,7 +20,7 @@ class ResponseAdapter(var responseList: List<Response>,var context: Context, val
     }
 
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
-        holder.responseButton.setText(responseList.get(position).text)
+        holder.responseButton.text = responseList.get(position).text
         holder.responseScore.text = responseList.get(position).value.toString()
         holder.responseButton.isChecked = responseList.get(position).isChecked
         holder.setItem(position, responseClicked)

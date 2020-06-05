@@ -18,7 +18,7 @@ class ClientSearchAdapter(var clientList: List<Client>, var context: Context, va
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.clientName?.text = clientList.get(position).entityName
-        holder.clientAccountNo?.text = "#".plus(clientList.get(position).entityAccountNo)
+        holder.clientAccountNo?.text = "#".plus(clientList[position].entityAccountNo)
         holder.setItem(clientList.get(position), listener)
     }
 
