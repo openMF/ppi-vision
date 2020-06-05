@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -34,10 +36,11 @@ import org.mifos.visionppi.ui.user_profile.UserProfileActivity
  * Created by Apoorva M K on 25/06/19.
  */
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainMVPView {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+    MainMVPView {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var clientList : List<Client>
+    lateinit var clientList: List<Client>
     var mMainPresenter: MainPresenter = MainPresenter()
 
 
@@ -58,6 +61,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 return@OnEditorActionListener true
             }
             false
+        })
+
+        search_query.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().trim().isEmpty()) {
+                    search_btn.isEnabled = false
+                    search_btn.alpha = 0.5F
+                } else {
+                    search_btn.isEnabled = true
+                    search_btn.alpha = 1.0F
+                }
+            }
         })
 
         search_btn.setOnClickListener {
@@ -97,7 +118,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             if (search_query.text.toString().length == 0)
                 searchError()
             else {
-                val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                val inputMethodManager =
+                    getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
                 search(search_query.text.toString())
             }
@@ -106,10 +128,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun networkAvailable (activity:AppCompatActivity): Boolean{
-        val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private fun networkAvailable(activity: AppCompatActivity): Boolean {
+        val connectivityManager =
+            activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
-        return  networkInfo != null && networkInfo.isConnected
+        return networkInfo != null && networkInfo.isConnected
     }
 
     override fun onBackPressed() {
@@ -174,16 +197,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         clientList = mMainPresenter.searchClients(string, applicationContext, this)
 
-        if(clientList.size==0)
+        if (clientList.size == 0)
             searchUnsuccessful()
 
-        client_search_list.adapter = ClientSearchAdapter(clientList, this, { item -> onClick(item)})
+        client_search_list.adapter =
+            ClientSearchAdapter(clientList, this, { item -> onClick(item) })
     }
 
     private fun onClick(item: Client) {
 
         val intent = Intent(applicationContext, ClientProfileActivity::class.java)
-        intent.putExtra("client",item)
+        intent.putExtra("client", item)
         startActivity(intent)
 
     }
