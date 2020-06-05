@@ -84,6 +84,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/login_btn"
+                    android:alpha="0.5"
+                    android:enabled="false"
                     android:layout_marginTop="@dimen/ll_margin"
                     android:paddingLeft="@dimen/text_input_spacing"
                     android:paddingRight="@dimen/text_input_spacing"
