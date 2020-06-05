@@ -10,6 +10,9 @@ import androidx.databinding.DataBindingUtil
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityLoginBinding
 import android.os.StrictMode
+import android.text.Editable
+import android.text.TextWatcher
+import kotlinx.android.synthetic.main.activity_login.*
 import org.mifos.visionppi.ui.home.MainActivity
 
 
@@ -17,12 +20,12 @@ import org.mifos.visionppi.ui.home.MainActivity
  * Created by Apoorva M K on 25/06/19.
  */
 
-class LoginActivity: AppCompatActivity(), LoginMVPView {
+class LoginActivity : AppCompatActivity(), LoginMVPView {
 
     private lateinit var username: String
     private lateinit var password: String
     private lateinit var binding: ActivityLoginBinding
-    private var mLoginPresenter: LoginPresenter  = LoginPresenter()
+    private var mLoginPresenter: LoginPresenter = LoginPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,45 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
             }
         }
 
+        binding.etUsername.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (et_password.text.toString().isNotEmpty() && et_username.text.toString()
+                        .isNotEmpty()
+                ) {
+                    login_btn.alpha = 1.0F
+                    login_btn.isEnabled = true
+                } else {
+                    login_btn.alpha = 0.5F
+                    login_btn.isEnabled = false
+                }
+            }
+        })
+
+        binding.etPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (et_password.text.toString().isNotEmpty() && et_username.text.toString()
+                        .isNotEmpty()
+                ) {
+                    login_btn.alpha = 1.0F
+                    login_btn.isEnabled = true
+                } else {
+                    login_btn.alpha = 0.5F
+                    login_btn.isEnabled = false
+                }
+            }
+        })
     }
 
     private fun login() {
@@ -50,12 +92,12 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
 
         if (validateUserInput()) {
 
-            val loginResult: Boolean = mLoginPresenter.login(username, password, applicationContext, this)
+            val loginResult: Boolean =
+                mLoginPresenter.login(username, password, applicationContext, this)
 
-            if(loginResult){
+            if (loginResult) {
                 onLoginSuccessful()
-            }
-            else{
+            } else {
                 onLoginError()
             }
         }
@@ -88,10 +130,11 @@ class LoginActivity: AppCompatActivity(), LoginMVPView {
         showToastMessage(getString(R.string.login_fail))
     }
 
-    private fun networkAvailable (activity:AppCompatActivity): Boolean{
-        val connectivityManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private fun networkAvailable(activity: AppCompatActivity): Boolean {
+        val connectivityManager =
+            activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
-        return  networkInfo != null && networkInfo.isConnected
+        return networkInfo != null && networkInfo.isConnected
     }
 
 }
