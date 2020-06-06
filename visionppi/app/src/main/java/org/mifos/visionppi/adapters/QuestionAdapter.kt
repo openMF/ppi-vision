@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.ppi_question_layout.view.*
@@ -15,8 +16,8 @@ class QuestionAdapter (var questionList: List<Question>, var context: Context, v
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         holder.question?.text = questionList.get(position).text
-        holder.responseRecyclerView.layoutManager = LinearLayoutManager(holder.responseRecyclerView.context)
-        holder.responseRecyclerView.adapter = ResponseAdapter(questionList.get(position).responseDatas, context, responseClick)
+        holder.responseRecyclerView?.layoutManager = LinearLayoutManager(holder.responseRecyclerView?.context)
+        holder.responseRecyclerView?.adapter = ResponseAdapter(questionList.get(position).responseDatas, context, responseClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
@@ -32,6 +33,6 @@ class QuestionAdapter (var questionList: List<Question>, var context: Context, v
 
 class QuestionViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
-    val question = view.question
-    val responseRecyclerView = view.responses
+    val question: TextView? = view.question
+    val responseRecyclerView: RecyclerView? = view.responses
 }
