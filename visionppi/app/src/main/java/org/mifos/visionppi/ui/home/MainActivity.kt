@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 super.onDrawerOpened(drawerView)
                 val inputMethodManager: InputMethodManager =
                     getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+                inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
                 profile_section.setOnClickListener {
                     val intent = Intent(applicationContext, UserProfileActivity::class.java)
