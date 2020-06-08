@@ -11,6 +11,8 @@ import org.mifos.visionppi.R
 import org.mifos.visionppi.api.APIEndPoint
 import org.mifos.visionppi.base.BasePresenter
 import org.mifos.visionppi.objects.Client
+import org.mifos.visionppi.ui.user_profile.UserProfilePresenter
+import org.mifos.visionppi.utils.AuthKey
 import org.mifos.visionppi.utils.PrefManager
 
 /**
@@ -19,9 +21,11 @@ import org.mifos.visionppi.utils.PrefManager
 
 class MainPresenter : BasePresenter<MainMVPView>() {
 
+    var mUserProfilePresenter : UserProfilePresenter = UserProfilePresenter()
 
     fun searchClients(query: String, context:Context, activity: Activity) : MutableList<Client> {
 
+        var user = mUserProfilePresenter.fetchUserDetails(activity, context)
         var searchResult : MutableList<Client> = mutableListOf<Client>()
         val url = context.getString(R.string.demoURL).plus(APIEndPoint.SEARCH)
         val tenantId  = context.getString(R.string.tenantId)
@@ -30,14 +34,9 @@ class MainPresenter : BasePresenter<MainMVPView>() {
         val payload = mapOf("query" to query, "exactMatch" to "false")
         val header = mapOf(
             "Fineract-Platform-TenantId" to tenantId)
-        val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name),Context.MODE_PRIVATE)
-        val mPrefManager = PrefManager()
-        val username = sharedPref.getString(mPrefManager.USERNAME, " ")
-        val password = sharedPref.getString(mPrefManager.PASSWORD, " ")
-
 
         try {
-            val response = get(url = url, params = payload, headers = header, auth= BasicAuthorization(username, password))
+            val response = get(url = url, params = payload, headers = header, auth= AuthKey(user.base64EncodedAuthenticationKey))
 
             if (response.statusCode == 200) {
 
