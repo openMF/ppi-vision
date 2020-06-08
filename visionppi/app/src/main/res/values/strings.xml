@@ -10,7 +10,7 @@
     <string name="invalid_passlen">Invalid password length</string>
     <string name="tenantId">default</string>
     <string name="contentType">application/json</string>
-    <string name="demoURL">https://demo.openmf.org/fineract-provider/api/v1/</string>
+    <string name="demoURL">https://demo.mifos.io/fineract-provider/api/v1/</string>
     <string name="pref_file_name">User Details</string>
     <string name="profile">Profile</string>
     <string name="title_activity_main2">Main2Activity</string>
