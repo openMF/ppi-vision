@@ -2,20 +2,13 @@
 
 # Import all the needed modules
 
-from skimage.viewer import ImageViewer
-from skimage import data, io, filters
-from matplotlib import pyplot as plt
 from torchvision import transforms
 from scipy.stats import norm
 from PIL import Image
 import numpy as np
-import matplotlib
 import argparse
-import sklearn 
-import skimage
 import decimal
 import random
-import torch
 import glob
 import cv2
 
