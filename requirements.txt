@@ -6,7 +6,7 @@ torchvision==0.6.0
 opencv-contrib-python==4.2.0.34
 opencv-python==4.2.0.34
 scikit-image==0.16.2
-scikit-learn==0.22.2.post1
+scikit-learn==0.23.1
 scipy==1.4.1
 Pillow==7.1.1
 pyflakes==2.2.0
