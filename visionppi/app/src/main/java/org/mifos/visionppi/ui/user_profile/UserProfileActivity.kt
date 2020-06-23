@@ -1,14 +1,13 @@
 package org.mifos.visionppi.ui.user_profile
 
-import android.app.PendingIntent.getActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import kotlinx.android.synthetic.main.toolbar.*
-import org.mifos.visionppi.objects.User
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityUserProfileBinding
+import org.mifos.visionppi.models.User
 
 /**
  * Created by Apoorva M K on 27/06/19.
@@ -16,7 +15,7 @@ import org.mifos.visionppi.databinding.ActivityUserProfileBinding
 
 class UserProfileActivity : AppCompatActivity(), UserProfileMVPView{
 
-    lateinit var user:User
+    lateinit var user: User
     lateinit var binding: ActivityUserProfileBinding
     var mUserProfilePresenter : UserProfilePresenter = UserProfilePresenter()
 

@@ -2,18 +2,18 @@ package org.mifos.visionppi.ui.home
 
 import android.app.Activity
 import android.content.Context
+import android.os.StrictMode
 import android.util.Log
 import com.google.gson.Gson
 import khttp.get
-import khttp.structures.authorization.BasicAuthorization
 import org.json.JSONArray
 import org.mifos.visionppi.R
-import org.mifos.visionppi.api.APIEndPoint
+import org.mifos.visionppi.api.ApiEndPoints
 import org.mifos.visionppi.base.BasePresenter
 import org.mifos.visionppi.objects.Client
 import org.mifos.visionppi.ui.user_profile.UserProfilePresenter
 import org.mifos.visionppi.utils.AuthKey
-import org.mifos.visionppi.utils.PrefManager
+
 
 /**
  * Created by Apoorva M K on 27/06/19.
@@ -25,10 +25,14 @@ class MainPresenter : BasePresenter<MainMVPView>() {
 
     fun searchClients(query: String, context:Context, activity: Activity) : MutableList<Client> {
 
+        //val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+
+        //StrictMode.setThreadPolicy(policy)
+
         var user = mUserProfilePresenter.fetchUserDetails(activity, context)
         var searchResult : MutableList<Client> = mutableListOf<Client>()
-        val url = context.getString(R.string.demoURL).plus(APIEndPoint.SEARCH)
-        val tenantId  = context.getString(R.string.tenantId)
+        val url = context.getString(R.string.demoURL).plus(ApiEndPoints.SEARCH)
+        val tenantId  = "mobile"
         val contentType  = context.getString(R.string.contentType)
 
         val payload = mapOf("query" to query, "exactMatch" to "false")
@@ -36,7 +40,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
             "Fineract-Platform-TenantId" to tenantId)
 
         try {
-            val response = get(url = url, params = payload, headers = header, auth= AuthKey(user.base64EncodedAuthenticationKey))
+            val response = get(url = url, params = payload, headers = header, auth= AuthKey((user.base64EncodedAuthenticationKey).toString()))
 
             if (response.statusCode == 200) {
 

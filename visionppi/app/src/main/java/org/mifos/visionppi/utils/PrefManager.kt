@@ -4,7 +4,12 @@ import android.app.Activity
 import android.content.Context
 import com.google.gson.Gson
 import org.mifos.visionppi.R
-import org.mifos.visionppi.objects.User
+import org.mifos.visionppi.models.User
+
+/**
+ * @author yashk2000
+ * @since 22/06/2020
+ */
 
 class PrefManager {
 
