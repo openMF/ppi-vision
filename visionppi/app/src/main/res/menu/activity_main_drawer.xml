@@ -18,6 +18,11 @@
                 android:icon="@drawable/ic_share"
                 android:title="@string/share"/>
 
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout"/>
+
     </group>
 
 </menu>

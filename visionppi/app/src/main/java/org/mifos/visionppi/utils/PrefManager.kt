@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import com.google.gson.Gson
 import org.mifos.visionppi.R
+import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.models.User
 
 /**
@@ -37,5 +38,16 @@ class PrefManager {
     fun saveLoginCredentials( username : String, password: String, context: Context, activity: Activity) {
         putString(USERNAME, username, activity, context)
         putString(PASSWORD, password, activity, context)
+    }
+
+    fun clear(activity:Activity, context: Context) {
+        val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name),Context.MODE_PRIVATE)
+
+        val editor = sharedPref.edit()
+        //prevent deletion of url and tenant
+        for ((key) in sharedPref.all) {
+            editor.remove(key)
+        }
+        editor.apply()
     }
 }
