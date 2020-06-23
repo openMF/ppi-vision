@@ -8,7 +8,7 @@ import khttp.get
 import khttp.structures.authorization.BasicAuthorization
 import org.json.JSONObject
 import org.mifos.visionppi.R
-import org.mifos.visionppi.api.APIEndPoint
+import org.mifos.visionppi.api.ApiEndPoints
 import org.mifos.visionppi.base.BasePresenter
 import org.mifos.visionppi.objects.PPISurvey
 import org.mifos.visionppi.ui.user_profile.UserProfilePresenter
@@ -21,7 +21,7 @@ class NewSurveyPresenter : BasePresenter<NewSurveyMVPView>() {
     var mUserProfilePresenter : UserProfilePresenter = UserProfilePresenter()
 
     fun getSurvey(surveyId : Int, context: Context, activity: Activity) : PPISurvey{
-        val url = context.getString(R.string.demoURL).plus(APIEndPoint.SURVEY)
+        val url = context.getString(R.string.demoURL).plus(ApiEndPoints.SURVEY)
                                                             .plus("/"+surveyId.toString())
         val tenantId  = context.getString(R.string.tenantId)
         val contentType  = context.getString(R.string.contentType)
@@ -29,24 +29,14 @@ class NewSurveyPresenter : BasePresenter<NewSurveyMVPView>() {
         val header = mapOf("Fineract-Platform-TenantId" to tenantId,
                                             "Content-Type" to contentType)
 
-        try {
+        var user = mUserProfilePresenter.fetchUserDetails(activity, context)
 
-            var user = mUserProfilePresenter.fetchUserDetails(activity, context)
+        var response = get(url = url, headers = header, auth= AuthKey((user.base64EncodedAuthenticationKey).toString()))
 
-            var response = get(url = url, headers = header, auth= AuthKey(user.base64EncodedAuthenticationKey))
+        val obj:JSONObject = response.jsonObject
+        var gson: Gson = Gson()
+        mPPISurvey  = gson.fromJson(obj.toString(), PPISurvey::class.java)
 
-            if (response.statusCode == 200) {
-
-                val obj:JSONObject = response.jsonObject
-                var gson: Gson = Gson()
-                mPPISurvey  = gson.fromJson(obj.toString(), PPISurvey::class.java)
-            }
-
-
-
-        }catch (e:Exception){
-            Log.i(context.getString(R.string.exception),e.toString())
-        }
 
         return mPPISurvey
     }

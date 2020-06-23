@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -24,6 +25,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ClientSearchAdapter
 import org.mifos.visionppi.databinding.ActivityMainBinding
@@ -194,14 +197,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun search(string: String) {
+        val future = doAsync {
 
-        clientList = mMainPresenter.searchClients(string, applicationContext, this)
+            clientList = doSearch(string)
 
-        if (clientList.size == 0)
-            searchUnsuccessful()
-
-        client_search_list.adapter =
-            ClientSearchAdapter(clientList, this, { item -> onClick(item) })
+            uiThread {
+                makelist()
+            }
+        }
     }
 
     private fun onClick(item: Client) {
@@ -210,5 +213,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         intent.putExtra("client", item)
         startActivity(intent)
 
+    }
+
+    fun doSearch(string: String): List<Client> {
+        return mMainPresenter.searchClients(string, applicationContext, this)
+    }
+
+    fun makelist() {
+        if (clientList.size == 0)
+            searchUnsuccessful()
+
+        client_search_list.adapter =
+                ClientSearchAdapter(clientList, this, { item -> onClick(item) })
     }
 }

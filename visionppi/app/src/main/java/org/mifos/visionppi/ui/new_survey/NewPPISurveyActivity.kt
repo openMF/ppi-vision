@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.PPISurvey
 import org.mifos.visionppi.objects.Response
@@ -22,11 +24,16 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ppi_view_pager)
 
-        getSurveyQuestions()
-        mPager = findViewById(R.id.ppi_view_pager)
+        val future = doAsync {
+            getSurveyQuestions()
 
-        val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
-        mPager.adapter = pagerAdapter
+            uiThread {
+                mPager = findViewById(R.id.ppi_view_pager)
+
+                val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
+                mPager.adapter = pagerAdapter
+            }
+        }
     }
 
     override fun getSurveyQuestions() {

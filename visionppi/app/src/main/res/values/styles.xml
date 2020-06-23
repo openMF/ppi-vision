@@ -9,6 +9,40 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="MaterialAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorButtonNormal">@color/primary</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="buttonStyle">@style/AppTheme.Button</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="alertDialogTheme">@style/MaterialAlertDialogStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="MaterialAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <!--Theme for Spash-->
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="Button">
         <item name="android:background">@color/blueDark</item>
         <item name="android:textSize">@dimen/ll_margin</item>
@@ -74,6 +108,5 @@
         <item name="android:textSize">20dp</item>
         <item name="android:background">@color/veryLightGray</item>
     </style>
-
 
 </resources>
