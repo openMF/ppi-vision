@@ -17,6 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context?) {
     private val sharedPreferences: SharedPreferences
+
     fun clear() {
         val editor = sharedPreferences.edit()
         //prevent deletion of url and tenant

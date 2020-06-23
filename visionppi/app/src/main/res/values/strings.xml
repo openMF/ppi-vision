@@ -8,8 +8,6 @@
     <string name="cancel">Cancel</string>
     <string name="create_an_account">Create an account</string>
 
-    x
-
     <string name="error_validation_blank">%1$s cannot be blank</string>
     <string name="error_validation_minimum_chars">%1$s cannot be less than %2$d characters</string>
     <string name="error_validation_cannot_contain_spaces">%1$s cannot contain %2$s</string>
@@ -23,8 +21,7 @@
     <string name="enter_passcode">Enter 4 digit Passcode</string>
     <string name="error_passcode">Passcode should be of 4 digit</string>
     <string name="incorrect_passcode">Incorrect Passcode</string>
-    <string name="incorrect_passcode_more_than_three">You have entered incorrect Passcode more than
-        3 times
+    <string name="incorrect_passcode_more_than_three">You have entered incorrect Passcode more than     3 times
     </string>
     <string name="skip">Skip</string>
     <string name="save">Save</string>
@@ -125,6 +122,5 @@
     <string name="cv_logo" translatable="false">cv_logo</string>
     <string name="search_query">Enter name/account number of client</string>
     <string name="search_results">Client Results</string>
-
 
 </resources>

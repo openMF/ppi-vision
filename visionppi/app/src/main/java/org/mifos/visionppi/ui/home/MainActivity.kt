@@ -29,10 +29,13 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ClientSearchAdapter
+import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.databinding.ActivityMainBinding
 import org.mifos.visionppi.objects.Client
+import org.mifos.visionppi.ui.activities.LoginActivity
 import org.mifos.visionppi.ui.client_profile.ClientProfileActivity
 import org.mifos.visionppi.ui.user_profile.UserProfileActivity
+import org.mifos.visionppi.utils.PrefManager
 
 
 /**
@@ -177,6 +180,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 )
                 sendIntent.type = "text/plain"
                 startActivity(sendIntent)
+            }
+            R.id.logout -> {
+                val preferencesHelper = PreferencesHelper(baseContext)
+                preferencesHelper.clear()
+                val prefManager = PrefManager()
+                prefManager.clear(this, baseContext)
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
             }
         }
 
