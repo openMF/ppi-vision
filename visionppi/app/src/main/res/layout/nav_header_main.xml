@@ -24,8 +24,7 @@
             android:layout_height="90dp"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             app:srcCompat="@drawable/user_profile_logo"
-            android:contentDescription="@string/nav_header_desc"
-            android:id="@+id/imageView"/>
+            android:contentDescription="@string/nav_header_desc" />
 
     <TextView
             android:id="@+id/username_value"

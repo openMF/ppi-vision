@@ -13,8 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="80sp"
             app:srcCompat="@drawable/eye"
-            android:id="@+id/imageView3"
-            android:contentDescription="@string/cv_logo"
+        android:contentDescription="@string/cv_logo"
             android:layout_marginBottom="@dimen/large_spacing"/>
     <Button
             android:text="@string/open_camera"
@@ -45,8 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Button"
-            android:id="@+id/analyze_images"
-            android:layout_marginTop="@dimen/ll_margin"/>
+        android:layout_marginTop="@dimen/ll_margin"/>
 
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>
