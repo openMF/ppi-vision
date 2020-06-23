@@ -17,8 +17,8 @@
         <TextView
                 android:text="@string/response"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView3"
-                android:layout_weight="4"
+                android:layout_height="wrap_content"
+            android:layout_weight="4"
                 style="@style/sub_heading_style"/>
         <TextView
                 android:text="@string/points"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/sub_heading_style"
-                android:id="@+id/textView4" android:layout_weight="1"/>
+            android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
@@ -46,8 +46,7 @@
                 style="@style/Button"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/submit_survey_btn"
-                android:layout_margin="@dimen/ll_margin"/>
+            android:layout_margin="@dimen/ll_margin"/>
     </LinearLayout>
 
 
