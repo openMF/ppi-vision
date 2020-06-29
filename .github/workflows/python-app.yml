@@ -27,4 +27,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test python scripts with pyflake
       run: |
-        cd Data_Collection && pyflakes GenerateImages.py && pyflakes xml_to_csv.py
+        cd DataCollection && pyflakes GenerateImages.py && pyflakes xml_to_csv.py
