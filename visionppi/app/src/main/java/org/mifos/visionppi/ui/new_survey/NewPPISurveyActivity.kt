@@ -1,6 +1,8 @@
 package org.mifos.visionppi.ui.new_survey
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -12,6 +14,7 @@ import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.PPISurvey
 import org.mifos.visionppi.objects.Response
+import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
 class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
 
@@ -34,6 +37,11 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
                 mPager.adapter = pagerAdapter
             }
         }
+    }
+
+    fun launchCVActivity(v: View) {
+        val intent = Intent(applicationContext, ComputerVisionActivity::class.java)
+        startActivity(intent)
     }
 
     override fun getSurveyQuestions() {
