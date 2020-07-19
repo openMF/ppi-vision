@@ -1,20 +1,22 @@
 package org.mifos.visionppi.ui.computer_vision
 
 import android.Manifest
+import android.app.Activity
+import android.content.ClipData
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import org.mifos.visionppi.R
-import android.graphics.BitmapFactory
-import android.app.Activity
-import kotlinx.android.synthetic.main.activity_computer_vision.*
-import android.content.pm.PackageManager
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.activity_computer_vision.*
+import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.SelectedImageAdapter
+import org.mifos.visionppi.objectdetection.ObjectDetectionMain
 
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
@@ -40,6 +42,10 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
         selected_images_list.layoutManager = GridLayoutManager(this, 3)
         selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+
+        analyse.setOnClickListener {
+            analyzeImages()
+        }
     }
 
     override fun fetchFromGallery() {
@@ -54,13 +60,20 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                     PICK_FROM_GALLERY
                 )
             } else {
-                val i = Intent(
+                /*val i = Intent(
                     Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI
 
                 )
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 val ACTIVITY_SELECT_IMAGE = 1234
-                startActivityForResult(i, ACTIVITY_SELECT_IMAGE)
+                startActivityForResult(i, ACTIVITY_SELECT_IMAGE)*/
+
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                intent.action = Intent.ACTION_GET_CONTENT
+                val ACTIVITY_SELECT_IMAGE = 1234
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), ACTIVITY_SELECT_IMAGE)
 
                 selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
             }
@@ -85,7 +98,10 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     }
 
     override fun analyzeImages() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        for (image in images) {
+            var d: ObjectDetectionMain = ObjectDetectionMain()
+            d.initObjectDetection(image, this)
+        }
     }
 
     override fun showToastMessage(string: String) {
@@ -97,21 +113,23 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
         when (requestCode) {
             1234 -> if (resultCode == Activity.RESULT_OK) {
-                val selectedImage = data!!.data
-                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-
-                val cursor = contentResolver.query(selectedImage!!, filePathColumn, null, null, null)
-                cursor!!.moveToFirst()
-
-                val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-                val filePath = cursor.getString(columnIndex)
-                cursor.close()
-
-
-                val yourSelectedImage = BitmapFactory.decodeFile(filePath)
-                images.add(yourSelectedImage)
-                selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
-
+                if (data?.data != null) {
+                    val mImageUri: Uri = data.data!!
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, mImageUri)
+                    images.add(bitmap)
+                    selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
+                } else {
+                    if (data?.getClipData() != null) {
+                        val mClipData: ClipData = data.clipData!!
+                        for (i in 0 until mClipData.itemCount) {
+                            val item = mClipData.getItemAt(i)
+                            val uri: Uri = item.uri
+                            val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+                            images.add(bitmap)
+                            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
+                        }
+                    }
+                }
             }
         }
 
