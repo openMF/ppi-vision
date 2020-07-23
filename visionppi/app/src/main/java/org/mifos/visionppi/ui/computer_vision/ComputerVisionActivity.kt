@@ -9,14 +9,23 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.mlkit.common.model.LocalModel
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeler
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import kotlinx.android.synthetic.main.activity_computer_vision.*
 import org.mifos.visionppi.R
+import org.mifos.visionppi.adapters.ObjectDetectionResultAdapter
 import org.mifos.visionppi.adapters.SelectedImageAdapter
-import org.mifos.visionppi.objectdetection.ObjectDetectionMain
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
@@ -27,6 +36,15 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private val CAMERA_REQUEST = 2
     private val MY_CAMERA_PERMISSION_CODE = 100
 
+    val labelList: MutableList<String> = ArrayList()
+
+    lateinit var localModel: LocalModel
+    lateinit var customImageLabelerOptions: CustomImageLabelerOptions
+    lateinit var imageLabeler: ImageLabeler
+
+    var finalLabels: MutableList<List<String>> = ArrayList()
+    var counter = 0
+    var imageNos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +62,47 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
 
         analyse.setOnClickListener {
+            counter = 0
+            imageNos = images.size
             analyzeImages()
+        }
+
+        readLabels()
+        initDetector()
+    }
+
+    private fun initDetector() {
+        localModel =
+                LocalModel.Builder()
+                        .setAssetFilePath("mobilenet_v1.0_224_quant.tflite")
+                        .build()
+
+        customImageLabelerOptions =
+                CustomImageLabelerOptions.Builder(localModel)
+                        .setMaxResultCount(10)
+                        .build()
+
+        imageLabeler =
+                ImageLabeling.getClient(customImageLabelerOptions)
+    }
+
+    private fun readLabels() {
+        var reader: BufferedReader? = null
+        try {
+            reader = BufferedReader(
+                    InputStreamReader(baseContext.assets.open("labels.txt")))
+
+            while (reader.readLine().also { if (it != null) labelList.add(it) } != null) {}
+        } catch (e: IOException) {
+            Log.e("ERROR", e.toString())
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close()
+                } catch (e: IOException) {
+                    Log.e("ERROR", e.toString())
+                }
+            }
         }
     }
 
@@ -60,14 +118,6 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                     PICK_FROM_GALLERY
                 )
             } else {
-                /*val i = Intent(
-                    Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI
-
-                )
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                val ACTIVITY_SELECT_IMAGE = 1234
-                startActivityForResult(i, ACTIVITY_SELECT_IMAGE)*/
-
                 val intent = Intent()
                 intent.type = "image/*"
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
@@ -99,9 +149,32 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
     override fun analyzeImages() {
         for (image in images) {
-            var d: ObjectDetectionMain = ObjectDetectionMain()
-            d.initObjectDetection(image, this)
+            detect(image!!)
         }
+    }
+
+    private fun detect(bitmap: Bitmap) {
+        val image = InputImage.fromBitmap(bitmap, 0)
+        val ll: MutableList<String> = ArrayList()
+
+        imageLabeler.process(image)
+                .addOnSuccessListener { labels ->
+                    for (label in labels) {
+                        val text = labelList[label.index]
+                        val confidence = label.confidence
+                        val index = label.index
+                        ll.add("$text: $confidence")
+                        Log.d("LABELS", "$text $confidence $index")
+                    }
+                    ++counter
+                    finalLabels.add(ll)
+                    if (counter == imageNos) {
+                        res_list.adapter = ObjectDetectionResultAdapter(finalLabels, images, baseContext)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.d("ERROR", e.message!!)
+                }
     }
 
     override fun showToastMessage(string: String) {
