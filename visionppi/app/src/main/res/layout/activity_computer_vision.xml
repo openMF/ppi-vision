@@ -47,5 +47,20 @@
             style="@style/Button"
         android:layout_marginTop="@dimen/ll_margin"/>
 
+        <TextView
+            android:id="@+id/listHeading"
+            style="@style/heading_style2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/foursp_margin"
+            android:layout_marginBottom="@dimen/foursp_margin"
+            android:text="@string/object_detection_results" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/res_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -55,5 +55,6 @@
     <string name="cv_logo" translatable="false">cv_logo</string>
     <string name="search_query">Enter name/account number of client</string>
     <string name="search_results">Client Results</string>
+    <string name="object_detection_results">Object Detection Results</string>
 
 </resources>
