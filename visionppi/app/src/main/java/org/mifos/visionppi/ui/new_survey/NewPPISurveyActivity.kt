@@ -2,6 +2,7 @@ package org.mifos.visionppi.ui.new_survey
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
     private lateinit var mPager: ViewPager
     var mNewSurveyPresenter : NewSurveyPresenter = NewSurveyPresenter()
     lateinit var mPPISurvey: PPISurvey
+    var list: MutableList<List<String>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,16 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
                 val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
                 mPager.adapter = pagerAdapter
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("NewPPISurveyActivity", ComputerVisionActivity.finalLabels.toString())
+        if (ComputerVisionActivity.finalLabels.isNotEmpty()) {
+            list = ComputerVisionActivity.finalLabels
+            val s: String = mPPISurvey.questionDatas.get(mPager.currentItem).text
+            Log.d("NewPPISurveyActivity", s)
         }
     }
 
@@ -59,7 +71,7 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getCount(): Int = mPPISurvey.questionDatas.size
 
-        override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas.get(position), applicationContext) { response: Response -> onResponseClicked(response) }
+        override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas.get(position), applicationContext, list) { response: Response -> onResponseClicked(response) }
     }
 
 
