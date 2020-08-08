@@ -38,11 +38,13 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
     val labelList: MutableList<String> = ArrayList()
 
+    companion object {
+        @JvmStatic var finalLabels: MutableList<List<String>> = ArrayList()
+    }
+
     lateinit var localModel: LocalModel
     lateinit var customImageLabelerOptions: CustomImageLabelerOptions
     lateinit var imageLabeler: ImageLabeler
-
-    var finalLabels: MutableList<List<String>> = ArrayList()
     var counter = 0
     var imageNos = 0
 
@@ -109,13 +111,13 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     override fun fetchFromGallery() {
         try {
             if (ActivityCompat.checkSelfPermission(
-                    this@ComputerVisionActivity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                            this@ComputerVisionActivity,
+                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
             ) {
                 ActivityCompat.requestPermissions(
-                    this@ComputerVisionActivity,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    PICK_FROM_GALLERY
+                        this@ComputerVisionActivity,
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        PICK_FROM_GALLERY
                 )
             } else {
                 val intent = Intent()
@@ -148,6 +150,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     }
 
     override fun analyzeImages() {
+        res_list.adapter = null
         for (image in images) {
             detect(image!!)
         }
@@ -219,7 +222,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
             PICK_FROM_GALLERY ->
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     val galleryIntent =
-                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(galleryIntent, PICK_FROM_GALLERY)
                 } else {
                     showToastMessage(getString(R.string.cant_open_gallery))
