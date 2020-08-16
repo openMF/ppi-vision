@@ -13,7 +13,6 @@
 
     <string name="not_contain_username">Spaces</string>
     <string name="no_internet_connection">No Internet Connection</string>
-    <string name="logout">Logout</string>
 
     <string name="language_type" translatable="false">language_type</string>
 
@@ -22,14 +21,8 @@
     <string name="contentType" translatable="false">application/json</string>
     <string name="demoURL" translatable="false">https://demo.mifos.io/fineract-provider/api/v1/</string>
     <string name="pref_file_name">User Details</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="install_vision">Download the Vision PPI to ease the process of filing PPI Surveys by automating the process.</string>
     <string name="download_link">Download Now: https://github.com/openMF/ppi-vision</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="my_profile">My Profile</string>
-    <string name="home">Home</string>
-    <string name="share">Share App</string>
     <string name="user_profile" translatable="false">user_profile</string>
     <string name="user_id">User ID:</string>
     <string name="office_name">Office Name:</string>
@@ -56,5 +49,8 @@
     <string name="search_query">Enter name/account number of client</string>
     <string name="search_results">Client Results</string>
     <string name="object_detection_results">Object Detection Results</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Profile</string>
 
 </resources>

@@ -1,9 +1,8 @@
 package org.mifos.visionppi.ui.home
 
-import android.app.Activity
 import android.content.Context
-import android.os.StrictMode
 import android.util.Log
+import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import khttp.get
 import org.json.JSONArray
@@ -23,7 +22,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
 
     var mUserProfilePresenter : UserProfilePresenter = UserProfilePresenter()
 
-    fun searchClients(query: String, context:Context, activity: Activity) : MutableList<Client> {
+    fun searchClients(query: String, context:Context, activity: FragmentActivity) : MutableList<Client> {
 
         //val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
 

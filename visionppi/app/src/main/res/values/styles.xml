@@ -61,8 +61,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
     <style name="user_profile_row">
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
@@ -86,10 +85,7 @@
         <item name="android:textAlignment">textStart</item>
         <item name="android:textSize">@dimen/user_profile_text_size</item>
     </style>
-    <style name="small_text_style">
-        <item name="android:textSize">@dimen/ll_margin</item>
-        <item name="android:textColor">@color/blueDark</item>
-    </style>
+
     <style name="heading_style">
         <item name="android:textColor">@color/cardview_dark_background</item>
         <item name="android:textSize">@dimen/text_input_spacing</item>

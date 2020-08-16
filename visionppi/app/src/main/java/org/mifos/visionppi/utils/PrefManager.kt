@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import com.google.gson.Gson
 import org.mifos.visionppi.R
-import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.models.User
 
 /**
