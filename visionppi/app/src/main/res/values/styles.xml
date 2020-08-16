@@ -105,4 +105,8 @@
         <item name="android:background">@color/veryLightGray</item>
     </style>
 
+    <style name="sub_heading_style2">
+        <item name="android:textSize">15dp</item>
+        <item name="android:background">@color/veryLightGray</item>
+    </style>
 </resources>
