@@ -20,37 +20,48 @@
             style="@style/heading_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="@dimen/foursp_margin"
-            android:layout_marginBottom="@dimen/foursp_margin"
             android:text="@string/search" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/sub_heading_style2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+            android:text="Search client via name or account number" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_query"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/search_query"
-                android:imeOptions="actionSearch"
-                android:singleLine="true"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin">
 
-        <Button
-            android:id="@+id/search_btn"
-            style="@style/SearchButton"
-            android:background="@drawable/button_design"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:alpha="0.5"
-            android:layout_marginTop="@dimen/ll_margin"
-            android:layout_marginBottom="@dimen/ll_margin"
-            android:text="@string/search" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_query"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_query"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/search_btn"
+                android:background="@drawable/button_design"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:enabled="false"
+                android:alpha="0.5"
+                android:src="@drawable/ic_search"
+                android:layout_marginTop="25dp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/listHeading"

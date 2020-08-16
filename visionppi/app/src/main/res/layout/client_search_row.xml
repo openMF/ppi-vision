@@ -26,4 +26,9 @@
             android:paddingLeft="@dimen/foursp_margin"
             android:paddingBottom="@dimen/foursp_margin"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
 </LinearLayout>

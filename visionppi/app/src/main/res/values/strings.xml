@@ -46,7 +46,7 @@
     <string name="analyze_images">Analyze Images</string>
     <string name="cant_open_gallery">Cannot open gallery</string>
     <string name="cv_logo" translatable="false">cv_logo</string>
-    <string name="search_query">Enter name/account number of client</string>
+    <string name="search_query">Enter name/account number</string>
     <string name="search_results">Client Results</string>
     <string name="object_detection_results">Object Detection Results</string>
     <string name="title_activity_main">MainActivity</string>
