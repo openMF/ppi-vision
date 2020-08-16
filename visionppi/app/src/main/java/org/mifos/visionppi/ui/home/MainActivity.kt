@@ -1,42 +1,29 @@
 package org.mifos.visionppi.ui.home
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ClientSearchAdapter
-import org.mifos.visionppi.api.local.PreferencesHelper
-import org.mifos.visionppi.databinding.ActivityMainBinding
 import org.mifos.visionppi.objects.Client
-import org.mifos.visionppi.ui.activities.LoginActivity
 import org.mifos.visionppi.ui.client_profile.ClientProfileActivity
-import org.mifos.visionppi.ui.user_profile.UserProfileActivity
-import org.mifos.visionppi.utils.PrefManager
 
 
 /**

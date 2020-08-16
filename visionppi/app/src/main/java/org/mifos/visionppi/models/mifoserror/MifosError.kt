@@ -3,8 +3,7 @@ package org.mifos.visionppi.models.mifoserror
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author yashk2000

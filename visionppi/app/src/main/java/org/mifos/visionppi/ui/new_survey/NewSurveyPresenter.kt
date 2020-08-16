@@ -2,10 +2,8 @@ package org.mifos.visionppi.ui.new_survey
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import com.google.gson.Gson
 import khttp.get
-import khttp.structures.authorization.BasicAuthorization
 import org.json.JSONObject
 import org.mifos.visionppi.R
 import org.mifos.visionppi.api.ApiEndPoints
@@ -13,7 +11,6 @@ import org.mifos.visionppi.base.BasePresenter
 import org.mifos.visionppi.objects.PPISurvey
 import org.mifos.visionppi.ui.user_profile.UserProfilePresenter
 import org.mifos.visionppi.utils.AuthKey
-import org.mifos.visionppi.utils.PrefManager
 
 class NewSurveyPresenter : BasePresenter<NewSurveyMVPView>() {
 

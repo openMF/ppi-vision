@@ -1,13 +1,19 @@
 package org.mifos.visionppi
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.toolbar.*
+import org.mifos.visionppi.api.local.PreferencesHelper
+import org.mifos.visionppi.ui.activities.LoginActivity
+import org.mifos.visionppi.utils.PrefManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,5 +32,36 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.logout -> {
+                val preferencesHelper = PreferencesHelper(baseContext)
+                preferencesHelper.clear()
+                val prefManager = PrefManager()
+                prefManager.clear(this, baseContext)
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.share -> {
+                val sendIntent = Intent()
+                sendIntent.action = Intent.ACTION_SEND
+                sendIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        getString(R.string.install_vision).toString() + "\n" + getString(R.string.download_link)
+                )
+                sendIntent.type = "text/plain"
+                startActivity(sendIntent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -2,9 +2,9 @@ package org.mifos.visionppi.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import org.mifos.visionppi.MainActivity
 import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.ui.activities.base.BaseActivity
-import org.mifos.visionppi.MainActivity
 
 /**
  * @author yashk2000

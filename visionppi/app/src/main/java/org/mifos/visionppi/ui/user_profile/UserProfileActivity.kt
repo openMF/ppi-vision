@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_user_profile.*
-import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.R
-import org.mifos.visionppi.databinding.ActivityUserProfileBinding
 import org.mifos.visionppi.models.User
 
 /**

@@ -1,7 +1,7 @@
 package org.mifos.visionppi.models
 
 import org.mifos.visionppi.objects.Role
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author yashk2000

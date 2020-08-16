@@ -1,8 +1,6 @@
 package org.mifos.visionppi.ui.home
 
-import android.app.Activity
 import android.content.Context
-import android.os.StrictMode
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson

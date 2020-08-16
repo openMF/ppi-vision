@@ -2,13 +2,13 @@ package org.mifos.visionppi.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.RecyclerView
-import org.mifos.visionppi.R
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.client_search_row.view.*
+import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.Client
 
 /**
