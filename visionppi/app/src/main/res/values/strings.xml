@@ -56,5 +56,9 @@
     <string name="search_query">Enter name/account number of client</string>
     <string name="search_results">Client Results</string>
     <string name="object_detection_results">Object Detection Results</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Profile</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

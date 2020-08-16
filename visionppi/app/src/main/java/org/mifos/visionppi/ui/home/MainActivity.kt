@@ -8,18 +8,19 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.*
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -42,24 +43,25 @@ import org.mifos.visionppi.utils.PrefManager
  * Created by Apoorva M K on 25/06/19.
  */
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    MainMVPView {
+class MainActivity : Fragment(), MainMVPView {
 
-    lateinit var binding: ActivityMainBinding
     lateinit var clientList: List<Client>
     var mMainPresenter: MainPresenter = MainPresenter()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(toolbar)
+        val root = inflater.inflate(R.layout.content_main, container, false)
+        return root
+    }
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        client_search_list.layoutManager = LinearLayoutManager(this)
-
-        setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-        actionBar?.title = getString(R.string.app_name)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        client_search_list.layoutManager = LinearLayoutManager(requireContext())
 
         search_query.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -90,42 +92,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         search_btn.setOnClickListener {
             performSearch()
         }
-
-        val toggle: ActionBarDrawerToggle = object :
-            ActionBarDrawerToggle(
-                this,
-                drawer_layout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
-            ) {
-            override
-            fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                val inputMethodManager: InputMethodManager =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-
-                profile_section.setOnClickListener {
-                    val intent = Intent(applicationContext, UserProfileActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-        }
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        nav_view.setNavigationItemSelectedListener(this)
     }
 
     private fun performSearch() {
-        if (networkAvailable(this)) {
+        if (networkAvailable(requireActivity())) {
             search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
             if (search_query.text.toString().length == 0)
                 searchError()
             else {
-                val inputMethodManager =
-                    getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
                 search(search_query.text.toString())
             }
@@ -134,65 +109,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun networkAvailable(activity: AppCompatActivity): Boolean {
+    private fun networkAvailable(activity: FragmentActivity): Boolean {
         val connectivityManager =
             activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
         }
-    }*/
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_profile -> {
-                val intent = Intent(applicationContext, UserProfileActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.nav_home -> {
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.share -> {
-                val sendIntent = Intent()
-                sendIntent.action = Intent.ACTION_SEND
-                sendIntent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    getString(R.string.install_vision).toString() + "\n" + getString(R.string.download_link)
-                )
-                sendIntent.type = "text/plain"
-                startActivity(sendIntent)
-            }
-            R.id.logout -> {
-                val preferencesHelper = PreferencesHelper(baseContext)
-                preferencesHelper.clear()
-                val prefManager = PrefManager()
-                prefManager.clear(this, baseContext)
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-            }
-        }
-
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
     }
 
     override fun searchError() {
@@ -200,7 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun showToastMessage(string: String) {
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
     }
 
     override fun searchUnsuccessful() {
@@ -220,14 +147,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun onClick(item: Client) {
 
-        val intent = Intent(applicationContext, ClientProfileActivity::class.java)
+        val intent = Intent(context, ClientProfileActivity::class.java)
         intent.putExtra("client", item)
         startActivity(intent)
 
     }
 
     fun doSearch(string: String): List<Client> {
-        return mMainPresenter.searchClients(string, applicationContext, this)
+        return mMainPresenter.searchClients(string, requireContext(), requireActivity())
     }
 
     fun makelist() {
@@ -235,6 +162,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             searchUnsuccessful()
 
         client_search_list.adapter =
-                ClientSearchAdapter(clientList, this, { item -> onClick(item) })
+                ClientSearchAdapter(clientList, requireContext(), { item -> onClick(item) })
     }
 }

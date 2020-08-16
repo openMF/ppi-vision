@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.mifos.visionppi.R
 import org.mifos.visionppi.presenters.LoginPresenter
 import org.mifos.visionppi.ui.activities.base.BaseActivity
-import org.mifos.visionppi.ui.home.MainActivity
+import org.mifos.visionppi.MainActivity
 import org.mifos.visionppi.ui.views.LoginView
 import org.mifos.visionppi.utils.Network
 import org.mifos.visionppi.utils.Toaster

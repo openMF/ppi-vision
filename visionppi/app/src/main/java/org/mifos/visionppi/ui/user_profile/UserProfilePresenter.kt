@@ -2,6 +2,7 @@ package org.mifos.visionppi.ui.user_profile
 
 import android.app.Activity
 import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import org.mifos.visionppi.R
 import org.mifos.visionppi.base.BasePresenter
