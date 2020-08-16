@@ -37,12 +37,12 @@ class UserProfileActivity : Fragment(), UserProfileMVPView{
 
     override fun getUserDetails() {
         user = mUserProfilePresenter.fetchUserDetails(requireActivity(), requireContext())
-        Log.d("HAHA", user.toString())
         setUserDetails()
     }
 
     override fun setUserDetails() {
 
+        uname.text = user.username
         username_value.text = user.username
         user_id_value.text = user.userId.toString()
         office_name_value.text = user.officeName

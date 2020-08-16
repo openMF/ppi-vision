@@ -11,4 +11,5 @@
     <color name="fontColour">#FFFFFF</color>
     <color name="lightGray">#DCDCDC</color>
     <color name="veryLightGray">#F8F8F8</color>
+    <color name="light_grey">#ffd1d1d1</color>
 </resources>
