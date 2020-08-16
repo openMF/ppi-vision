@@ -52,5 +52,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Profile</string>
-
+    <string name="medium_text">Placeholder</string>
 </resources>

@@ -4,10 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import kotlinx.android.synthetic.main.activity_client_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.R
-import org.mifos.visionppi.databinding.ActivityClientProfileBinding
 import org.mifos.visionppi.objects.Client
 import org.mifos.visionppi.ui.new_survey.NewPPISurveyActivity
 
@@ -17,12 +16,10 @@ import org.mifos.visionppi.ui.new_survey.NewPPISurveyActivity
 
 class ClientProfileActivity : AppCompatActivity() , ClientProfileMVPView {
 
-    lateinit var binding: ActivityClientProfileBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_client_profile)
+        setContentView(R.layout.activity_client_profile)
         val clientDetails = intent.getParcelableExtra("client") as Client
         setClientDetails(clientDetails)
 
@@ -30,17 +27,18 @@ class ClientProfileActivity : AppCompatActivity() , ClientProfileMVPView {
         val actionBar = supportActionBar
         actionBar?.title = "Client Profile"
 
-        binding.newSurveyBtn.setOnClickListener {
+        new_survey_btn.setOnClickListener {
             val intent= Intent(applicationContext, NewPPISurveyActivity::class.java)
             startActivity(intent)
         }
     }
     override fun setClientDetails(client : Client) {
-        binding.clientIdValue.text = client.entityId.toString()
-        binding.clientNameValue.text = client.entityName
-        binding.accountNoValue.text = client.entityAccountNo
-        binding.mobileNoValue.text = client.entityMobileNo
-        binding.clientTypeValue.text = client.entityType
+        uname.text = client.entityName
+        clientIdValue.text = client.entityId.toString()
+        clientNameValue.text = client.entityName
+        accountNoValue.text = client.entityAccountNo
+        mobileNoValue.text = client.entityMobileNo
+        clientTypeValue.text = client.entityType
     }
 
     override fun showToastMessage(string: String) {

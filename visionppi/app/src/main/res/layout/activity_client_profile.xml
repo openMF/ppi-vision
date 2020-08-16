@@ -1,154 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_height="225dp"
+        android:layout_width="match_parent">
 
-    <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/toolbar" />
-
-        <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
             <LinearLayout
-                    android:layout_width="match_parent"
+                android:gravity="bottom"
+                android:layout_height="match_parent"
+                android:layout_margin="32dp"
+                android:layout_width="300dp"
+                android:orientation="horizontal"
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/iv_text_drawable"
+                    android:layout_height="84dp"
+                    android:src="@drawable/ic_wrapped_person_black_24dp"
+                    android:layout_width="84dp"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/text_size"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/ll_margin"
-                    android:clipToPadding="false"
+                    android:textSize="32sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="10dp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:text="@string/medium_text"
+                    android:id="@+id/uname"/>
+            </LinearLayout>
+
+            <View
+                android:background="@drawable/background"
+                android:layout_gravity="bottom"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_collapseMode="pin"
+                app:title="Client Details"/>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ncv_customer_details"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/ll_user_profile"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:background="@color/white"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/text_input_spacing">
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="94dp"
-                        android:orientation="horizontal">
-
-                    <ImageView
-                            android:id="@+id/client_image"
-                            android:layout_width="94dp"
-                            android:layout_height="94dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginTop="@dimen/text_input_spacing"
-                            android:layout_marginBottom="@dimen/text_input_spacing"
-                            android:contentDescription="@string/user_profile"
-                            app:srcCompat="@drawable/user_profile_logo" />
+                    android:padding="16dp">
 
                     <TextView
-                            android:id="@+id/client_name_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="TextView"
-                            android:textSize="@dimen/text_input" />
-
-                </LinearLayout>
-
-                <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="#A9A9A9" />
-
-                <LinearLayout
-                        style="@style/user_profile_row"
-                        android:layout_marginTop="@dimen/ll_margin"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Client ID"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/primary"/>
 
                     <TextView
-                            android:id="@+id/client_id_key"
-                            style="@style/user_profile_key"
-                            android:text="@string/client_id" />
+                        android:gravity="center"
+                        android:id="@+id/clientIdValue"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingTop="4dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:text="@string/medium_text"/>
 
-                    <TextView
-                            android:id="@+id/client_id_value"
-                            style="@style/user_profile_value"
-                            android:layout_height="match_parent"
-                            android:text="" />
-                </LinearLayout>
-
-                <View
-                        android:layout_width="match_parent"
+                    <View
+                        android:background="@color/light_grey"
                         android:layout_height="1dp"
-                        android:background="#c0c0c0" />
-
-                <LinearLayout
-                        style="@style/user_profile_row"
-                        android:layout_marginTop="@dimen/ll_margin"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"/>
 
                     <TextView
-                            android:id="@+id/account_no_key"
-                            style="@style/user_profile_key"
-                            android:text="@string/account_no" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_width="wrap_content"
+                        android:text="Client Name"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/primary"/>
 
                     <TextView
-                            android:id="@+id/account_no_value"
-                            style="@style/user_profile_value"
-                            android:layout_height="match_parent"
-                            android:text="" />
-                </LinearLayout>
+                        android:gravity="center"
+                        android:id="@+id/clientNameValue"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingTop="4dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:text="@string/medium_text"/>
 
-                <View
-                        android:layout_width="match_parent"
+                    <View
+                        android:background="@color/light_grey"
                         android:layout_height="1dp"
-                        android:background="#c0c0c0" />
-
-                <LinearLayout
-                        style="@style/user_profile_row"
-                        android:layout_marginTop="@dimen/ll_margin"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"/>
 
                     <TextView
-                            android:id="@+id/mobile_no_key"
-                            style="@style/user_profile_key"
-                            android:text="@string/mobile_no" />
-
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_width="wrap_content"
+                        android:text="Account Number"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/primary"/>
                     <TextView
-                            android:id="@+id/mobile_no_value"
-                            style="@style/user_profile_value"
-                            android:text="" />
-                </LinearLayout>
+                        android:gravity="center"
+                        android:id="@+id/accountNoValue"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingTop="4dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:text="@string/medium_text"/>
 
-                <View
-                        android:layout_width="match_parent"
+                    <View
+                        android:background="@color/light_grey"
                         android:layout_height="1dp"
-                        android:background="#c0c0c0" />
-
-                <LinearLayout
-                        style="@style/user_profile_row"
-                        android:layout_marginTop="@dimen/ll_margin"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"/>
 
                     <TextView
-                            android:id="@+id/client_type_key"
-                            style="@style/user_profile_key"
-                            android:text="@string/client_type" />
-
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_width="wrap_content"
+                        android:text="Mobile No"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/primary"/>
                     <TextView
-                            android:id="@+id/client_type_value"
-                            style="@style/user_profile_value"
-                            android:layout_height="match_parent"
-                            android:text="" />
-                </LinearLayout>
+                        android:gravity="center"
+                        android:id="@+id/mobileNoValue"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingTop="4dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:text="@string/medium_text"/>
 
-                <View
-                        android:layout_width="match_parent"
+                    <View
+                        android:background="@color/light_grey"
                         android:layout_height="1dp"
-                        android:background="#c0c0c0"
-                        android:layout_marginBottom="@dimen/ll_margin"/>
+                        android:layout_width="match_parent"/>
 
-                <LinearLayout
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_width="wrap_content"
+                        android:text="Client Type"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="@color/primary"/>
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/clientTypeValue"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingTop="4dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        tools:text="@string/medium_text"/>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/text_input_spacing"
                         android:orientation="horizontal">
 
-                    <Button
+                        <Button
                             android:id="@+id/new_survey_btn"
                             style="@style/Button2"
                             android:background="@drawable/button_design"
@@ -159,7 +205,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/take_new_survey" />
 
-                    <Button
+                        <Button
                             android:id="@+id/prev_survey_btn"
                             style="@style/Button2"
                             android:layout_width="100dp"
@@ -169,9 +215,14 @@
                             android:padding="7dp"
                             android:text="@string/view_previous_surveys" />
 
-                </LinearLayout>
-            </LinearLayout>
+                    </LinearLayout>
 
-        </ScrollView>
-    </LinearLayout>
-</layout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
