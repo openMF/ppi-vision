@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<TableLayout android:id="@+id/TableLayout01"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
             android:orientation="horizontal"
@@ -14,7 +15,7 @@
                     android:text="RadioButton"
                     android:textSize="@dimen/user_profile_text_size"
                     android:textColor="@color/black"
-                    android:layout_width="140sp"
+                    android:layout_width="300sp"
                     android:layout_height="wrap_content"
                     android:id="@+id/response_btn"
                     android:layout_weight="4"
@@ -23,10 +24,13 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textSize="@dimen/user_profile_text_size"
+                android:layout_marginLeft="10dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="10dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/response_score" android:layout_weight="1"/>
 
     </LinearLayout>
-</LinearLayout>
+</TableLayout>

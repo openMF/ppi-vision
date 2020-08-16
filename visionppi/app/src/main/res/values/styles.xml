@@ -96,7 +96,6 @@
     </style>
     <style name="question_style">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@color/lightGray</item>
         <item name="android:textSize">@dimen/twenty_four_sp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

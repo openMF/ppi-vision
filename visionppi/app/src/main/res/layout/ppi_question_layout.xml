@@ -12,27 +12,9 @@
     <TextView
             android:text=""
             android:id="@+id/question"
+            android:textColor="@android:color/black"
             android:layout_margin="@dimen/ll_margin" style="@style/question_style"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_margin="@dimen/ll_margin">
 
-
-        <TextView
-                android:text="@string/response"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-            android:layout_weight="4"
-                style="@style/sub_heading_style"/>
-        <TextView
-                android:text="@string/points"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/sub_heading_style"
-            android:layout_weight="1"/>
-    </LinearLayout>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -60,10 +42,11 @@
         <Button
                 android:text="@string/submit_survey"
                 android:layout_width="match_parent"
-                style="@style/Button"
+                style="@style/Button2"
                 android:layout_weight="1"
+                android:background="@drawable/button_design"
                 android:layout_height="wrap_content"
-            android:layout_margin="@dimen/ll_margin"/>
+                android:layout_margin="@dimen/ll_margin"/>
     </LinearLayout>
 
 
