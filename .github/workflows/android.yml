@@ -20,4 +20,6 @@ jobs:
     - name: Install NDK
       run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.1.6352462" --sdk_root=${ANDROID_SDK_ROOT}
     - name: Build with Gradle
-      run: cd visionppi/ && ./gradlew build
+      run: cd visionppi/ && ./gradlew build 
+    - name: Build with Gradle
+      run: ./gradlew spotlessCheck
