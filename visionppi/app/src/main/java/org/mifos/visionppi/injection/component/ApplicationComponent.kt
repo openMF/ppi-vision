@@ -3,12 +3,12 @@ package org.mifos.visionppi.injection.component
 import android.app.Application
 import android.content.Context
 import dagger.Component
+import javax.inject.Singleton
 import org.mifos.visionppi.api.BaseApiManager
 import org.mifos.visionppi.api.DataManager
 import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.injection.ApplicationContext
 import org.mifos.visionppi.injection.module.ApplicationModule
-import javax.inject.Singleton
 
 /**
  * @author yashk2000

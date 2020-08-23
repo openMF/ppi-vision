@@ -4,10 +4,10 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 import org.mifos.visionppi.api.BaseApiManager
 import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.injection.ApplicationContext
-import javax.inject.Singleton
 
 /**
  * @author yashk2000
@@ -37,5 +37,4 @@ class ApplicationModule(private val application: Application) {
     fun provideBaseApiManager(preferencesHelper: PreferencesHelper?): BaseApiManager {
         return BaseApiManager(preferencesHelper)
     }
-
 }

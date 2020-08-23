@@ -10,6 +10,7 @@ import org.mifos.visionppi.models.mifoserror.MifosError
 object MFErrorParser {
     const val LOG_TAG = "MFErrorParser"
     private val gson = Gson()
+
     @JvmStatic
     fun parseError(serverResponse: String?): MifosError {
         return gson.fromJson(serverResponse, MifosError::class.java)

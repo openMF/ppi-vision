@@ -9,12 +9,14 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 
-data class Client constructor(var entityId: Int,
-                              var entityAccountNo: String,
-                              var entityExternalId: String,
-                              var entityName: String,
-                              var entityType: String,
-                              var parentId: Int,
-                              var parentName: String,
-                              var entityMobileNo: String,
-                              var entityStatus: Status) : Parcelable
+data class Client constructor(
+    var entityId: Int,
+    var entityAccountNo: String,
+    var entityExternalId: String,
+    var entityName: String,
+    var entityType: String,
+    var parentId: Int,
+    var parentName: String,
+    var entityMobileNo: String,
+    var entityStatus: Status
+) : Parcelable

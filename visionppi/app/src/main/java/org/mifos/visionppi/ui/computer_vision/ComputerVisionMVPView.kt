@@ -9,5 +9,4 @@ interface ComputerVisionMVPView : MVPView {
     fun fetchFromCamera()
 
     fun analyzeImages()
-
 }

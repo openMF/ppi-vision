@@ -12,16 +12,15 @@ import org.mifos.visionppi.utils.PrefManager
  * Created by Apoorva M K on 27/06/19.
  */
 
-class UserProfilePresenter : BasePresenter<UserProfileMVPView>(){
+class UserProfilePresenter : BasePresenter<UserProfileMVPView>() {
 
-    private val gson : Gson = Gson()
+    private val gson: Gson = Gson()
 
     fun fetchUserDetails(activity: Activity, context: Context): User {
         val mPrefManager = PrefManager()
-        val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name),Context.MODE_PRIVATE)
+        val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name), Context.MODE_PRIVATE)
         val userJsonString = sharedPref.getString(mPrefManager.USER_DETAILS, " ")
 
         return gson.fromJson(userJsonString, User::class.java)
-
     }
 }

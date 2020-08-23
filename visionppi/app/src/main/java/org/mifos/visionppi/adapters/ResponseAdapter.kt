@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.ppi_response_row.view.*
+import kotlinx.android.synthetic.main.ppi_response_row.view.response_btn
+import kotlinx.android.synthetic.main.ppi_response_row.view.response_score
 import org.mifos.visionppi.objects.Response
 
-
-class ResponseAdapter(var responseList: List<Response>,var context: Context, val responseClicked :(response: Response)->Unit) : RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
+class ResponseAdapter(var responseList: List<Response>, var context: Context, val responseClicked: (response: Response) -> Unit) : RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseViewHolder {
         return ResponseViewHolder(LayoutInflater.from(context).inflate(org.mifos.visionppi.R.layout.ppi_response_row, parent, false))
@@ -32,8 +32,7 @@ class ResponseAdapter(var responseList: List<Response>,var context: Context, val
         var responseButton: RadioButton? = view.response_btn
         var responseScore: TextView? = view.response_score
 
-        fun setItem(position: Int, responseClicked: (response: Response) -> Unit)
-        {
+        fun setItem(position: Int, responseClicked: (response: Response) -> Unit) {
             responseButton?.setOnClickListener {
                 for (responseListPosition in 0..responseList.lastIndex) {
                     responseList.get(responseListPosition).isChecked = false
@@ -45,7 +44,4 @@ class ResponseAdapter(var responseList: List<Response>,var context: Context, val
             }
         }
     }
-
 }
-
-

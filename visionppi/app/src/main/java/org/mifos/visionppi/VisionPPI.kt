@@ -6,11 +6,11 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
+import java.util.Locale
 import org.mifos.visionppi.injection.component.ApplicationComponent
 import org.mifos.visionppi.injection.component.DaggerApplicationComponent
 import org.mifos.visionppi.injection.module.ApplicationModule
 import org.mifos.visionppi.utils.LanguageHelper.onAttach
-import java.util.*
 
 /**
  * @author yashk2000

@@ -19,17 +19,19 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeler
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
-import kotlinx.android.synthetic.main.activity_computer_vision.*
-import org.mifos.visionppi.R
-import org.mifos.visionppi.adapters.ObjectDetectionResultAdapter
-import org.mifos.visionppi.adapters.SelectedImageAdapter
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-
+import kotlinx.android.synthetic.main.activity_computer_vision.analyse
+import kotlinx.android.synthetic.main.activity_computer_vision.open_camera_btn
+import kotlinx.android.synthetic.main.activity_computer_vision.res_list
+import kotlinx.android.synthetic.main.activity_computer_vision.selected_images_list
+import kotlinx.android.synthetic.main.activity_computer_vision.upload_from_gallery_btn
+import org.mifos.visionppi.R
+import org.mifos.visionppi.adapters.ObjectDetectionResultAdapter
+import org.mifos.visionppi.adapters.SelectedImageAdapter
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
-
 
     private val images = ArrayList<Bitmap?>()
     private val PICK_FROM_GALLERY = 1
@@ -39,7 +41,8 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     val labelList: MutableList<String> = ArrayList()
 
     companion object {
-        @JvmStatic var finalLabels: MutableList<List<String>> = ArrayList()
+        @JvmStatic
+        var finalLabels: MutableList<List<String>> = ArrayList()
     }
 
     lateinit var localModel: LocalModel
@@ -94,7 +97,8 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
             reader = BufferedReader(
                     InputStreamReader(baseContext.assets.open("labels.txt")))
 
-            while (reader.readLine().also { if (it != null) labelList.add(it) } != null) {}
+            while (reader.readLine().also { if (it != null) labelList.add(it) } != null) {
+            }
         } catch (e: IOException) {
             Log.e("ERROR", e.toString())
         } finally {
@@ -127,20 +131,18 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                 val ACTIVITY_SELECT_IMAGE = 1234
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), ACTIVITY_SELECT_IMAGE)
 
-                selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
+                selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     override fun fetchFromCamera() {
         try {
-            if (ActivityCompat.checkSelfPermission(applicationContext,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
-            }
-            else {
+            if (ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
+            } else {
                 val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST)
             }
@@ -193,7 +195,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                     val mImageUri: Uri = data.data!!
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, mImageUri)
                     images.add(bitmap)
-                    selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
+                    selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
                 } else {
                     if (data?.getClipData() != null) {
                         val mClipData: ClipData = data.clipData!!
@@ -202,7 +204,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                             val uri: Uri = item.uri
                             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
                             images.add(bitmap)
-                            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
+                            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
                         }
                     }
                 }
@@ -212,9 +214,8 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         if (requestCode === CAMERA_REQUEST && resultCode === Activity.RESULT_OK) {
             val photoCaptured = data?.extras?.get("data") as Bitmap
             images.add(photoCaptured)
-            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
+            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
         }
-
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -240,10 +241,8 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         }
     }
 
-    fun imageRemove(position : Int){
+    fun imageRemove(position: Int) {
         images.removeAt(position)
-        selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position)}
-
+        selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
     }
-
 }

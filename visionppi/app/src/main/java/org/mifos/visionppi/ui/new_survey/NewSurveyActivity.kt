@@ -6,18 +6,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
-import kotlinx.android.synthetic.main.activity_new_survey.*
-import kotlinx.android.synthetic.main.new_survey_toolbar.*
+import kotlinx.android.synthetic.main.activity_new_survey.ppi_survey
+import kotlinx.android.synthetic.main.new_survey_toolbar.computer_vision
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.QuestionAdapter
 import org.mifos.visionppi.objects.PPISurvey
 import org.mifos.visionppi.objects.Response
 import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
+class NewSurveyActivity : AppCompatActivity(), NewSurveyMVPView {
 
-class NewSurveyActivity : AppCompatActivity() , NewSurveyMVPView {
-
-    var mNewSurveyPresenter : NewSurveyPresenter = NewSurveyPresenter()
+    var mNewSurveyPresenter: NewSurveyPresenter = NewSurveyPresenter()
     lateinit var mPPISurvey: PPISurvey
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,6 @@ class NewSurveyActivity : AppCompatActivity() , NewSurveyMVPView {
             val intent = Intent(applicationContext, ComputerVisionActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     override fun getSurveyQuestions() {
@@ -50,7 +48,7 @@ class NewSurveyActivity : AppCompatActivity() , NewSurveyMVPView {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 
-    fun onResponseClicked( response: Response) {
+    fun onResponseClicked(response: Response) {
         showToastMessage(response.text)
     }
 }

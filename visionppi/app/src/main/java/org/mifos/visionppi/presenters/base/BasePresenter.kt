@@ -28,5 +28,4 @@ open class BasePresenter<T : MVPView?> protected constructor(protected var conte
 
     class MvpViewNotAttachedException : RuntimeException("Please call Presenter.attachView(MvpView) before" +
             " requesting data to the Presenter")
-
 }

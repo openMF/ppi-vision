@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.text.TextUtils
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.mifos.visionppi.api.BaseURL
 import org.mifos.visionppi.api.VisionPPIInterceptor
 import org.mifos.visionppi.injection.ApplicationContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * @author yashk2000
@@ -20,7 +20,7 @@ class PreferencesHelper @Inject constructor(@ApplicationContext context: Context
 
     fun clear() {
         val editor = sharedPreferences.edit()
-        //prevent deletion of url and tenant
+        // prevent deletion of url and tenant
         for ((key) in sharedPreferences.all) {
             if (!(key == BASE_URL || key == TENANT)) {
                 editor.remove(key)

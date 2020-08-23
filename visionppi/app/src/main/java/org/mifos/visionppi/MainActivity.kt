@@ -10,7 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.appToolbar
 import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.ui.activities.LoginActivity
 import org.mifos.visionppi.utils.PrefManager

@@ -1,10 +1,10 @@
 package org.mifos.visionppi.api
 
 import io.reactivex.Observable
-import org.mifos.visionppi.api.local.PreferencesHelper
-import org.mifos.visionppi.models.User
 import javax.inject.Inject
 import javax.inject.Singleton
+import org.mifos.visionppi.api.local.PreferencesHelper
+import org.mifos.visionppi.models.User
 
 /**
  * @author yashk2000
@@ -15,5 +15,4 @@ class DataManager @Inject constructor(val preferencesHelper: PreferencesHelper, 
     fun login(username: String?, password: String?): Observable<User?>? {
         return baseApiManager.authenticationApi.authenticate(username, password)
     }
-
 }
