@@ -19,9 +19,8 @@ import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
 class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
 
-
     private lateinit var mPager: ViewPager
-    var mNewSurveyPresenter : NewSurveyPresenter = NewSurveyPresenter()
+    var mNewSurveyPresenter: NewSurveyPresenter = NewSurveyPresenter()
     lateinit var mPPISurvey: PPISurvey
     var list: MutableList<List<String>> = ArrayList()
 
@@ -74,16 +73,15 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
         override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas.get(position), applicationContext, list) { response: Response -> onResponseClicked(response) }
     }
 
-
     override fun showToastMessage(string: String) {
-        Toast.makeText(applicationContext ,string , Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, string, Toast.LENGTH_LONG).show()
     }
 
     override fun renderSurvey(mPPISurvey: PPISurvey) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    fun onResponseClicked( response: Response) {
+    fun onResponseClicked(response: Response) {
         showToastMessage(response.text)
     }
 }

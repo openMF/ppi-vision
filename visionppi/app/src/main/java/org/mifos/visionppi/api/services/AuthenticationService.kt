@@ -12,6 +12,8 @@ import retrofit2.http.Query
  */
 interface AuthenticationService {
     @POST(ApiEndPoints.AUTHENTICATION)
-    fun authenticate(@Query("username") username: String?,
-                     @Query("password") password: String?): Observable<User?>?
+    fun authenticate(
+        @Query("username") username: String?,
+        @Query("password") password: String?
+    ): Observable<User?>?
 }

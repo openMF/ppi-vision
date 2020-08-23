@@ -5,9 +5,9 @@
 package org.mifos.visionppi.api
 
 import android.text.TextUtils
+import java.io.IOException
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
 
 /**
  * @author yashk2000
@@ -31,5 +31,4 @@ class VisionPPIInterceptor(private val tenant: String, private val authToken: St
         const val HEADER_AUTH = "Authorization"
         const val DEFAULT_TENANT = "mobile"
     }
-
 }

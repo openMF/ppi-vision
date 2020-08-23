@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.ppi_question_layout.view.*
+import kotlinx.android.synthetic.main.ppi_question_layout.view.question
+import kotlinx.android.synthetic.main.ppi_question_layout.view.res
+import kotlinx.android.synthetic.main.ppi_question_layout.view.responses
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ResponseAdapter
 import org.mifos.visionppi.objects.Question
 import org.mifos.visionppi.objects.Response
-
 
 class PPIQuestionFragment(var questionData: Question, val mContext: Context, val list: MutableList<List<String>>, val responseClick: (response: Response) -> Unit) : Fragment() {
 
@@ -43,11 +44,11 @@ class PPIQuestionFragment(var questionData: Question, val mContext: Context, val
                     } else if (it.contains("washer", ignoreCase = true)) {
                         washer = true
                     } else if (it.contains("television", ignoreCase = true) || it.contains("entertainment center", ignoreCase = true) || it.contains("home theater", ignoreCase = true)) {
-                       tv = true
+                        tv = true
                     } else if (it.contains("cassette player", ignoreCase = true) || it.contains("CD player", ignoreCase = true) || it.contains("tape player", ignoreCase = true)) {
                         player = true
                     } else if (it.contains("cellular telephone", ignoreCase = true) || it.contains("dial telephone", ignoreCase = true)) {
-                        ++c;
+                        ++c
                     }
                 }
             }
@@ -92,5 +93,4 @@ class PPIQuestionFragment(var questionData: Question, val mContext: Context, val
         view.responses.adapter = ResponseAdapter(questionData.responseDatas, mContext, responseClick)
         return view
     }
-
 }

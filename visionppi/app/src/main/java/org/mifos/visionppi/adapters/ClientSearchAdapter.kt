@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.client_search_row.view.*
+import kotlinx.android.synthetic.main.client_search_row.view.client_account_no
+import kotlinx.android.synthetic.main.client_search_row.view.client_name
+import kotlinx.android.synthetic.main.client_search_row.view.client_search_row
 import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.Client
 
@@ -17,23 +19,19 @@ import org.mifos.visionppi.objects.Client
 
 class ClientSearchAdapter(var clientList: List<Client>, var context: Context, val listener: (Client) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.clientName?.text = clientList.get(position).entityName
         holder.clientAccountNo?.text = "#".plus(clientList[position].entityAccountNo)
         holder.setItem(clientList.get(position), listener)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.client_search_row, parent, false))
     }
 
-
-    override fun getItemCount() : Int{
+    override fun getItemCount(): Int {
         return clientList.size
     }
-
 }
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -45,7 +43,3 @@ class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         linear_layout?.setOnClickListener { listener(item) }
     }
 }
-
-
-
-

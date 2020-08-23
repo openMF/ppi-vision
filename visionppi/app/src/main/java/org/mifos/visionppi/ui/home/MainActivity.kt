@@ -17,14 +17,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main.client_search_list
+import kotlinx.android.synthetic.main.content_main.search_btn
+import kotlinx.android.synthetic.main.content_main.search_query
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ClientSearchAdapter
 import org.mifos.visionppi.objects.Client
 import org.mifos.visionppi.ui.client_profile.ClientProfileActivity
-
 
 /**
  * Created by Apoorva M K on 25/06/19.
@@ -35,11 +36,10 @@ class MainActivity : Fragment(), MainMVPView {
     lateinit var clientList: List<Client>
     var mMainPresenter: MainPresenter = MainPresenter()
 
-
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
         val root = inflater.inflate(R.layout.content_main, container, false)
@@ -98,7 +98,7 @@ class MainActivity : Fragment(), MainMVPView {
 
     private fun networkAvailable(activity: FragmentActivity): Boolean {
         val connectivityManager =
-            activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
     }
@@ -137,7 +137,6 @@ class MainActivity : Fragment(), MainMVPView {
         val intent = Intent(context, ClientProfileActivity::class.java)
         intent.putExtra("client", item)
         startActivity(intent)
-
     }
 
     fun doSearch(string: String): List<Client> {

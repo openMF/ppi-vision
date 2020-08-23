@@ -4,8 +4,8 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import androidx.preference.PreferenceManager
+import java.util.Locale
 import org.mifos.visionppi.R
-import java.util.*
 
 /**
  * @author yashk2000

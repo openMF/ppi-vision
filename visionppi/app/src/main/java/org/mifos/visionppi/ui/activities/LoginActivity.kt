@@ -7,7 +7,9 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
-import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_login.til_password
+import kotlinx.android.synthetic.main.activity_login.til_username
 import org.mifos.visionppi.MainActivity
 import org.mifos.visionppi.R
 import org.mifos.visionppi.presenters.LoginPresenter
@@ -15,7 +17,6 @@ import org.mifos.visionppi.ui.activities.base.BaseActivity
 import org.mifos.visionppi.ui.views.LoginView
 import org.mifos.visionppi.utils.Network
 import org.mifos.visionppi.utils.Toaster
-import javax.inject.Inject
 
 /**
  * @author yashk2000

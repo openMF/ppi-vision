@@ -50,7 +50,7 @@ open class BaseActivity : AppCompatActivity(), BaseActivityCallback {
      *  * LONG
      *
      *
-     * @param message   Message that the toast must show.
+     * @param message Message that the toast must show.
      * @param toastType Duration for which the toast must be visible.
      */
     fun showToast(message: String, toastType: Int) {

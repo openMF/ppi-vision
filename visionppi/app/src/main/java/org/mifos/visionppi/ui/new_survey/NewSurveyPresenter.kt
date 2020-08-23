@@ -14,28 +14,26 @@ import org.mifos.visionppi.utils.AuthKey
 
 class NewSurveyPresenter : BasePresenter<NewSurveyMVPView>() {
 
-    lateinit var mPPISurvey : PPISurvey
-    var mUserProfilePresenter : UserProfilePresenter = UserProfilePresenter()
+    lateinit var mPPISurvey: PPISurvey
+    var mUserProfilePresenter: UserProfilePresenter = UserProfilePresenter()
 
-    fun getSurvey(surveyId : Int, context: Context, activity: Activity) : PPISurvey{
+    fun getSurvey(surveyId: Int, context: Context, activity: Activity): PPISurvey {
         val url = context.getString(R.string.demoURL).plus(ApiEndPoints.SURVEY)
-                                                            .plus("/"+surveyId.toString())
-        val tenantId  = context.getString(R.string.tenantId)
-        val contentType  = context.getString(R.string.contentType)
+                .plus("/" + surveyId.toString())
+        val tenantId = context.getString(R.string.tenantId)
+        val contentType = context.getString(R.string.contentType)
 
         val header = mapOf("Fineract-Platform-TenantId" to tenantId,
-                                            "Content-Type" to contentType)
+                "Content-Type" to contentType)
 
         var user = mUserProfilePresenter.fetchUserDetails(activity, context)
 
-        var response = get(url = url, headers = header, auth= AuthKey((user.base64EncodedAuthenticationKey).toString()))
+        var response = get(url = url, headers = header, auth = AuthKey((user.base64EncodedAuthenticationKey).toString()))
 
-        val obj:JSONObject = response.jsonObject
+        val obj: JSONObject = response.jsonObject
         var gson: Gson = Gson()
-        mPPISurvey  = gson.fromJson(obj.toString(), PPISurvey::class.java)
-
+        mPPISurvey = gson.fromJson(obj.toString(), PPISurvey::class.java)
 
         return mPPISurvey
     }
-
 }

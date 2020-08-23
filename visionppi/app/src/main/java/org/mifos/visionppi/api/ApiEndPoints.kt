@@ -7,5 +7,5 @@ package org.mifos.visionppi.api
 object ApiEndPoints {
     const val AUTHENTICATION = "authentication"
     var SEARCH: String = "search"
-    var SURVEY : String = "surveys"
+    var SURVEY: String = "surveys"
 }

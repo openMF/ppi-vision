@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.ppi_question_layout.view.*
+import kotlinx.android.synthetic.main.ppi_question_layout.view.question
+import kotlinx.android.synthetic.main.ppi_question_layout.view.responses
 import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.Question
 import org.mifos.visionppi.objects.Response
 
-class QuestionAdapter (var questionList: List<Question>, var context: Context, val responseClick :(response : Response) -> Unit) : RecyclerView.Adapter<QuestionViewHolder>() {
+class QuestionAdapter(var questionList: List<Question>, var context: Context, val responseClick: (response: Response) -> Unit) : RecyclerView.Adapter<QuestionViewHolder>() {
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         holder.question?.text = questionList.get(position).text
@@ -24,14 +25,12 @@ class QuestionAdapter (var questionList: List<Question>, var context: Context, v
         return QuestionViewHolder(LayoutInflater.from(context).inflate(R.layout.ppi_question_layout, parent, false))
     }
 
-
     override fun getItemCount(): Int {
         return questionList.size
     }
-
 }
 
-class QuestionViewHolder(view: View) : RecyclerView.ViewHolder(view){
+class QuestionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val question: TextView? = view.question
     val responseRecyclerView: RecyclerView? = view.responses

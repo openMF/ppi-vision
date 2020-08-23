@@ -8,6 +8,8 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class Status (var id: Int,
-                   var code: String,
-                   var value: String) : Parcelable
+data class Status(
+    var id: Int,
+    var code: String,
+    var value: String
+) : Parcelable
