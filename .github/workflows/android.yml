@@ -22,4 +22,4 @@ jobs:
     - name: Build with Gradle
       run: cd visionppi/ && ./gradlew build 
     - name: Spotless check
-      run: ./gradlew spotlessCheck
+      run: cd visionppi/ && ./gradlew spotlessCheck
