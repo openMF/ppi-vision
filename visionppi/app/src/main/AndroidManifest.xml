@@ -33,6 +33,9 @@
             android:name=".ui.computer_vision.ComputerVisionActivity"
             android:label="Computer Vision"></activity>
         <activity
+            android:name=".ui.AboutActivity"
+            android:label="@string/about"/>
+        <activity
             android:name=".ui.activities.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
