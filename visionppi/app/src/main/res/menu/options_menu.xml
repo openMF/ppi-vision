@@ -16,4 +16,11 @@
         android:actionLayout="@layout/toolbar"
         android:title="Share App" />
 
+    <item
+        android:id="@+id/about"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_info"
+        android:actionLayout="@layout/toolbar"
+        android:title="About" />
+
 </menu>

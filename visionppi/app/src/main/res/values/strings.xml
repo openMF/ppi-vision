@@ -53,4 +53,18 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Profile</string>
     <string name="medium_text">Placeholder</string>
+    <string name="about_app">Vision PPI helps officers to fill PPI Surveys automatically with the help of photographs taken in a clients house.</string>
+    <string name="about_mifos">Developed by <a href="https://mifos.org/">Mifos</a>
+        <a href="https://github.com/openMF/ppi-vision/graphs/contributors">Contributors</a>.
+    </string>
+    <string name="about_us_connect">Connect With Us</string>
+    <string name="link">Visit Us</string>
+    <string name="about_support_github_sub">Fork the repo and push changes or submit new issues.</string>
+    <string name="about_support_github">GitHub</string>
+    <string name="about">About</string>
+    <string name="about_support_twitter_sub">Twitter page </string>
+    <string name="about_support_twitter">Twitter</string>
+    <string name="about_license">License</string>
+    <string name="about_license_sub">MIT License</string>
+
 </resources>

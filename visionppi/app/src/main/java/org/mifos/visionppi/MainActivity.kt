@@ -10,8 +10,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.toolbar.appToolbar
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.api.local.PreferencesHelper
+import org.mifos.visionppi.ui.AboutActivity
 import org.mifos.visionppi.ui.activities.LoginActivity
 import org.mifos.visionppi.utils.PrefManager
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 prefManager.clear(this, baseContext)
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
                 true
             }
             R.id.share -> {
@@ -59,6 +61,12 @@ class MainActivity : AppCompatActivity() {
                 )
                 sendIntent.type = "text/plain"
                 startActivity(sendIntent)
+                true
+            }
+            R.id.about -> {
+                intent.setClass(this, AboutActivity::class.java)
+                startActivity(intent)
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
