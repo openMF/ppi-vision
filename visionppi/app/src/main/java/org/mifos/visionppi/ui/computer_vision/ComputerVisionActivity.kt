@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_computer_vision.open_camera_btn
 import kotlinx.android.synthetic.main.activity_computer_vision.res_list
 import kotlinx.android.synthetic.main.activity_computer_vision.selected_images_list
 import kotlinx.android.synthetic.main.activity_computer_vision.upload_from_gallery_btn
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ObjectDetectionResultAdapter
 import org.mifos.visionppi.adapters.SelectedImageAdapter
@@ -55,6 +57,13 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_computer_vision)
 
+        setSupportActionBar(appToolbar)
+        val actionBar = supportActionBar
+        actionBar?.title = "Analyse Images"
+
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setDisplayShowHomeEnabled(true)
+
         upload_from_gallery_btn.setOnClickListener {
             fetchFromGallery()
         }
@@ -78,6 +87,15 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
         readLabels()
         initDetector()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return true
     }
 
     private fun initDetector() {
