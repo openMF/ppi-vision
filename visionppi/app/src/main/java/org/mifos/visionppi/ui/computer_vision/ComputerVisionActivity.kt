@@ -69,7 +69,11 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         analyse.setOnClickListener {
             counter = 0
             imageNos = images.size
-            analyzeImages()
+            if (images.isNotEmpty()) {
+                analyzeImages()
+            } else {
+                Toast.makeText(this, "Please select at least 1 image", Toast.LENGTH_SHORT).show()
+            }
         }
 
         readLabels()
