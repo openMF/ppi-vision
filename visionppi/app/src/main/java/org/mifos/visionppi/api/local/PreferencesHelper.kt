@@ -37,11 +37,11 @@ class PreferencesHelper @Inject constructor(@ApplicationContext context: Context
         sharedPreferences.edit().putInt(preferenceKey, preferenceValue).apply()
     }
 
-    fun getLong(preferenceKey: String?, preferenceDefaultValue: Long): Long {
+    private fun getLong(preferenceKey: String?, preferenceDefaultValue: Long): Long {
         return sharedPreferences.getLong(preferenceKey, preferenceDefaultValue)
     }
 
-    fun putLong(preferenceKey: String?, preferenceValue: Long) {
+    private fun putLong(preferenceKey: String?, preferenceValue: Long) {
         sharedPreferences.edit().putLong(preferenceKey, preferenceValue).apply()
     }
 
@@ -49,7 +49,7 @@ class PreferencesHelper @Inject constructor(@ApplicationContext context: Context
         return sharedPreferences.getString(preferenceKey, preferenceDefaultValue)
     }
 
-    fun putString(preferenceKey: String?, preferenceValue: String?) {
+    private fun putString(preferenceKey: String?, preferenceValue: String?) {
         sharedPreferences.edit().putString(preferenceKey, preferenceValue).apply()
     }
 

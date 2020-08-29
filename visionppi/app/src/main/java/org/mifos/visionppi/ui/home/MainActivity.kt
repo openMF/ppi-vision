@@ -139,11 +139,11 @@ class MainActivity : Fragment(), MainMVPView {
         startActivity(intent)
     }
 
-    fun doSearch(string: String): List<Client> {
+    private fun doSearch(string: String): List<Client> {
         return mMainPresenter.searchClients(string, requireContext(), requireActivity())
     }
 
-    fun makelist() {
+    private fun makelist() {
         if (clientList.size == 0)
             searchUnsuccessful()
 

@@ -40,7 +40,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private val CAMERA_REQUEST = 2
     private val MY_CAMERA_PERMISSION_CODE = 100
 
-    val labelList: MutableList<String> = ArrayList()
+    private val labelList: MutableList<String> = ArrayList()
 
     companion object {
         @JvmStatic

@@ -19,7 +19,7 @@ open class BasePresenter<T : MVPView?> protected constructor(protected var conte
         mvpView = null
     }
 
-    val isViewAttached: Boolean
+    private val isViewAttached: Boolean
         get() = mvpView != null
 
     fun checkViewAttached() {

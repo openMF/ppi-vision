@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.ppi_response_row.view.response_btn
 import kotlinx.android.synthetic.main.ppi_response_row.view.response_score
 import org.mifos.visionppi.objects.Response
 
-class ResponseAdapter(var responseList: List<Response>, var context: Context, val responseClicked: (response: Response) -> Unit) : RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
+class ResponseAdapter(var responseList: List<Response>, var context: Context, private val responseClicked: (response: Response) -> Unit) : RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseViewHolder {
         return ResponseViewHolder(LayoutInflater.from(context).inflate(org.mifos.visionppi.R.layout.ppi_response_row, parent, false))
