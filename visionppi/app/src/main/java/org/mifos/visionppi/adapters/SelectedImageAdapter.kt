@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.image_grid_layout.view.remove_button
 import kotlinx.android.synthetic.main.image_grid_layout.view.selected_image
 import org.mifos.visionppi.R
 
-class SelectedImageAdapter(val items: ArrayList<Bitmap?>, val context: Context, val removeImage: (position: Int) -> Unit) : RecyclerView.Adapter<SelectedImageAdapter.SelectedImageViewHolder>() {
+class SelectedImageAdapter(private val items: ArrayList<Bitmap?>, val context: Context, val removeImage: (position: Int) -> Unit) : RecyclerView.Adapter<SelectedImageAdapter.SelectedImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectedImageViewHolder {
         return SelectedImageViewHolder(LayoutInflater.from(context).inflate(R.layout.image_grid_layout, parent, false))
@@ -29,7 +29,7 @@ class SelectedImageAdapter(val items: ArrayList<Bitmap?>, val context: Context, 
 
     inner class SelectedImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val selected_image_imageview: ImageView? = view.selected_image
-        val removeButton: ImageButton? = view.remove_button
+        private val removeButton: ImageButton? = view.remove_button
         fun setItem(position: Int) {
             removeButton?.setOnClickListener { removeImage(position) }
         }

@@ -13,7 +13,7 @@ import org.mifos.visionppi.R
 import org.mifos.visionppi.objects.Question
 import org.mifos.visionppi.objects.Response
 
-class QuestionAdapter(var questionList: List<Question>, var context: Context, val responseClick: (response: Response) -> Unit) : RecyclerView.Adapter<QuestionViewHolder>() {
+class QuestionAdapter(var questionList: List<Question>, var context: Context, private val responseClick: (response: Response) -> Unit) : RecyclerView.Adapter<QuestionViewHolder>() {
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         holder.question?.text = questionList.get(position).text
