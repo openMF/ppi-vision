@@ -19,7 +19,7 @@ class SelectedImageAdapter(private val items: ArrayList<Bitmap?>, val context: C
     }
 
     override fun onBindViewHolder(holder: SelectedImageViewHolder, position: Int) {
-        holder.selected_image_imageview?.setImageBitmap(items.get(position))
+        holder.selectedImageImageview?.setImageBitmap(items.get(position))
         holder.setItem(position)
     }
 
@@ -28,7 +28,7 @@ class SelectedImageAdapter(private val items: ArrayList<Bitmap?>, val context: C
     }
 
     inner class SelectedImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val selected_image_imageview: ImageView? = view.selected_image
+        val selectedImageImageview: ImageView? = view.selected_image
         private val removeButton: ImageButton? = view.remove_button
         fun setItem(position: Int) {
             removeButton?.setOnClickListener { removeImage(position) }

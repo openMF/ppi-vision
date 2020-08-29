@@ -84,7 +84,7 @@ open class BaseActivity : AppCompatActivity(), BaseActivityCallback {
      * Used for setting title of Toolbar
      * @param title String you want to display as title
      */
-    fun setActionBarTitle(title: String?) {
+    private fun setActionBarTitle(title: String?) {
         if (supportActionBar != null && getTitle() != null) {
             setTitle(title)
         }

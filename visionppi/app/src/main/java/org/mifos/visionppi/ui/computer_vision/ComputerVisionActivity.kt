@@ -36,9 +36,9 @@ import org.mifos.visionppi.adapters.SelectedImageAdapter
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
     private val images = ArrayList<Bitmap?>()
-    private val PICK_FROM_GALLERY = 1
-    private val CAMERA_REQUEST = 2
-    private val MY_CAMERA_PERMISSION_CODE = 100
+    private val pickFromGallery = 1
+    private val cameraRequest = 2
+    private val myCameraPermissionCode = 100
 
     private val labelList: MutableList<String> = ArrayList()
 
@@ -143,7 +143,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                 ActivityCompat.requestPermissions(
                         this@ComputerVisionActivity,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        PICK_FROM_GALLERY
+                        pickFromGallery
                 )
             } else {
                 val intent = Intent()
@@ -163,10 +163,10 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     override fun fetchFromCamera() {
         try {
             if (ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), myCameraPermissionCode)
             } else {
                 val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(cameraIntent, CAMERA_REQUEST)
+                startActivityForResult(cameraIntent, cameraRequest)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -233,7 +233,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
             }
         }
 
-        if (requestCode === CAMERA_REQUEST && resultCode === Activity.RESULT_OK) {
+        if (requestCode === cameraRequest && resultCode === Activity.RESULT_OK) {
             val photoCaptured = data?.extras?.get("data") as Bitmap
             images.add(photoCaptured)
             selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
@@ -242,28 +242,28 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
-            PICK_FROM_GALLERY ->
+            pickFromGallery ->
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     val galleryIntent =
                             Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    startActivityForResult(galleryIntent, PICK_FROM_GALLERY)
+                    startActivityForResult(galleryIntent, pickFromGallery)
                 } else {
                     showToastMessage(getString(R.string.cant_open_gallery))
                 }
         }
 
-        if (requestCode === MY_CAMERA_PERMISSION_CODE) {
+        if (requestCode === myCameraPermissionCode) {
             if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
                 showToastMessage("Camera permission granted")
                 val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(cameraIntent, CAMERA_REQUEST)
+                startActivityForResult(cameraIntent, cameraRequest)
             } else {
                 showToastMessage("Camera permission denied")
             }
         }
     }
 
-    fun imageRemove(position: Int) {
+    private fun imageRemove(position: Int) {
         images.removeAt(position)
         selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
     }
