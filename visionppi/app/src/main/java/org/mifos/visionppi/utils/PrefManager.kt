@@ -13,9 +13,9 @@ import org.mifos.visionppi.models.User
 
 class PrefManager {
 
-    val USER_DETAILS = "user_details"
-    private val USERNAME = "username"
-    private val PASSWORD = "password"
+    val userDetails = "user_details"
+    private val username = "username"
+    private val password = "password"
     private val gson: Gson = Gson()
 
     private fun putString(preferenceKey: String, preferenceValue: String, activity: Activity, context: Context) {
@@ -29,12 +29,12 @@ class PrefManager {
     }
 
     fun saveUser(user: User, context: Context, activity: Activity) {
-        putString(USER_DETAILS, gson.toJson(user), activity, context)
+        putString(userDetails, gson.toJson(user), activity, context)
     }
 
     fun saveLoginCredentials(username: String, password: String, context: Context, activity: Activity) {
-        putString(USERNAME, username, activity, context)
-        putString(PASSWORD, password, activity, context)
+        putString(this.username, username, activity, context)
+        putString(this.password, password, activity, context)
     }
 
     fun clear(activity: Activity, context: Context) {

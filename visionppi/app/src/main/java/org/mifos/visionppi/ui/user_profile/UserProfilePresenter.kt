@@ -19,7 +19,7 @@ class UserProfilePresenter : BasePresenter<UserProfileMVPView>() {
     fun fetchUserDetails(activity: Activity, context: Context): User {
         val mPrefManager = PrefManager()
         val sharedPref = activity.getSharedPreferences(context.getString(R.string.pref_file_name), Context.MODE_PRIVATE)
-        val userJsonString = sharedPref.getString(mPrefManager.USER_DETAILS, " ")
+        val userJsonString = sharedPref.getString(mPrefManager.userDetails, " ")
 
         return gson.fromJson(userJsonString, User::class.java)
     }

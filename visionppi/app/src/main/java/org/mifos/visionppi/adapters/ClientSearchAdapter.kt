@@ -37,9 +37,9 @@ class ClientSearchAdapter(var clientList: List<Client>, var context: Context, va
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val clientName: TextView? = view.client_name
     val clientAccountNo: TextView? = view.client_account_no
-    private val linear_layout: LinearLayout? = view.client_search_row
+    private val linearLayout: LinearLayout? = view.client_search_row
 
     fun setItem(item: Client, listener: (Client) -> Unit) {
-        linear_layout?.setOnClickListener { listener(item) }
+        linearLayout?.setOnClickListener { listener(item) }
     }
 }
