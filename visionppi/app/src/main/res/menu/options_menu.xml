@@ -6,6 +6,7 @@
         android:id="@+id/logout"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_logout"
+        android:iconTint="@android:color/black"
         android:actionLayout="@layout/toolbar"
         android:title="Logout" />
 
@@ -13,6 +14,7 @@
         android:id="@+id/share"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_share"
+        android:iconTint="@android:color/black"
         android:actionLayout="@layout/toolbar"
         android:title="Share App" />
 
@@ -20,6 +22,7 @@
         android:id="@+id/about"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_info"
+        android:iconTint="@android:color/black"
         android:actionLayout="@layout/toolbar"
         android:title="About" />
 
