@@ -16,9 +16,9 @@ import org.mifos.visionppi.objects.Response
 class QuestionAdapter(var questionList: List<Question>, var context: Context, private val responseClick: (response: Response) -> Unit) : RecyclerView.Adapter<QuestionViewHolder>() {
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
-        holder.question?.text = questionList.get(position).text
+        holder.question?.text = questionList[position].text
         holder.responseRecyclerView?.layoutManager = LinearLayoutManager(holder.responseRecyclerView?.context)
-        holder.responseRecyclerView?.adapter = ResponseAdapter(questionList.get(position).responseDatas, context, responseClick)
+        holder.responseRecyclerView?.adapter = ResponseAdapter(questionList[position].responseDatas, context, responseClick)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {

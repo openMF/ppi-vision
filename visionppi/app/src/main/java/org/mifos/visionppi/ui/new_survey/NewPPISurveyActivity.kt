@@ -45,7 +45,7 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
         Log.d("NewPPISurveyActivity", ComputerVisionActivity.finalLabels.toString())
         if (ComputerVisionActivity.finalLabels.isNotEmpty()) {
             list = ComputerVisionActivity.finalLabels
-            val s: String = mPPISurvey.questionDatas.get(mPager.currentItem).text
+            val s: String = mPPISurvey.questionDatas[mPager.currentItem].text
             Log.d("NewPPISurveyActivity", s)
         }
     }
@@ -70,7 +70,7 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getCount(): Int = mPPISurvey.questionDatas.size
 
-        override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas.get(position), applicationContext, list) { response: Response -> onResponseClicked(response) }
+        override fun getItem(position: Int): Fragment = PPIQuestionFragment(mPPISurvey.questionDatas[position], applicationContext, list) { response: Response -> onResponseClicked(response) }
     }
 
     override fun showToastMessage(string: String) {

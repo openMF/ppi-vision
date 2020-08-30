@@ -16,7 +16,7 @@ import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
 class NewSurveyActivity : AppCompatActivity(), NewSurveyMVPView {
 
-    var mNewSurveyPresenter: NewSurveyPresenter = NewSurveyPresenter()
+    private var mNewSurveyPresenter: NewSurveyPresenter = NewSurveyPresenter()
     lateinit var mPPISurvey: PPISurvey
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class NewSurveyActivity : AppCompatActivity(), NewSurveyMVPView {
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(ppi_survey)
         ppi_survey.layoutManager = LinearLayoutManager(this)
-        ppi_survey.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        ppi_survey.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         ppi_survey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext) { response: Response -> onResponseClicked(response) }
     }
 
@@ -48,7 +48,7 @@ class NewSurveyActivity : AppCompatActivity(), NewSurveyMVPView {
         Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 
-    fun onResponseClicked(response: Response) {
+    private fun onResponseClicked(response: Response) {
         showToastMessage(response.text)
     }
 }

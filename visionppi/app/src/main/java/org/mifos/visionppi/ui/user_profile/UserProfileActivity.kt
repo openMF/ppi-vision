@@ -31,8 +31,7 @@ class UserProfileActivity : Fragment(), UserProfileMVPView {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-        val root = inflater.inflate(R.layout.activity_user_profile, container, false)
-        return root
+        return inflater.inflate(R.layout.activity_user_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

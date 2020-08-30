@@ -3,7 +3,6 @@ package org.mifos.visionppi.ui.activities.base
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
-import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.mifos.visionppi.VisionPPI
@@ -28,20 +27,13 @@ open class BaseActivity : AppCompatActivity(), BaseActivityCallback {
             if (field == null) {
                 field = DaggerActivityComponent.builder()
                         .activityModule(ActivityModule(this))
-                        .applicationComponent(VisionPPI.get(this).component())
+                        .applicationComponent(VisionPPI[this].component())
                         .build()
             }
             return field
         }
         private set
     private var progress: ProgressDialog? = null
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     /**
      * Displays a toast in current activity. The duration can of two types:

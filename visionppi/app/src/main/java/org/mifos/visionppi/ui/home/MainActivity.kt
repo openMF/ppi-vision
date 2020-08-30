@@ -50,7 +50,7 @@ class MainActivity : Fragment(), MainMVPView {
         super.onViewCreated(view, savedInstanceState)
         client_search_list.layoutManager = LinearLayoutManager(requireContext())
 
-        search_query.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        search_query.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch()
                 return@OnEditorActionListener true
@@ -84,7 +84,7 @@ class MainActivity : Fragment(), MainMVPView {
     private fun performSearch() {
         if (networkAvailable(requireActivity())) {
             search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
-            if (search_query.text.toString().length == 0)
+            if (search_query.text.toString().isEmpty())
                 searchError()
             else {
                 val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -144,10 +144,10 @@ class MainActivity : Fragment(), MainMVPView {
     }
 
     private fun makelist() {
-        if (clientList.size == 0)
+        if (clientList.isEmpty())
             searchUnsuccessful()
 
         client_search_list.adapter =
-                ClientSearchAdapter(clientList, requireContext(), { item -> onClick(item) })
+                ClientSearchAdapter(clientList, requireContext()) { item -> onClick(item) }
     }
 }

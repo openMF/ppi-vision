@@ -22,9 +22,9 @@ class ResponseAdapter(var responseList: List<Response>, var context: Context, pr
     }
 
     override fun onBindViewHolder(holder: ResponseViewHolder, position: Int) {
-        holder.responseButton?.text = responseList.get(position).text
-        holder.responseScore?.text = responseList.get(position).value.toString() + " Pts"
-        holder.responseButton?.isChecked = responseList.get(position).isChecked
+        holder.responseButton?.text = responseList[position].text
+        holder.responseScore?.text = responseList[position].value.toString() + " Pts"
+        holder.responseButton?.isChecked = responseList[position].isChecked
         holder.setItem(position, responseClicked)
     }
 
@@ -35,11 +35,11 @@ class ResponseAdapter(var responseList: List<Response>, var context: Context, pr
         fun setItem(position: Int, responseClicked: (response: Response) -> Unit) {
             responseButton?.setOnClickListener {
                 for (responseListPosition in 0..responseList.lastIndex) {
-                    responseList.get(responseListPosition).isChecked = false
+                    responseList[responseListPosition].isChecked = false
                 }
                 responseButton?.isChecked = true
-                responseList.get(position).isChecked = true
-                responseClicked(responseList.get(position))
+                responseList[position].isChecked = true
+                responseClicked(responseList[position])
                 notifyDataSetChanged()
             }
         }

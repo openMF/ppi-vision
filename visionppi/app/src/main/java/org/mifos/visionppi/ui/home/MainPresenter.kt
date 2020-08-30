@@ -27,8 +27,8 @@ class MainPresenter : BasePresenter<MainMVPView>() {
 
         // StrictMode.setThreadPolicy(policy)
 
-        var user = mUserProfilePresenter.fetchUserDetails(activity, context)
-        var searchResult: MutableList<Client> = mutableListOf<Client>()
+        val user = mUserProfilePresenter.fetchUserDetails(activity, context)
+        val searchResult: MutableList<Client> = mutableListOf<Client>()
         val url = context.getString(R.string.demoURL).plus(ApiEndPoints.SEARCH)
         val tenantId = "mobile"
         val contentType = context.getString(R.string.contentType)
@@ -43,7 +43,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
             if (response.statusCode == 200) {
 
                 val obj: JSONArray = response.jsonArray
-                var gson: Gson = Gson()
+                val gson: Gson = Gson()
 
                 for (i in 0 until obj.length()) {
                     Log.i("i", i.toString())

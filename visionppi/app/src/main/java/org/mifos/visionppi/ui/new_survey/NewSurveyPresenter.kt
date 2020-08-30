@@ -19,19 +19,19 @@ class NewSurveyPresenter : BasePresenter<NewSurveyMVPView>() {
 
     fun getSurvey(surveyId: Int, context: Context, activity: Activity): PPISurvey {
         val url = context.getString(R.string.demoURL).plus(ApiEndPoints.SURVEY)
-                .plus("/" + surveyId.toString())
+                .plus("/$surveyId")
         val tenantId = context.getString(R.string.tenantId)
         val contentType = context.getString(R.string.contentType)
 
         val header = mapOf("Fineract-Platform-TenantId" to tenantId,
                 "Content-Type" to contentType)
 
-        var user = mUserProfilePresenter.fetchUserDetails(activity, context)
+        val user = mUserProfilePresenter.fetchUserDetails(activity, context)
 
-        var response = get(url = url, headers = header, auth = AuthKey((user.base64EncodedAuthenticationKey).toString()))
+        val response = get(url = url, headers = header, auth = AuthKey((user.base64EncodedAuthenticationKey).toString()))
 
         val obj: JSONObject = response.jsonObject
-        var gson: Gson = Gson()
+        val gson: Gson = Gson()
         mPPISurvey = gson.fromJson(obj.toString(), PPISurvey::class.java)
 
         return mPPISurvey

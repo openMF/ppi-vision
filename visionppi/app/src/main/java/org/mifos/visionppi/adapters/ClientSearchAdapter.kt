@@ -17,12 +17,12 @@ import org.mifos.visionppi.objects.Client
  * Created by Apoorva M K on 01/07/19.
  */
 
-class ClientSearchAdapter(var clientList: List<Client>, var context: Context, val listener: (Client) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
+class ClientSearchAdapter(var clientList: List<Client>, var context: Context, private val listener: (Client) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.clientName?.text = clientList.get(position).entityName
+        holder.clientName?.text = clientList[position].entityName
         holder.clientAccountNo?.text = "#".plus(clientList[position].entityAccountNo)
-        holder.setItem(clientList.get(position), listener)
+        holder.setItem(clientList[position], listener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

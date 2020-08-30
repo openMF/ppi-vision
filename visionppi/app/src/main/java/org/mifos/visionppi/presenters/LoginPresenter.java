@@ -130,7 +130,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     boolean credentialValid = true;
     final Resources resources = getContext().getResources();
     final String correctUsername = username.replaceFirst("\\s++$", "").trim();
-    if (username == null || username.matches("\\s*") || username.isEmpty()) {
+    if (username.matches("\\s*") || username.isEmpty()) {
       getMvpView()
           .showUsernameError(
               getContext()

@@ -15,9 +15,9 @@ import org.mifos.visionppi.R
 class ObjectDetectionResultAdapter(var result: List<List<String>>, var images: ArrayList<Bitmap?>, var context: Context) : RecyclerView.Adapter<ResultViewHolder>() {
 
     override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {
-        holder.image?.setImageBitmap(images.get(position))
+        holder.image?.setImageBitmap(images[position])
         var s: String = ""
-        var ss = result[position]
+        val ss = result[position]
         ss.forEach { s += it + "\n" }
         holder.res1?.text = s
     }
