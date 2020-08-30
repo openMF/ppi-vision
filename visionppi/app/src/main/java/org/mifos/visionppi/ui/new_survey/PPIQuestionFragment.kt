@@ -15,7 +15,7 @@ import org.mifos.visionppi.adapters.ResponseAdapter
 import org.mifos.visionppi.objects.Question
 import org.mifos.visionppi.objects.Response
 
-class PPIQuestionFragment(var questionData: Question, val mContext: Context, val list: MutableList<List<String>>, val responseClick: (response: Response) -> Unit) : Fragment() {
+class PPIQuestionFragment(var questionData: Question, private val mContext: Context, val list: MutableList<List<String>>, private val responseClick: (response: Response) -> Unit) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.ppi_question_layout, container, false)
@@ -31,7 +31,7 @@ class PPIQuestionFragment(var questionData: Question, val mContext: Context, val
             var tv = false
             var player = false
             var mh = false
-            list.forEach {
+            list.forEach { it ->
                 it.forEach {
                     if (it.contains("thatch", ignoreCase = true)) {
                         thatch = true
@@ -54,26 +54,26 @@ class PPIQuestionFragment(var questionData: Question, val mContext: Context, val
             }
 
             if (questionData.text.contains("construction materials", ignoreCase = true)) {
-                if (thatch && !mh) {
-                    s = "The outer walls are made up of predominantly light materials"
+                s = if (thatch && !mh) {
+                    "The outer walls are made up of predominantly light materials"
                 } else {
-                    s = "The outer walls are made of predominantly strong or strong materials"
+                    "The outer walls are made of predominantly strong or strong materials"
                 }
             } else if (questionData.text.contains("sala sets", ignoreCase = true)) {
-                if (sc) {
-                    s = "There is atleast 1 salsa set present"
+                s = if (sc) {
+                    "There is atleast 1 salsa set present"
                 } else {
-                    s = "There is no salsa set"
+                    "There is no salsa set"
                 }
             } else if (questionData.text.contains("washing machine", ignoreCase = true)) {
-                if (fridge && !washer) {
-                    s = "Only a refrigerator is present"
+                s = if (fridge && !washer) {
+                    "Only a refrigerator is present"
                 } else if (washer && !fridge) {
-                    s = "Only a washing machine is present"
+                    "Only a washing machine is present"
                 } else if (washer && fridge) {
-                    s = "Both are present"
+                    "Both are present"
                 } else {
-                    s = "Neither are present"
+                    "Neither are present"
                 }
             } else if (questionData.text.contains("television", ignoreCase = true)) {
                 if (tv && !player) {

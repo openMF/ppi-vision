@@ -8,7 +8,7 @@ open class BasePresenter<T : MVPView> {
 
     private lateinit var mMVPView: T
 
-    public fun getMVPView(): T {
+    fun getMVPView(): T {
         return mMVPView
     }
 }

@@ -16,7 +16,7 @@ import org.mifos.visionppi.injection.ApplicationContext
  */
 @Singleton
 class PreferencesHelper @Inject constructor(@ApplicationContext context: Context?) {
-    private val sharedPreferences: SharedPreferences
+    private val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     fun clear() {
         val editor = sharedPreferences.edit()
@@ -99,9 +99,5 @@ class PreferencesHelper @Inject constructor(@ApplicationContext context: Context
         private const val USER_NAME = "preferences_user_name"
         private const val TENANT = "preferences_base_tenant"
         private const val BASE_URL = "preferences_base_url_key"
-    }
-
-    init {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     }
 }

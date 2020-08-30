@@ -19,7 +19,7 @@ class SelectedImageAdapter(private val items: ArrayList<Bitmap?>, val context: C
     }
 
     override fun onBindViewHolder(holder: SelectedImageViewHolder, position: Int) {
-        holder.selectedImageImageview?.setImageBitmap(items.get(position))
+        holder.selectedImageImageview?.setImageBitmap(items[position])
         holder.setItem(position)
     }
 

@@ -90,7 +90,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
+        when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
             }
@@ -150,8 +150,8 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                 intent.type = "image/*"
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 intent.action = Intent.ACTION_GET_CONTENT
-                val ACTIVITY_SELECT_IMAGE = 1234
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), ACTIVITY_SELECT_IMAGE)
+                val activitySelectIMage = 1234
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), activitySelectIMage)
 
                 selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
             }
@@ -219,7 +219,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                     images.add(bitmap)
                     selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
                 } else {
-                    if (data?.getClipData() != null) {
+                    if (data?.clipData != null) {
                         val mClipData: ClipData = data.clipData!!
                         for (i in 0 until mClipData.itemCount) {
                             val item = mClipData.getItemAt(i)

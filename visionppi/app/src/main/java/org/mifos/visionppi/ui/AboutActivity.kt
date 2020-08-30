@@ -61,7 +61,7 @@ class AboutActivity : AppCompatActivity() {
         link(license)
     }
 
-    fun link(url: String?) {
+    private fun link(url: String?) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
