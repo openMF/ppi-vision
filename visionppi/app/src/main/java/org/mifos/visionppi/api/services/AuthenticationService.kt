@@ -4,6 +4,7 @@ import io.reactivex.Observable
 import org.mifos.visionppi.api.ApiEndPoints
 import org.mifos.visionppi.models.User
 import retrofit2.http.POST
+import retrofit2.http.Body
 import retrofit2.http.Query
 
 /**
@@ -13,7 +14,6 @@ import retrofit2.http.Query
 interface AuthenticationService {
     @POST(ApiEndPoints.AUTHENTICATION)
     fun authenticate(
-        @Query("username") username: String?,
-        @Query("password") password: String?
+        @Body body: Map<String, String>
     ): Observable<User?>?
 }

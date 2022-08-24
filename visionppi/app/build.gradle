@@ -18,7 +18,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        ndkVersion '21.1.6352462'
+        ndkVersion '21.4.7075529'
         // A test runner provided by https://code.google.com/p/android-test-kit/
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
