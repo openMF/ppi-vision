@@ -35,11 +35,19 @@ class MainPresenter : BasePresenter<MainMVPView>() {
 
         val payload = mapOf("query" to query, "exactMatch" to "false")
         val header = mapOf(
-                "Fineract-Platform-TenantId" to tenantId)
+            "Fineract-Platform-TenantId" to tenantId,
+            "Authorization" to "Basic bWlmb3M6cGFzc3dvcmQ=")
 
         try {
+            
             val response = get(url = url, params = payload, headers = header, auth = AuthKey((user.base64EncodedAuthenticationKey).toString()))
-
+            response.request.run {
+                println("headers $headers")
+                println("url ${this.url}")
+                println("params ${this.params}")
+                println("auth ${this.auth}")
+            }
+            
             if (response.statusCode == 200) {
 
                 val obj: JSONArray = response.jsonArray
