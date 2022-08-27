@@ -2,7 +2,6 @@ package org.mifos.visionppi.api
 
 import javax.inject.Inject
 import io.reactivex.Observable
-import javax.inject.Inject
 import javax.inject.Singleton
 import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.models.User
