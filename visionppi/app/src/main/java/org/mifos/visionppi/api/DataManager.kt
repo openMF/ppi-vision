@@ -1,5 +1,6 @@
 package org.mifos.visionppi.api
 
+import javax.inject.Inject
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,6 +14,10 @@ import org.mifos.visionppi.models.User
 @Singleton
 class DataManager @Inject constructor(val preferencesHelper: PreferencesHelper, private val baseApiManager: BaseApiManager) {
     fun login(username: String?, password: String?): Observable<User?>? {
-        return baseApiManager.authenticationApi.authenticate(username, password)
+        val paramsMap = mapOf(
+            "username" to username!!,
+            "password" to password!!
+        )
+        return baseApiManager.authenticationApi.authenticate(paramsMap)
     }
 }
