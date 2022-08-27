@@ -84,9 +84,11 @@ class MainActivity : Fragment(), MainMVPView {
     private fun performSearch() {
         if (networkAvailable(requireActivity())) {
             search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            println("Going in")
             if (search_query.text.toString().isEmpty())
                 searchError()
             else {
+                println("going in deeper")
                 val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
                 search(search_query.text.toString())
@@ -123,8 +125,11 @@ class MainActivity : Fragment(), MainMVPView {
 
     override fun search(string: String) {
         val future = doAsync {
+            println("fetching client list")
 
             clientList = doSearch(string)
+            
+            println("fetched client list $clientList")
 
             uiThread {
                 makelist()
