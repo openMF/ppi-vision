@@ -19,7 +19,7 @@
     <string name="to" translatable="false">TODO</string>
     <string name="tenantId" translatable="false">default</string>
     <string name="contentType" translatable="false">application/json</string>
-    <string name="demoURL" translatable="false">https://demo.mifos.io/fineract-provider/api/v1/</string>
+    <string name="demoURL" translatable="false">https://mobile.mifos.io/fineract-provider/api/v1/</string>
     <string name="pref_file_name">User Details</string>
     <string name="install_vision">Download the Vision PPI to ease the process of filing PPI Surveys by automating the process.</string>
     <string name="download_link">Download Now: https://github.com/openMF/ppi-vision</string>
