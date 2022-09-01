@@ -10,78 +10,90 @@
 
     <include layout="@layout/toolbar" />
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        android:orientation="horizontal">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="80sp"
-            android:layout_height="80sp"
-            app:srcCompat="@drawable/eye"
-            android:contentDescription="@string/cv_logo"
-            android:layout_marginRight="@dimen/text_size"
-            android:layout_marginBottom="@dimen/large_spacing"/>
-
-        <LinearLayout android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:text="@string/open_camera"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_design"
-                android:id="@+id/open_camera_btn"
-                android:padding="5dp"
-                android:layout_marginBottom="10dp"
-                style="@style/Button2"/>
+                android:padding="24dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:text="@string/upload_from_gallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_design"
-                android:id="@+id/upload_from_gallery_btn"
-                android:padding="5dp"
-                style="@style/Button2" />
+                <ImageView
+                    android:layout_width="80sp"
+                    android:layout_height="80sp"
+                    app:srcCompat="@drawable/eye"
+                    android:contentDescription="@string/cv_logo"
+                    android:layout_marginRight="@dimen/text_size"
+                    android:layout_marginBottom="@dimen/large_spacing"/>
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:text="@string/open_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_design"
+                        android:id="@+id/open_camera_btn"
+                        android:padding="5dp"
+                        android:layout_marginBottom="10dp"
+                        style="@style/Button2"/>
+
+                    <Button
+                        android:text="@string/upload_from_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_design"
+                        android:id="@+id/upload_from_gallery_btn"
+                        android:padding="5dp"
+                        style="@style/Button2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/selected_images_list"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/search_bar"
+                    android:layout_height="305dp"/>
+                <Button
+                    android:id="@+id/analyse"
+                    android:text="@string/analyze_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_design"
+                    android:padding="5dp"
+                    style="@style/Button2"
+                    android:layout_marginTop="@dimen/ll_margin"/>
+
+                <TextView
+                    android:id="@+id/listHeading"
+                    style="@style/heading_style2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/foursp_margin"
+                    android:layout_marginBottom="@dimen/foursp_margin"
+                    android:text="@string/object_detection_results" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/res_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/selected_images_list"
-            android:layout_width="match_parent"
-            android:background="@drawable/search_bar"
-            android:layout_height="305dp"/>
-        <Button
-            android:id="@+id/analyse"
-            android:text="@string/analyze_images"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_design"
-            android:padding="5dp"
-            style="@style/Button2"
-            android:layout_marginTop="@dimen/ll_margin"/>
-
-        <TextView
-            android:id="@+id/listHeading"
-            style="@style/heading_style2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/foursp_margin"
-            android:layout_marginBottom="@dimen/foursp_margin"
-            android:text="@string/object_detection_results" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/res_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
