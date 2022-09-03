@@ -128,7 +128,7 @@ class MainActivity : Fragment(), MainMVPView {
             println("fetching client list")
 
             clientList = doSearch(string)
-            
+
             println("fetched client list $clientList")
 
             uiThread {

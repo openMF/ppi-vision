@@ -39,7 +39,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
             "Authorization" to "Basic bWlmb3M6cGFzc3dvcmQ=")
 
         try {
-            
+
             val response = get(url = url, params = payload, headers = header, auth = AuthKey((user.base64EncodedAuthenticationKey).toString()))
             response.request.run {
                 println("headers $headers")
@@ -47,7 +47,7 @@ class MainPresenter : BasePresenter<MainMVPView>() {
                 println("params ${this.params}")
                 println("auth ${this.auth}")
             }
-            
+
             if (response.statusCode == 200) {
 
                 val obj: JSONArray = response.jsonArray
