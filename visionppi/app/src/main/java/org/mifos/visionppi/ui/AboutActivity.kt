@@ -21,7 +21,7 @@ class AboutActivity : AppCompatActivity() {
 
         setSupportActionBar(appToolbar)
         val actionBar = supportActionBar
-        actionBar?.title = "About"
+        actionBar?.title = "About Us"
 
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)
