@@ -20,7 +20,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="20dp">
@@ -28,9 +28,18 @@
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/mifos_logo"/>
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/mifos_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
 
                 <TextView
                     android:id="@+id/textView"
@@ -51,27 +60,40 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
-                    android:text="@string/about_mifos"
-                    android:onClick="goToWeb"/>
+                    android:onClick="goToWeb"
+                    android:text="@string/about_mifos" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|start"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/app_version"
+                    android:textColor="#0773bb"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/about_support_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="185dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="@dimen/card_spacing"
-            android:layout_marginTop="10dp"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:cardElevation="@dimen/card_elevation">
 
             <LinearLayout
                 android:id="@+id/about_providers"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="188dp"
                 android:gravity="center"
                 android:orientation="vertical">
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -79,22 +101,23 @@
                     android:gravity="center_vertical|start"
                     android:padding="@dimen/about_group_text_padding"
                     android:text="@string/about_us_connect"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/about_group_item_text_size" />
 
                 <LinearLayout
                     android:id="@+id/GitHub"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="goToGit"
                     android:gravity="center"
+                    android:onClick="goToGit"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="@dimen/about_icon_size"
                         android:layout_height="@dimen/about_icon_size"
-                        app:srcCompat="@drawable/ic_github"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"/>
+                        app:srcCompat="@drawable/ic_github" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -126,16 +149,16 @@
                     android:id="@+id/twitter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="goToTwitter"
                     android:gravity="center"
+                    android:onClick="goToTwitter"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="@dimen/about_icon_size"
                         android:layout_height="@dimen/about_icon_size"
-                        app:srcCompat="@drawable/ic_twitter"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"/>
+                        app:srcCompat="@drawable/ic_twitter" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -169,7 +192,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/about_license_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="127dp"
             android:layout_marginBottom="@dimen/card_spacing"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:cardElevation="@dimen/card_elevation">
@@ -184,6 +207,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|start"
                     android:padding="@dimen/about_group_text_padding"
+                    android:textColor="@color/black"
                     android:text="@string/about_license"
                     android:textSize="@dimen/about_group_item_text_size" />
 
@@ -229,5 +253,6 @@
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </ScrollView>
