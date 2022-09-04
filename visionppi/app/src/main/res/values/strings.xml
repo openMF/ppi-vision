@@ -57,6 +57,7 @@
     <string name="about_mifos">Developed by <a href="https://mifos.org/">Mifos</a>
         <a href="https://github.com/openMF/ppi-vision/graphs/contributors">Contributors</a>.
     </string>
+    <string name="app_version">App Version 3.0</string>
     <string name="about_us_connect">Connect With Us</string>
     <string name="link">Visit Us</string>
     <string name="about_support_github_sub">Fork the repo and push changes or submit new issues.</string>
