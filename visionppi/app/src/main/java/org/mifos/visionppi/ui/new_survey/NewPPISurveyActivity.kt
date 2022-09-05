@@ -56,7 +56,7 @@ class NewPPISurveyActivity : FragmentActivity(), NewSurveyMVPView {
     }
 
     override fun getSurveyQuestions() {
-        mPPISurvey = mNewSurveyPresenter.getSurvey(1, applicationContext, this)
+        mPPISurvey = mNewSurveyPresenter.getSurvey(5, applicationContext, this)
     }
 
     override fun onBackPressed() {
