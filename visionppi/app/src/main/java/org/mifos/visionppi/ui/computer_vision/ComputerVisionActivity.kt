@@ -39,7 +39,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private val pickFromGallery = 1
     private val cameraRequest = 2
     private val myCameraPermissionCode = 100
-
+    private val threshold = .6
     private val labelList: MutableList<String> = ArrayList()
 
     companion object {
@@ -190,7 +190,10 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                         val text = labelList[label.index]
                         val confidence = label.confidence
                         val index = label.index
-                        ll.add("$text: $confidence")
+                        if(confidence > threshold){
+                            ll.add("$text: $confidence")
+                        }
+
                         Log.d("LABELS", "$text $confidence $index")
                     }
                     ++counter
