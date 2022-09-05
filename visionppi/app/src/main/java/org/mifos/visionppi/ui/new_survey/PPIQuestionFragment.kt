@@ -14,13 +14,23 @@ import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ResponseAdapter
 import org.mifos.visionppi.objects.Question
 import org.mifos.visionppi.objects.Response
+import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
-class PPIQuestionFragment(var questionData: Question, private val mContext: Context, val list: MutableList<List<String>>, private val responseClick: (response: Response) -> Unit) : Fragment() {
+class PPIQuestionFragment(var questionData: Question, private val mContext: Context, private val responseClick: (response: Response) -> Unit) : Fragment() {
 
+    val list
+        get() = ComputerVisionActivity.finalLabels
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.ppi_question_layout, container, false)
-        view.question.text = questionData.text
-        view.responses.layoutManager = LinearLayoutManager(context)
+
+        view.responses.adapter = ResponseAdapter(questionData.responseDatas, mContext, responseClick)
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireView().question.text = questionData.text
+        requireView().responses.layoutManager = LinearLayoutManager(context)
         if (!list.isNullOrEmpty()) {
             var s: String = ""
             var c: Int = 0
@@ -87,10 +97,9 @@ class PPIQuestionFragment(var questionData: Question, private val mContext: Cont
                 s = "There are $c telephones detected"
             }
 
-            view.res.text = s
-            view.res.visibility = View.VISIBLE
+            requireView().res.text = s
+
+            requireView().res.visibility = View.VISIBLE
         }
-        view.responses.adapter = ResponseAdapter(questionData.responseDatas, mContext, responseClick)
-        return view
     }
 }
