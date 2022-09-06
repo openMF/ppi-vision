@@ -2,13 +2,13 @@
 <resources>
     <color name="white">#ffffffff</color>
     <color name="black">#000000</color>
-    <color name="primary">#03A9F4</color>
-    <color name="primary_dark">#0288D1</color>
-    <color name="dark">#0CB6C8</color>
+    <color name="primary">#325ca8</color>
+    <color name="primary_dark">#325ca8</color>
+    <color name="dark">#325ca8</color>
     <color name="accent">#FF4081</color>
-    <color name="colorPrimaryDark">#108AC0</color>
+    <color name="colorPrimaryDark">#325ca8</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="blueDark">#ff0099cc</color>
+    <color name="blueDark">#325ca8</color>
     <color name="fontColour">#FFFFFF</color>
     <color name="lightGray">#DCDCDC</color>
     <color name="veryLightGray">#F8F8F8</color>
