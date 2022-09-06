@@ -190,7 +190,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                         val text = labelList[label.index]
                         val confidence = label.confidence
                         val index = label.index
-                        if(confidence > threshold){
+                        if (confidence > threshold) {
                             ll.add("$text: $confidence")
                         }
 
