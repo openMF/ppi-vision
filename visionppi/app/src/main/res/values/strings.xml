@@ -67,5 +67,10 @@
     <string name="about_support_twitter">Twitter</string>
     <string name="about_license">License</string>
     <string name="about_license_sub">MIT License</string>
+    
+    <!--Customer care details-->
+    <string name="need_help">Contact Us</string>
+    <string name="help_line_number" translatable="false">8000000000</string>
+    <string name="contact_email" translatable="false">support@mifos.org</string>
 
 </resources>
