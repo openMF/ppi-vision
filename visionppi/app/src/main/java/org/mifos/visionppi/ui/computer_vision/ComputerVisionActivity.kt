@@ -101,7 +101,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private fun initDetector() {
         localModel =
                 LocalModel.Builder()
-                        .setAssetFilePath("mobilenet_v1.0_224_quant.tflite")
+                        .setAssetFilePath("mlmodel.tflite")
                         .build()
 
         customImageLabelerOptions =
