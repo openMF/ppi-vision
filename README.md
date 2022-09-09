@@ -82,11 +82,15 @@ For data collection, [this](https://github.com/hardikvasa/google-images-download
 
 #### Model Training
 
-We use [Google's MLKit SDK](https://developers.google.com/ml-kit) for image labelling. In order to train the model used further, we use transfer learning on our collected data. 
+We use [Google's ML Kit SDK](https://developers.google.com/ml-kit) for image labelling. In order to train the model used further, we use transfer learning on our collected data. 
 
+**Useful resources for getting started with Transfer Learning**
 
+- [Transfer learning and fine-tuning](https://www.tensorflow.org/tutorials/images/transfer_learning)
+- [Transfer learning with TensorFlow Hub](https://www.tensorflow.org/tutorials/images/transfer_learning_with_hub)
+- [Data augmentation](https://www.tensorflow.org/tutorials/images/data_augmentation)
 
-**Useful Resources for getting started with MLKIt if you are interested in contributing to this project:**
+**Useful Resources for getting started with ML Kit if you are interested in contributing to this project:**
 
 - [Label images with ML Kit on Android](https://developers.google.com/ml-kit/vision/image-labeling/android)
 - [MLKIt Quickstart Sample](https://github.com/googlesamples/mlkit/tree/master/android/vision-quickstart)
