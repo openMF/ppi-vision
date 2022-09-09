@@ -13,7 +13,7 @@ For more information about the usecases of the project and details about PPI, th
 
 ![Untitled design (7)](https://user-images.githubusercontent.com/75531664/189319225-8d40e34d-1be2-4743-92e9-2be54eac336b.png)
 
-## Usage and Flow of Vison PPI app :ocean:
+## Usage and Flow of Vision PPI app :ocean:
 
 1. After installing or building the app, the first screen which is encountered is a Login screen with ppi logo on top of it. To log into the app enter the **username: mifos** and **password : password** in the respectative columns of username and password.
 
