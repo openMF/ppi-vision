@@ -8,10 +8,10 @@ For more information about the usecases of the project and details about PPI, th
 
 ## Screenshots :camera:
 
-| <img src="https://user-images.githubusercontent.com/41234408/91012906-80992800-e604-11ea-960f-7956ed1c6b30.png" width="250" />  | <img src="https://user-images.githubusercontent.com/41234408/91012933-8ee74400-e604-11ea-8dca-4056855e25d5.png" width="250" />   | <img src="https://user-images.githubusercontent.com/41234408/91012972-a1fa1400-e604-11ea-92d2-5ba6ef186fa4.png" width="250" />  |
-|---|---|---|
-| <img src="https://user-images.githubusercontent.com/41234408/91013027-b2aa8a00-e604-11ea-8d46-41b63ecff38b.png" width="250" />  | <img src="https://user-images.githubusercontent.com/41234408/91013053-bccc8880-e604-11ea-8670-9fe584d11b61.png" width="250" />   | <img src="https://user-images.githubusercontent.com/41234408/91013076-c9e97780-e604-11ea-8c47-c965e401c1ab.png" width="250" />  |
-| <img src="https://user-images.githubusercontent.com/41234408/91013128-db328400-e604-11ea-8ba8-3d6603424b7b.png" width="250" />  | <img src="https://user-images.githubusercontent.com/41234408/91013158-e5548280-e604-11ea-8049-a3fc2a391af8.png" width="250" />   | <img src="https://user-images.githubusercontent.com/41234408/91013194-ef768100-e604-11ea-9c6c-c76c520b85bd.png" width="250" />  |
+![Untitled design (3)](https://user-images.githubusercontent.com/75531664/189315815-479c0011-71d1-46e8-8ce8-538a3ae09da9.png)
+
+![Untitled design (4)](https://user-images.githubusercontent.com/75531664/189315834-4bbe81c0-57dc-4e53-a7b3-88e260da8ae6.png)
+
 
 ## Contributions :information_desk_person:
 
