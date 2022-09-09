@@ -4,6 +4,8 @@
 
 Vision PPI is a computer vision and machine learning based app to help in filling out the PPI Survey. There are two broad aspects to this project - The android app which provides the interface to the field officer for conducting the survey and the machine learning models which will be used to analyze the images captured. 
 
+
+## Wiki 📙
 For more information about the usecases of the project and details about PPI, the API used and demo credentials, please take a look at the [project wiki](https://github.com/openMF/ppi-vision/wiki). 
 
 ## Screenshots :camera:
