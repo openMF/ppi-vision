@@ -7,11 +7,9 @@ Vision PPI is a computer vision and machine learning based app to help in fillin
 For more information about the usecases of the project and details about PPI, the API used and demo credentials, please take a look at the [project wiki](https://github.com/openMF/ppi-vision/wiki). 
 
 ## Screenshots :camera:
+![Untitled design (5)](https://user-images.githubusercontent.com/75531664/189319200-f7f3b143-2757-46c8-9342-0021fada2ca2.png)
 
-![Untitled design (3)](https://user-images.githubusercontent.com/75531664/189315815-479c0011-71d1-46e8-8ce8-538a3ae09da9.png)
-
-![Untitled design (4)](https://user-images.githubusercontent.com/75531664/189315834-4bbe81c0-57dc-4e53-a7b3-88e260da8ae6.png)
-
+![Untitled design (7)](https://user-images.githubusercontent.com/75531664/189319225-8d40e34d-1be2-4743-92e9-2be54eac336b.png)
 
 ## Contributions :information_desk_person:
 
