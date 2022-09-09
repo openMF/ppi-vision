@@ -2,7 +2,7 @@
 
 # PPI-Vision :iphone:
 
-Vision PPI is a computer vision and machine learning based app to help in filling out the PPI Survey. There are two broad aspects to this project - The android app which provides the interface to the field officer for conducting the survey and the machine learning models which will be used to analyze the images captured. 
+Vision PPI is a computer vision and machine learning based android app designed to help in filling out the PPI Survey. There are two broad aspects to this project - The android app which provides the interface to the field officer for conducting the survey and the machine learning models which are used in the backend of app to analyze the images captured. 
 
 
 ## Wiki 📙
@@ -16,6 +16,10 @@ For more information about the usecases of the project and details about PPI, th
 ## Contributions :information_desk_person:
 
 We welcome contributions in form of issues, as well as pull requests. Please go though the contribution guidelines over [here](https://github.com/openMF/ppi-vision/blob/master/CONTRIBUTING.md) and also through our Code of Conduct [here](https://github.com/openMF/ppi-vision/blob/master/CODE_OF_CONDUCT.md).
+
+## Installation ⚙
+* The app can be installed by directly downloading the Android Application Package (APK) File located at : "give drive link here " into the Mobile phone device with Android OS.
+* For building the project from on your local machine, clone the repo and Open it with Android Studio and the follow the development setup guidlines given below.
 
 ## Development Setup :triangular_ruler:
 
@@ -49,6 +53,21 @@ For data collection, [this](https://github.com/hardikvasa/google-images-download
 
 We use [Google's MLKit SDK](https://developers.google.com/ml-kit) for image labelling. In order to train the model used further, we use transfer learning on our collected data. 
 
+## Usage and Flow of Vison PPI app :ocean:
+
+1. After installing or building the app, the first screen which is encountered is a Login screen with ppi logo on top.To log into the app you need to enter **username: mifos** and **password : password** in the respectative columns.
+
+
+2. The second screen renders the home page. A search bar is present where client account can be searched by typing their names. At the top of screen Share, Logout and About Us button are present that works to share this app , logout from the app and to go to about us page respectatively. 
+
+3. The third screen shows up with analyze images page.There are more than one open available for seleting the image, image can be selected from gallary or directly form the camera depending upon the user prefrerence. A screen also appers to ask for premision form the user for accesing storage and camera. Which are needed for getting the images from gallery and directly from camera. 
+
+4. After clicking on Analyse image button the result of modle appears in the Object Deteciton Result column. Only that result is shown for which modle has an confidance of more than 60 %.
+
+5. The last screen appears with the respectative PPI questions. THe quesion are not stored in the app but directly comming from the API. User can tick only one choice out of the give. The scores are written for each choice which are added at the end and be used in calculating the over all survey score. 
+
+
+6. About Us page features information about the app. Links for github and twitter account of mifos also given in this page. At the bottom 
 **Useful Resources for getting started with MLKIt if you are interested in contributing to this project:**
 
 - [Label images with ML Kit on Android](https://developers.google.com/ml-kit/vision/image-labeling/android)
