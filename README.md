@@ -57,7 +57,7 @@ We welcome contributions in form of issues, as well as pull requests. Please go 
 ## Development Setup :triangular_ruler:
 
 ## Alert ! ⚠️
-The version used for building the current apk of Android Studio SDK is Android Studio Chipmunk | 2021.2.1
+The current apk is built using **Android Studio Chipmunk | 2021.2.1** version.
 
 *Follow this [Link](https://developer.android.com/studio/archive.html) to download specific version.*
 
