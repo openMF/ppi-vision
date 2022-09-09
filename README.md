@@ -56,6 +56,11 @@ We welcome contributions in form of issues, as well as pull requests. Please go 
 
 ## Development Setup :triangular_ruler:
 
+## Alert ! ⚠️
+The version used for building the current apk of Android Studio SDK is Android Studio Chipmunk | 2021.2.1
+
+*Follow this [Link](https://developer.android.com/studio/archive.html) to download specific version.*
+
 Before you begin, you should have already downloaded the Android Studio SDK and set it up correctly. You can find a guide on how to do this here: [Setting up Android Studio](http://developer.android.com/sdk/installing/index.html?pkg=studio)
 
 ### Setting up the Android Project :black_nib:
