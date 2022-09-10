@@ -24,8 +24,8 @@ import org.mifos.visionppi.utils.PrefManager;
 import retrofit2.HttpException;
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 public class LoginPresenter extends BasePresenter<LoginView> {
 

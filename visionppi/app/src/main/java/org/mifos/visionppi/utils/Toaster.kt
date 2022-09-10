@@ -10,8 +10,8 @@ import org.mifos.visionppi.R
 import org.mifos.visionppi.VisionPPI
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 object Toaster {
     private val snackbarsQueue = ArrayList<Snackbar>()

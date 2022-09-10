@@ -8,8 +8,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 public class BaseApiManager {
 

@@ -7,8 +7,8 @@ import dagger.Provides
 import org.mifos.visionppi.injection.ActivityContext
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 @Module
 class ActivityModule(private val activity: Activity) {

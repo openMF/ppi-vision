@@ -14,8 +14,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 class VisionPPIOkHttpClient(private val tenant: String, private val authToken: String) {
     // Create a trust manager that does not validate certificate chains

@@ -7,8 +7,8 @@ import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.ui.activities.base.BaseActivity
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 class SplashActivity : BaseActivity() {
     var i: Intent? = null

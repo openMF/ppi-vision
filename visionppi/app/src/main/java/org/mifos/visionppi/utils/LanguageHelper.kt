@@ -8,8 +8,8 @@ import java.util.Locale
 import org.mifos.visionppi.R
 
 /**
- * @author yashk2000
- * @since 22/06/2020
+ * @author HARSH-nith
+ * @since 13/07/2022
  */
 object LanguageHelper {
     @JvmStatic
