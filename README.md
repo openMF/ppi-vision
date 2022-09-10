@@ -15,32 +15,32 @@ For more information about the usecases of the project and details about PPI, th
 
 ## Usage and Flow of Vision PPI app :ocean:
 
-1. After installing or building the app, the first screen which is encountered is a Login screen with ppi logo on top of it. To log into the app enter the **username: mifos** and **password : password** in the respectative columns of username and password.
+1. After installing or building the app, the first screen which is encountered is a **Login screen** with ppi logo on top of it. To log into the app enter the `username = mifos` and `password = password` in the respectative columns of username and password.
 
 <p align=center><img src="https://user-images.githubusercontent.com/75531664/189433266-ede5ab7b-2b77-4beb-98f4-1819ee1baf2b.jpg" width="200" height="450" >&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/75531664/189433324-6bdbeaa8-1115-466f-befc-0b47d39768e4.jpg" width="200" height="450" > &nbsp&nbsp&nbsp&nbsp&nbsp </p>
 
 
-2. The second screen renders the home page. It contains search bar through which client account can be searched by typing their names. At the top of screen Share, Logout and About Us button are present they functions to share the app ,logout from the app and to go to about us page respectively. 
+2. The second screen renders the **Home page**. It contains search bar through which client account can be searched by typing their names. At the top of screen *Share, Logout and About Us* buttons are present they functions to share the app ,logout from the app and to go to about us page respectively. 
 
 <p align=center><img src="https://user-images.githubusercontent.com/75531664/189433442-878f655d-ecc3-4114-8add-ff87baf63b10.jpg" width="200" height="450" >&nbsp&nbsp&nbsp&nbsp&nbsp</p>
 
 
-3. The third screen comes up with analyze images page. It contains option for seleting the image from gallary or directly or from capturing directly for the camera. Previously to selecting an image an screen appers to ask for premision from user for accesing the gallery and camera
+3. The third screen comes up with **Analyze Images page**. It contains option for seleting the image from gallary or directly capturing form the camera. An other screen also appears here that asks for premission from user for accesing the gallery and camera.
 
 <p align=center><img src="https://user-images.githubusercontent.com/75531664/189433760-dbdc4e6d-8dad-42e9-9926-72d3fe2dc019.jpg" width="200" height="450" >&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/75531664/189433861-f00145ee-e162-44f1-bb56-903818cd884d.jpg" width="200" height="450" > &nbsp&nbsp&nbsp&nbsp&nbsp </p>
 
 
-4. The result of object detection model appears in the Object Deteciton Result column after clicking on analyse images button. Result threshold is applied on object detection result,that result is shown up only those outcomes for which model has an confidance of 60 % or more than it.
+4. The result of object detection model appears in the Object Deteciton Result column after clicking on analyse images button. *Result threshold* implemented results in shown up only those outcomes for which model has an confidence of 60 % or more .
 
 <p align=center><img src="https://user-images.githubusercontent.com/75531664/189434050-8988a1d1-b132-45d2-8603-9a7c9596556d.jpg" width="200" height="450" >&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/75531664/189433924-5ad9a677-13e7-46f4-8ec3-ab1f558058d7.jpg" width="200" height="450" > &nbsp&nbsp&nbsp&nbsp&nbsp </p>
 
 
-5. The fifth screen contains PPI Questions. These quesion are directly comming from the API not form app. Users are able to tick only one choice out of the given. The scores are written for each question choice which are added at the end to in calculating over all PPI survey score. 
+5. The fifth screen contains **PPI Questions**. These quesion are directly comming from the API not from app. Users are able to tick only one choice out of the given. The scores are written for each question choice which are added at the end to in calculating over all PPI survey score. 
 
 
 <p align=center><img src="https://user-images.githubusercontent.com/75531664/189434123-9d319098-4be8-4335-8ddc-06694fcb1853.jpg" width="200" height="450" >&nbsp&nbsp&nbsp&nbsp&nbsp<img src="https://user-images.githubusercontent.com/75531664/189434142-3f933b39-a3fa-4016-8a3f-e9bfaa636a6a.jpg" width="200" height="450" > &nbsp&nbsp&nbsp&nbsp&nbsp </p>
 
-6. About Us page features information about the app. Links for github and twitter account of mifos is given in this page. Contact details and current app verion are shown here that helps to reach out to community whenever needed. 
+6. **About Us** page features information about the app. Links for `github and twitter` account of mifos is given in this page. Contact details and current app version are shown here . Contact details helps to reach out to community whenever needed. 
 
 
 <p align=center><img src="https://user-images.githubusercontent.com/75531664/189434305-34f2b110-fef8-43f4-b531-839e0e85725e.jpg" width="200" height="450" >&nbsp&nbsp&nbsp&nbsp&nbsp</p>
