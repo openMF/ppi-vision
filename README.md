@@ -1,7 +1,7 @@
 <img height='175' src="https://user-images.githubusercontent.com/37406965/51083189-d5dc3a80-173b-11e9-8ca0-28015e0893ac.png" align="left" hspace="1" vspace="1">
 
 # PPI-Vision :iphone:
-
+The **Poverty Probability Index (PPI)** is a poverty measurement tool for organizations and businesses with a mission to serve the poor. Taking this into account Vision PPI is designed to facilitate this measurement process much accurate and efficient. 
 Vision PPI is a computer vision and machine learning based android app designed to help in filling out the PPI Survey. There are two broad aspects to this project - The android app which provides the interface to the field officer for conducting the survey and the machine learning models which are used in the backend of app to analyze the images captured. 
 
 
