@@ -51,7 +51,8 @@ For more information about the usecases of the project and details about PPI, th
 We welcome contributions in form of issues, as well as pull requests. Please go though the contribution guidelines over [here](https://github.com/openMF/ppi-vision/blob/master/CONTRIBUTING.md) and also through our Code of Conduct [here](https://github.com/openMF/ppi-vision/blob/master/CODE_OF_CONDUCT.md).
 
 ## Installation ⚙
-* The app can be installed by directly downloading the Android Application Package (APK) File located at : "give drive link here " into the Mobile phone device with Android OS.
+* The app can be installed by directly downloading the Android Application Package (APK)  into the Mobile phone device with Android OS.
+**[Download the App](https://drive.google.com/drive/folders/1PW-EVUaxE1AuEK-VOC7hU70RM_IB2rU6?usp=sharing)**
 * For building the project from on your local machine, clone the repo and Open it with Android Studio and the follow the development setup guidlines given below.
 
 ## Development Setup :triangular_ruler:
