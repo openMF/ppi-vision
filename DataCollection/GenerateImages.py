@@ -243,6 +243,12 @@ for image in images:
     i += 1
     cv2.imwrite(savePath, median)
 
+    # BGR image
+    image=cv2.imread(path)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, image)
+
     # Bilateral Filtering
     blur = cv2.bilateralFilter(image,9,75,75)
     savePath = output + str(i) + ".png"
