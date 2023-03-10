@@ -163,7 +163,7 @@ for image in images:
     cv2.imwrite(savePath, flip)
 
     # Changing brightness out an image
-    for num in range (0, 5):
+    for num in range (0, 6):
         gamma = float(decimal.Decimal(random.randrange(10, 1000))/100)
         invGamma = 1.0 / gamma
         table = np.array([((i / 255.0) ** invGamma) * 255
