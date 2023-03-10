@@ -243,12 +243,6 @@ for image in images:
     i += 1
     cv2.imwrite(savePath, median)
 
-    # LAB image
-    imgLAB=cv2.imread(path,cv2.COLOR_BGR2LAB)
-    savePath = output + str(i) + ".png"
-    i += 1
-    cv2.imwrite(savePath, imgLAB)
-
     # Bilateral Filtering
     blur = cv2.bilateralFilter(image,9,75,75)
     savePath = output + str(i) + ".png"
