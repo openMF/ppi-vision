@@ -588,55 +588,6 @@ for image in images:
     i += 1
     cv2.imwrite(savePath, merged)
 
-        # Augmentation by grid shuffling
-    height, width, channels = image.shape
-
-    # Define the grid size (must divide the image dimensions evenly)
-    grid_size = 8
-
-    # Create a grid of indices
-    grid_indices = np.indices((height, width)).swapaxes(0, 2).swapaxes(0, 1)
-    grid_indices = grid_indices // grid_size
-
-    # Shuffle the grid indices along the x and y axes separately
-    np.random.shuffle(grid_indices[:, :, 0].flat)
-    np.random.shuffle(grid_indices[:, :, 1].flat)
-
-    # Reshape the shuffled indices back into a grid
-    shuffled_grid = grid_indices.reshape(height // grid_size, grid_size, width // grid_size, grid_size, 2)
-    shuffled_grid = shuffled_grid.transpose(0, 2, 1, 3, 4).reshape(height, width, 2)
-
-    # Use the shuffled grid to rearrange the pixels in the image
-    shuffled_image = np.zeros_like(image)
-    shuffled_image[:, :, 0] = image[shuffled_grid[:, :, 0], shuffled_grid[:, :, 1], 0]
-    shuffled_image[:, :, 1] = image[shuffled_grid[:, :, 0], shuffled_grid[:, :, 1], 1]
-    shuffled_image[:, :, 2] = image[shuffled_grid[:, :, 0], shuffled_grid[:, :, 1], 2]
-
-    savePath = output + str(i) + ".png"
-    i += 1
-    cv2.imwrite(savePath, shuffled_image)
-
-    # Augmentation by grid masking
-    height, width, channels = image.shape
-
-    # Define the grid size (must divide the image dimensions evenly)
-    grid_size = 8
-
-    # Create a grid of indices
-    grid_indices = np.indices((height, width)).swapaxes(0, 2).swapaxes(0, 1)
-    grid_indices = grid_indices // grid_size
-
-    # Create a mask by taking the sum of the grid indices along the x and y axes
-    mask = ((grid_indices[:, :, 0] + grid_indices[:, :, 1]) % 2).astype(np.bool)
-
-    # Apply the mask to the image
-    masked_image = np.zeros_like(image)
-    masked_image[mask] = image[mask]
-
-    savePath = output + str(i) + ".png"
-    i += 1
-    cv2.imwrite(savePath, masked_image)
-
     # Augmentation by cutout with random erasing
     height, width, channels = image.shape
 
@@ -708,34 +659,6 @@ for image in images:
     i += 1
     cv2.imwrite(savePath, image)
 
-    # Augmentation by elastic distortions
-    height, width, channels = image.shape
-    scale = 50 # Scale of the elastic distortions
-    sigma = int(min(height, width) * 0.04) # Sigma for the Gaussian smoothing filter
-    alpha = np.random.randint(8, 10) # Alpha value for controlling the intensity of the distortions
-    grid_size = int(min(height, width) / 10) # Grid size for the distortion field
-    
-    # Create the distortion field
-    x, y = np.meshgrid(np.arange(width), np.arange(height))
-    x_distortion = scale * gaussian_filter((np.random.rand(height, width) * 2 - 1), sigma, mode='constant', cval=0) * alpha
-    y_distortion = scale * gaussian_filter((np.random.rand(height, width) * 2 - 1), sigma, mode='constant', cval=0) * alpha
-    x_new = x + x_distortion
-    y_new = y + y_distortion
-    coords = np.stack((y_new, x_new), axis=-1)
-
-    # Map the original image to the distorted coordinates
-    new_image = np.zeros_like(image)
-    for c in range(channels):
-        channel = image[:,:,c]
-        channel_distorted = map_coordinates(channel, coords, order=1, mode='reflect')
-        new_image[:,:,c] = channel_distorted
-    
-    # Resize the distorted image to the original size
-    new_image = cv2.resize(new_image, (width, height), interpolation=cv2.INTER_LINEAR)
-
-    savePath = output + str(i) + ".png"
-    i += 1
-    cv2.imwrite(savePath, new_image)
     
     # Shadow Effect
     shadow_image = add_shadow(image, darkness_factor=0.7, x_offset=50, y_offset=50)
