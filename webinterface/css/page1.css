@@ -1,0 +1,58 @@
+      body {
+          text-align: center;
+          background: linear-gradient(to right, #005B9D, #74A82E, #FFA200);
+      }
+
+      #mifoslogo {
+          float: left;
+          margin: 20px;
+          width: 170px;
+          height: auto;
+          border-radius: 10%;
+      }
+
+      #logo {
+          width: 250px;
+          height: 150px;
+          margin: 30px auto;
+          display: block;
+          border-radius: 10%;
+      }
+
+      form {
+          display: inline-block;
+          text-align: left;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      button {
+          display: block;
+          margin: 10px auto;
+          padding: 10px;
+          border: 1px solid #005B9D;
+          border-radius: 5px;
+          width: 250px;
+      }
+
+      #login-box-container {
+          width: 300px;
+          height: 400px;
+          background-color: #f2f2f2;
+          border: 1px solid #ccc;
+          padding: 20px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+          border-radius: 10%;
+      }
+
+
+      button[type="login"] {
+          background-color: #005B9D;
+          color: white;
+          padding: 5px 10px;
+          font-size: 16px;
+      }
