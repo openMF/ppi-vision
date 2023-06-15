@@ -7,30 +7,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.ppi_question_layout.view.question
-import kotlinx.android.synthetic.main.ppi_question_layout.view.res
-import kotlinx.android.synthetic.main.ppi_question_layout.view.responses
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ResponseAdapter
+import org.mifos.visionppi.databinding.NewSurveyToolbarBinding
+import org.mifos.visionppi.databinding.PpiQuestionLayoutBinding
 import org.mifos.visionppi.objects.Question
 import org.mifos.visionppi.objects.Response
 import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
 class PPIQuestionFragment(var questionData: Question, private val mContext: Context, private val responseClick: (response: Response) -> Unit) : Fragment() {
+    private lateinit var ppiQuestionLayoutBinding: PpiQuestionLayoutBinding
+    val list get() = ComputerVisionActivity.finalLabels
 
-    val list
-        get() = ComputerVisionActivity.finalLabels
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.ppi_question_layout, container, false)
 
-        view.responses.adapter = ResponseAdapter(questionData.responseDatas, mContext, responseClick)
+        ppiQuestionLayoutBinding=PpiQuestionLayoutBinding.inflate(layoutInflater)
+        ppiQuestionLayoutBinding.responses.adapter = ResponseAdapter(questionData.responseDatas, mContext, responseClick)
+        val view = ppiQuestionLayoutBinding.root
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        requireView().question.text = questionData.text
-        requireView().responses.layoutManager = LinearLayoutManager(context)
+        ppiQuestionLayoutBinding.question.text = questionData.text
+        ppiQuestionLayoutBinding.responses.layoutManager = LinearLayoutManager(context)
         if (!list.isNullOrEmpty()) {
             var s: String = ""
             var c: Int = 0
@@ -162,9 +162,9 @@ class PPIQuestionFragment(var questionData: Question, private val mContext: Cont
                 s = "There are $c telephones detected"
             }
 
-            requireView().res.text = s
+            ppiQuestionLayoutBinding.res.text = s
 
-            requireView().res.visibility = View.VISIBLE
+            ppiQuestionLayoutBinding.res.visibility = View.VISIBLE
         }
     }
 }
