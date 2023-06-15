@@ -2,19 +2,18 @@ package org.mifos.visionppi.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.ppi_response_row.view.response_btn
-import kotlinx.android.synthetic.main.ppi_response_row.view.response_score
+import org.mifos.visionppi.databinding.PpiResponseRowBinding
 import org.mifos.visionppi.objects.Response
 
 class ResponseAdapter(var responseList: List<Response>, var context: Context, private val responseClicked: (response: Response) -> Unit) : RecyclerView.Adapter<ResponseAdapter.ResponseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseViewHolder {
-        return ResponseViewHolder(LayoutInflater.from(context).inflate(org.mifos.visionppi.R.layout.ppi_response_row, parent, false))
+        val binding = PpiResponseRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ResponseViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -28,9 +27,9 @@ class ResponseAdapter(var responseList: List<Response>, var context: Context, pr
         holder.setItem(position, responseClicked)
     }
 
-    inner class ResponseViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
-        var responseButton: RadioButton? = view.response_btn
-        var responseScore: TextView? = view.response_score
+    inner class ResponseViewHolder(val binding: PpiResponseRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        var responseButton: RadioButton? = binding.responseBtn
+        var responseScore: TextView? = binding.responseScore
 
         fun setItem(position: Int, responseClicked: (response: Response) -> Unit) {
             responseButton?.setOnClickListener {
