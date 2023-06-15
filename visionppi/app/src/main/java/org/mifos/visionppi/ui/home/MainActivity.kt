@@ -17,12 +17,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.content_main.client_search_list
+import kotlinx.android.synthetic.main.content_main.search_btn
+import kotlinx.android.synthetic.main.content_main.search_query
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ClientSearchAdapter
-import org.mifos.visionppi.databinding.ActivityComputerVisionBinding
-import org.mifos.visionppi.databinding.ContentMainBinding
 import org.mifos.visionppi.objects.Client
 import org.mifos.visionppi.ui.client_profile.ClientProfileActivity
 
@@ -31,7 +32,7 @@ import org.mifos.visionppi.ui.client_profile.ClientProfileActivity
  */
 
 class MainActivity : Fragment(), MainMVPView {
-    private lateinit var contentMainBinding: ContentMainBinding
+
     lateinit var clientList: List<Client>
     var mMainPresenter: MainPresenter = MainPresenter()
 
@@ -42,15 +43,14 @@ class MainActivity : Fragment(), MainMVPView {
     ): View? {
         super.onCreate(savedInstanceState)
         val root = inflater.inflate(R.layout.content_main, container, false)
-        contentMainBinding=ContentMainBinding.inflate(layoutInflater)
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        contentMainBinding.clientSearchList.layoutManager = LinearLayoutManager(requireContext())
+        client_search_list.layoutManager = LinearLayoutManager(requireContext())
 
-        contentMainBinding.searchQuery.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+        search_query.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch()
                 return@OnEditorActionListener true
@@ -58,7 +58,7 @@ class MainActivity : Fragment(), MainMVPView {
             false
         })
 
-        contentMainBinding.searchQuery.addTextChangedListener(object : TextWatcher {
+        search_query.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
 
@@ -67,31 +67,31 @@ class MainActivity : Fragment(), MainMVPView {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.toString().trim().isEmpty()) {
-                    contentMainBinding.searchBtn.isEnabled = false
-                    contentMainBinding.searchBtn.alpha = 0.5F
+                    search_btn.isEnabled = false
+                    search_btn.alpha = 0.5F
                 } else {
-                    contentMainBinding.searchBtn.isEnabled = true
-                    contentMainBinding.searchBtn.alpha = 1.0F
+                    search_btn.isEnabled = true
+                    search_btn.alpha = 1.0F
                 }
             }
         })
 
-        contentMainBinding.searchBtn.setOnClickListener {
+        search_btn.setOnClickListener {
             performSearch()
         }
     }
 
     private fun performSearch() {
         if (networkAvailable(requireActivity())) {
-            contentMainBinding.searchQuery.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            search_query.onEditorAction(EditorInfo.IME_ACTION_DONE)
             println("Going in")
-            if (contentMainBinding.searchQuery.text.toString().isEmpty())
+            if (search_query.text.toString().isEmpty())
                 searchError()
             else {
                 println("going in deeper")
                 val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(contentMainBinding.searchBtn.windowToken, 0)
-                search(contentMainBinding.searchQuery.text.toString())
+                inputMethodManager.hideSoftInputFromWindow(search_btn.windowToken, 0)
+                search(search_query.text.toString())
             }
         } else {
             showToastMessage("Internet connection not available. Please check network settings")
@@ -152,7 +152,7 @@ class MainActivity : Fragment(), MainMVPView {
         if (clientList.isEmpty())
             searchUnsuccessful()
 
-        contentMainBinding.clientSearchList.adapter =
+        client_search_list.adapter =
                 ClientSearchAdapter(clientList, requireContext()) { item -> onClick(item) }
     }
 }

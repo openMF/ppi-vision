@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_user_profile.office_id_value
+import kotlinx.android.synthetic.main.activity_user_profile.office_name_value
+import kotlinx.android.synthetic.main.activity_user_profile.staff_disp_name_value
+import kotlinx.android.synthetic.main.activity_user_profile.staff_id_value
+import kotlinx.android.synthetic.main.activity_user_profile.uname
+import kotlinx.android.synthetic.main.activity_user_profile.user_id_value
+import kotlinx.android.synthetic.main.activity_user_profile.username_value
 import org.mifos.visionppi.R
-import org.mifos.visionppi.databinding.ActivityUserProfileBinding
-import org.mifos.visionppi.databinding.ToolbarBinding
 import org.mifos.visionppi.models.User
 
 /**
@@ -18,7 +23,6 @@ import org.mifos.visionppi.models.User
 class UserProfileActivity : Fragment(), UserProfileMVPView {
 
     lateinit var user: User
-    private lateinit var activityUserProfileBinding: ActivityUserProfileBinding
     var mUserProfilePresenter: UserProfilePresenter = UserProfilePresenter()
 
     override fun onCreateView(
@@ -26,7 +30,6 @@ class UserProfileActivity : Fragment(), UserProfileMVPView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activityUserProfileBinding=ActivityUserProfileBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         return inflater.inflate(R.layout.activity_user_profile, container, false)
     }
@@ -43,13 +46,13 @@ class UserProfileActivity : Fragment(), UserProfileMVPView {
 
     override fun setUserDetails() {
 
-        activityUserProfileBinding.uname.text = user.username
-        activityUserProfileBinding.usernameValue.text = user.username
-        activityUserProfileBinding.userIdValue.text = user.userId.toString()
-        activityUserProfileBinding.officeNameValue.text = user.officeName
-        activityUserProfileBinding.officeIdValue.text = user.officeId.toString()
-        activityUserProfileBinding.staffIdValue.text = user.staffId.toString()
-        activityUserProfileBinding.staffDispNameValue.text = user.staffDisplayName
+        uname.text = user.username
+        username_value.text = user.username
+        user_id_value.text = user.userId.toString()
+        office_name_value.text = user.officeName
+        office_id_value.text = user.officeId.toString()
+        staff_id_value.text = user.staffId.toString()
+        staff_disp_name_value.text = user.staffDisplayName
     }
 
     override fun showToastMessage(string: String) {

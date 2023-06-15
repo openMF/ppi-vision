@@ -8,12 +8,10 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import javax.inject.Inject
-//import kotlinx.android.synthetic.main.activity_login.til_password
-//import kotlinx.android.synthetic.main.activity_login.til_username
+import kotlinx.android.synthetic.main.activity_login.til_password
+import kotlinx.android.synthetic.main.activity_login.til_username
 import org.mifos.visionppi.MainActivity
 import org.mifos.visionppi.R
-import org.mifos.visionppi.databinding.ActivityLoginBinding
-import org.mifos.visionppi.databinding.ToolbarBinding
 import org.mifos.visionppi.presenters.LoginPresenter
 import org.mifos.visionppi.ui.activities.base.BaseActivity
 import org.mifos.visionppi.ui.views.LoginView
@@ -34,13 +32,11 @@ class LoginActivity : BaseActivity(), LoginView {
     var llLogin: LinearLayout? = null
 
     private var userName: String? = null
-    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         activityComponent!!.inject(this)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.activity_login)
         ButterKnife.bind(this)
         loginPresenter!!.attachView(this)
     }
@@ -84,27 +80,27 @@ class LoginActivity : BaseActivity(), LoginView {
     }
 
     override fun showUsernameError(error: String?) {
-        binding.tilUsername.error = error
+        til_username.error = error
     }
 
     override fun showPasswordError(error: String?) {
-        binding.tilPassword.error = error
+        til_password.error = error
     }
 
     override fun clearUsernameError() {
-        binding.tilUsername.isErrorEnabled = false
+        til_username.isErrorEnabled = false
     }
 
     override fun clearPasswordError() {
-        binding.tilPassword.isErrorEnabled = false
+        til_password.isErrorEnabled = false
     }
 
     /**
      * Called when Login Button is clicked, used for logging in the user
      */
     fun onLoginClicked(view: View) {
-        val username = binding.tilUsername.editText?.editableText.toString()
-        val password = binding.tilPassword.editText?.editableText.toString()
+        val username = til_username.editText?.editableText.toString()
+        val password = til_password.editText?.editableText.toString()
         if (Network.isConnected(this)) {
             loginPresenter?.login(username, password)
         } else {

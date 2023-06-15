@@ -51,9 +51,6 @@
     <string name="object_detection_results">Object Detection Results</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_analyze">Analyze</string>
-    <string name="title_menu">Menu</string>
     <string name="title_dashboard">Profile</string>
     <string name="medium_text">Placeholder</string>
     <string name="about_app">Vision PPI helps officers to fill PPI Surveys automatically with the help of photographs taken in a clients house.</string>

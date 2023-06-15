@@ -14,12 +14,6 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="org.mifos.visionppi.ui.user_profile.UserProfileActivity"
-        android:label="@string/title_analyze"
-        tools:layout="@layout/activity_user_profile" />
-
-    <fragment
-        android:id="@+id/navigation_menu"
-        android:name="org.mifos.visionppi.ui.user_profile.UserProfileActivity"
-        android:label="@string/title_menu"
+        android:label="@string/title_dashboard"
         tools:layout="@layout/activity_user_profile" />
 </navigation>

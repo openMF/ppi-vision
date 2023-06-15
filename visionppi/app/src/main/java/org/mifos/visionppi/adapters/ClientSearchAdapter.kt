@@ -1,20 +1,24 @@
 package org.mifos.visionppi.adapters
 
 import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.client_search_row.view.client_account_no
+import kotlinx.android.synthetic.main.client_search_row.view.client_name
+import kotlinx.android.synthetic.main.client_search_row.view.client_search_row
 import org.mifos.visionppi.R
-import org.mifos.visionppi.databinding.ClientSearchRowBinding
 import org.mifos.visionppi.objects.Client
-import android.view.LayoutInflater
 
 /**
  * Created by Apoorva M K on 01/07/19.
  */
 
 class ClientSearchAdapter(var clientList: List<Client>, var context: Context, private val listener: (Client) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.clientName?.text = clientList[position].entityName
         holder.clientAccountNo?.text = "#".plus(clientList[position].entityAccountNo)
@@ -22,8 +26,7 @@ class ClientSearchAdapter(var clientList: List<Client>, var context: Context, pr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ClientSearchRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.client_search_row, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -31,10 +34,10 @@ class ClientSearchAdapter(var clientList: List<Client>, var context: Context, pr
     }
 }
 
-class ViewHolder(val binding: ClientSearchRowBinding) : RecyclerView.ViewHolder(binding.root) {
-    val clientName: TextView? = binding.clientName
-    val clientAccountNo: TextView? =  binding.clientAccountNo
-    private val linearLayout: LinearLayout? = binding.clientSearchRow
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val clientName: TextView? = view.client_name
+    val clientAccountNo: TextView? = view.client_account_no
+    private val linearLayout: LinearLayout? = view.client_search_row
 
     fun setItem(item: Client, listener: (Client) -> Unit) {
         linearLayout?.setOnClickListener { listener(item) }

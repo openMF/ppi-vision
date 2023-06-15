@@ -23,15 +23,18 @@ import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import kotlinx.android.synthetic.main.activity_computer_vision.analyse
+import kotlinx.android.synthetic.main.activity_computer_vision.open_camera_btn
+import kotlinx.android.synthetic.main.activity_computer_vision.res_list
+import kotlinx.android.synthetic.main.activity_computer_vision.selected_images_list
+import kotlinx.android.synthetic.main.activity_computer_vision.upload_from_gallery_btn
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.ObjectDetectionResultAdapter
 import org.mifos.visionppi.adapters.SelectedImageAdapter
-import org.mifos.visionppi.databinding.ActivityComputerVisionBinding
-import org.mifos.visionppi.databinding.ToolbarBinding
 
 class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
-    private lateinit var toolBarBinding: ToolbarBinding
-    private lateinit var activityComputerVisionBinding: ActivityComputerVisionBinding
+
     private val images = ArrayList<Bitmap?>()
     private val pickFromGallery = 1
     private val cameraRequest = 2
@@ -53,28 +56,26 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_computer_vision)
-        toolBarBinding = ToolbarBinding.inflate(layoutInflater)
-        activityComputerVisionBinding = ActivityComputerVisionBinding.inflate(layoutInflater)
-        setSupportActionBar(toolBarBinding.appToolbar)
 
+        setSupportActionBar(appToolbar)
         val actionBar = supportActionBar
         actionBar?.title = "Analyse Images"
 
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)
 
-        activityComputerVisionBinding.uploadFromGalleryBtn.setOnClickListener {
+        upload_from_gallery_btn.setOnClickListener {
             fetchFromGallery()
         }
 
-        activityComputerVisionBinding.openCameraBtn.setOnClickListener {
+        open_camera_btn.setOnClickListener {
             fetchFromCamera()
         }
 
-        activityComputerVisionBinding.selectedImagesList.layoutManager = GridLayoutManager(this, 3)
-        activityComputerVisionBinding.selectedImagesList.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+        selected_images_list.layoutManager = GridLayoutManager(this, 3)
+        selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
 
-        activityComputerVisionBinding.analyse.setOnClickListener {
+        analyse.setOnClickListener {
             counter = 0
             imageNos = images.size
             if (images.isNotEmpty()) {
@@ -152,7 +153,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                 val activitySelectIMage = 1234
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), activitySelectIMage)
 
-                activityComputerVisionBinding.selectedImagesList.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+                selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -173,7 +174,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     }
 
     override fun analyzeImages() {
-        activityComputerVisionBinding.resList.adapter = null
+        res_list.adapter = null
         for (image in images) {
             detect(image!!)
         }
@@ -198,7 +199,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                     ++counter
                     finalLabels.add(ll)
                     if (counter == imageNos) {
-                        activityComputerVisionBinding.resList.adapter = ObjectDetectionResultAdapter(finalLabels, images, baseContext)
+                        res_list.adapter = ObjectDetectionResultAdapter(finalLabels, images, baseContext)
                     }
                 }
                 .addOnFailureListener { e ->
@@ -219,7 +220,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                     val mImageUri: Uri = data.data!!
                     val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, mImageUri)
                     images.add(bitmap)
-                    activityComputerVisionBinding.selectedImagesList.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+                    selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
                 } else {
                     if (data?.clipData != null) {
                         val mClipData: ClipData = data.clipData!!
@@ -228,7 +229,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
                             val uri: Uri = item.uri
                             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
                             images.add(bitmap)
-                            activityComputerVisionBinding.selectedImagesList.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+                            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
                         }
                     }
                 }
@@ -238,7 +239,7 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
         if (requestCode === cameraRequest && resultCode === Activity.RESULT_OK) {
             val photoCaptured = data?.extras?.get("data") as Bitmap
             images.add(photoCaptured)
-            activityComputerVisionBinding.selectedImagesList.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+            selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
         }
     }
 
@@ -267,6 +268,6 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
 
     private fun imageRemove(position: Int) {
         images.removeAt(position)
-        activityComputerVisionBinding.selectedImagesList.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
+        selected_images_list.adapter = SelectedImageAdapter(images, this) { position: Int -> imageRemove(position) }
     }
 }
