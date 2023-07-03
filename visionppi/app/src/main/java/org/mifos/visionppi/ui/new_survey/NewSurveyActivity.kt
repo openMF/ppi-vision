@@ -6,26 +6,29 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
-import kotlinx.android.synthetic.main.activity_new_survey.ppi_survey
-import kotlinx.android.synthetic.main.new_survey_toolbar.computer_vision
 import org.mifos.visionppi.R
 import org.mifos.visionppi.adapters.QuestionAdapter
+import org.mifos.visionppi.databinding.ActivityComputerVisionBinding
+import org.mifos.visionppi.databinding.ActivityNewSurveyBinding
+import org.mifos.visionppi.databinding.NewSurveyToolbarBinding
 import org.mifos.visionppi.objects.PPISurvey
 import org.mifos.visionppi.objects.Response
 import org.mifos.visionppi.ui.computer_vision.ComputerVisionActivity
 
 class NewSurveyActivity : AppCompatActivity(), NewSurveyMVPView {
-
+    private lateinit var newSurveyToolbarBinding: NewSurveyToolbarBinding
+    private lateinit var activityNewSurveyBinding: ActivityNewSurveyBinding
     private var mNewSurveyPresenter: NewSurveyPresenter = NewSurveyPresenter()
     lateinit var mPPISurvey: PPISurvey
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_survey)
-
+        newSurveyToolbarBinding=NewSurveyToolbarBinding.inflate(layoutInflater)
+        activityNewSurveyBinding=ActivityNewSurveyBinding.inflate(layoutInflater)
         getSurveyQuestions()
 
-        computer_vision.setOnClickListener {
+        newSurveyToolbarBinding.computerVision.setOnClickListener {
             val intent = Intent(applicationContext, ComputerVisionActivity::class.java)
             startActivity(intent)
         }
@@ -38,10 +41,10 @@ class NewSurveyActivity : AppCompatActivity(), NewSurveyMVPView {
 
     override fun renderSurvey(mPPISurvey: PPISurvey) {
         val snapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(ppi_survey)
-        ppi_survey.layoutManager = LinearLayoutManager(this)
-        ppi_survey.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        ppi_survey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext) { response: Response -> onResponseClicked(response) }
+        snapHelper.attachToRecyclerView(activityNewSurveyBinding.ppiSurvey)
+        activityNewSurveyBinding.ppiSurvey.layoutManager = LinearLayoutManager(this)
+        activityNewSurveyBinding.ppiSurvey.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        activityNewSurveyBinding.ppiSurvey.adapter = QuestionAdapter(mPPISurvey.questionDatas, applicationContext) { response: Response -> onResponseClicked(response) }
     }
 
     override fun showToastMessage(string: String) {

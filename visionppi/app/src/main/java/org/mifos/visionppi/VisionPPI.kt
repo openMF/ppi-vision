@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
+//import com.crashlytics.android.Crashlytics
+//import io.fabric.sdk.android.Fabric
 import java.util.Locale
 import org.mifos.visionppi.injection.component.ApplicationComponent
 import org.mifos.visionppi.injection.component.DaggerApplicationComponent
@@ -36,7 +36,7 @@ class VisionPPI : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         MultiDex.install(this)
-        Fabric.with(this, Crashlytics())
+//        Fabric.with(this, Crashlytics())
         instance = this
     }
 
