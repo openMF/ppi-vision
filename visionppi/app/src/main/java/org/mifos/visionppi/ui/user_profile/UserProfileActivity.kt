@@ -5,7 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivityUserProfileBinding
 import org.mifos.visionppi.databinding.ToolbarBinding
@@ -15,29 +21,23 @@ import org.mifos.visionppi.models.User
  * Created by Apoorva M K on 27/06/19.
  */
 
-class UserProfileActivity : Fragment(), UserProfileMVPView {
+class UserProfileActivity : AppCompatActivity(), UserProfileMVPView {
 
     lateinit var user: User
     private lateinit var activityUserProfileBinding: ActivityUserProfileBinding
     var mUserProfilePresenter: UserProfilePresenter = UserProfilePresenter()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        activityUserProfileBinding=ActivityUserProfileBinding.inflate(layoutInflater)
+    private lateinit var binding: ToolbarBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        return inflater.inflate(R.layout.activity_user_profile, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = ToolbarBinding.inflate(layoutInflater)
+        activityUserProfileBinding=ActivityUserProfileBinding.inflate(layoutInflater)
+        setContentView(activityUserProfileBinding.root)
+        setSupportActionBar(binding.appToolbar)
         getUserDetails()
     }
 
     override fun getUserDetails() {
-        user = mUserProfilePresenter.fetchUserDetails(requireActivity(), requireContext())
+        user = mUserProfilePresenter.fetchUserDetails(this, this)
         setUserDetails()
     }
 
@@ -53,6 +53,6 @@ class UserProfileActivity : Fragment(), UserProfileMVPView {
     }
 
     override fun showToastMessage(string: String) {
-        Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
     }
 }
