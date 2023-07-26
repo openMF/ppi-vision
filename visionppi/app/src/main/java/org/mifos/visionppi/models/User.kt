@@ -9,7 +9,9 @@ import org.mifos.visionppi.objects.Role
  */
 
 data class User(
-
+    var firstName: String,
+    var middleName: String,
+    var lastName: String,
     var userId: Long = 0,
     var isAuthenticated: Boolean = false,
     var username: String? = null,
