@@ -3,14 +3,12 @@ package org.mifos.visionppi.adapters
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.object_detection_result.view.imageObject
-import kotlinx.android.synthetic.main.object_detection_result.view.item1
-import org.mifos.visionppi.R
+
+import org.mifos.visionppi.databinding.ObjectDetectionResultBinding
 
 class ObjectDetectionResultAdapter(var result: List<List<String>>, var images: ArrayList<Bitmap?>, var context: Context) : RecyclerView.Adapter<ResultViewHolder>() {
 
@@ -23,7 +21,8 @@ class ObjectDetectionResultAdapter(var result: List<List<String>>, var images: A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
-        return ResultViewHolder(LayoutInflater.from(context).inflate(R.layout.object_detection_result, parent, false))
+        val binding = ObjectDetectionResultBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ResultViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -31,7 +30,7 @@ class ObjectDetectionResultAdapter(var result: List<List<String>>, var images: A
     }
 }
 
-class ResultViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val image: ImageView? = view.imageObject
-    val res1: TextView? = view.item1
+class ResultViewHolder(val binding: ObjectDetectionResultBinding) : RecyclerView.ViewHolder(binding.root) {
+    val image: ImageView? = binding.imageObject
+    val res1: TextView? = binding.item1
 }
