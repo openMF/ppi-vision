@@ -11,20 +11,18 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-//import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.api.local.PreferencesHelper
-import org.mifos.visionppi.databinding.ToolbarBinding
 import org.mifos.visionppi.ui.AboutActivity
 import org.mifos.visionppi.ui.activities.LoginActivity
 import org.mifos.visionppi.utils.PrefManager
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ToolbarBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ToolbarBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main2)
-        setSupportActionBar(binding.appToolbar)
+        setSupportActionBar(appToolbar)
         val actionBar = supportActionBar
         actionBar?.title = "OK"
         val navView: BottomNavigationView = findViewById(R.id.nav_view)

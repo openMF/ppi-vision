@@ -6,22 +6,20 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.MainActivity
 import org.mifos.visionppi.R
-import org.mifos.visionppi.databinding.ToolbarBinding
 
 class AboutActivity : AppCompatActivity() {
     var contributors = "https://github.com/openMF/ppi-vision/graphs/contributors"
     var gitHub = "https://github.com/openMF/ppi-vision"
     var twitter = "https://twitter.com/mifos"
     var license = "https://github.com/openMF/ppi-vision/blob/master/LICENSE"
-    private lateinit var binding: ToolbarBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ToolbarBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_about)
 
-        setSupportActionBar(binding.appToolbar)
+        setSupportActionBar(appToolbar)
         val actionBar = supportActionBar
         actionBar?.title = "About Us"
 
