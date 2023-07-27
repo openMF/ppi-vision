@@ -13,4 +13,6 @@
     <color name="lightGray">#DCDCDC</color>
     <color name="veryLightGray">#F8F8F8</color>
     <color name="light_grey">#ffd1d1d1</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="blue">#ADD8E6</color>
 </resources>
