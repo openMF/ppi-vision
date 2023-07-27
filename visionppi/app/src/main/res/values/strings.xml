@@ -76,4 +76,10 @@
     <string name="help_line_number" translatable="false">8000000000</string>
     <string name="contact_email" translatable="false">support@mifos.org</string>
 
+    <string-array name="country_options">
+        <item>India</item>
+        <item>Afghanistan</item>
+        <item>Nepal</item>
+    </string-array>
+
 </resources>

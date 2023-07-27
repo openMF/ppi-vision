@@ -41,9 +41,8 @@ class MainActivity : Fragment(), MainMVPView {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-        val root = inflater.inflate(R.layout.content_main, container, false)
         contentMainBinding=ContentMainBinding.inflate(layoutInflater)
-        return root
+        return contentMainBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
