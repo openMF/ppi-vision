@@ -1,12 +1,15 @@
-<img height='175' src="https://user-images.githubusercontent.com/37406965/51083189-d5dc3a80-173b-11e9-8ca0-28015e0893ac.png" align="left" hspace="1" vspace="1">
+<img height='90' src="https://user-images.githubusercontent.com/37406965/51083189-d5dc3a80-173b-11e9-8ca0-28015e0893ac.png" align="left" hspace="1" vspace="1">
 
 # PPI-Vision :iphone:
-The **Poverty Probability Index (PPI)** is a poverty measurement tool for organizations and businesses with a mission to serve the poor. Taking this into account Vision PPI is designed to facilitate this measurement process much accurate and efficient. 
-Vision PPI is a computer vision and machine learning based android app designed to help in filling out the PPI Survey. There are two broad aspects to this project - The android app which provides the interface to the field officer for conducting the survey and the machine learning models which are used in the backend of app to analyze the images captured. 
+The **Poverty Probability Index (PPI)** is a poverty measurement tool for organizations and businesses with a mission to serve the poor. Taking this into account Vision PPI is designed to facilitate this measurement process much accurate and efficient. Vision PPI is a computer vision and machine learning based android app designed to help in filling out PPI Survey. 
+
+*There are two broad aspects to this project:-*
+- The android app which provides the interface to the field officer for conducting the survey.
+- The machine learning models which are used in the backend of app to analyze the images captured. 
 
 
 ## Wiki 📙
-For more information about the usecases of the project and details about PPI, the API used and demo credentials, please take a look at the [project wiki](https://github.com/openMF/ppi-vision/wiki). 
+For more information about the usecases of the project and details about PPI, the API used and demo credentials, please take a look at the **[project wiki](https://github.com/openMF/ppi-vision/wiki)**. 
 
 ## Screenshots :camera:
 ![Untitled design (5)](https://user-images.githubusercontent.com/75531664/189319200-f7f3b143-2757-46c8-9342-0021fada2ca2.png)
