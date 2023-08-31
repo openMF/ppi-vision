@@ -1,4 +1,4 @@
-package com.example.survey_screen
+package com.example.justquiz
 
 import android.os.Bundle
 import android.util.Log
@@ -9,13 +9,13 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.survey_screen.databinding.ActivityMainBinding
+import com.example.justquiz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var currentQuestionIndex = 0
-    private var questionsWithOptions: List<Pair<String, List<String>>> = emptyList()
+    private var questionsWithOptions: List<Triple<String, List<String>, Map<String, Int>>> = emptyList()
     private val answers: MutableMap<String, String> = mutableMapOf()
     private val selectedOptions: MutableMap<String, String?> = mutableMapOf()
 
@@ -78,32 +78,78 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setQuestionsForCountry(country: String) {
+        private fun setQuestionsForCountry(country: String) {
         // Update the list of questionsWithOptions based on the selected country
         questionsWithOptions = when (country) {
-            "Ghana" -> listOf(
-                "Q1. HOW MANY MEMBERS ARE THERE IN THE HOUSEHOLD?" to listOf("1-5", "5-10", "10-15", "15-20"),
-                "Q2. IN THE PAST MONTH, HAVE YOU PURCHASED ANY CHICKEN EGGS (FRESH OR SINGLE)?" to listOf("Yes", "No"),
-                "Q3. IN THE PAST MONTH, HAVE YOU PURCHASED ANY RAW OR CORNED BEEF?" to listOf("Yes", "No"),
-                "Q4. WHAT IS THE MAIN CONSTRUCTION MATERIAL USED FOR THE OUTER WALL?" to listOf("Stones", "Earth-based bricks","Sand-cement","Other"),
-                "Q5. WHAT IS THE MAIN FUEL USED BY THE HOUSEHOLD FOR COOKING?" to listOf("Wood", "Charcoal", "Crop residue", "Gas"),
+            "India" -> listOf(
+                Triple(
+                    "Q1. This is Question 1 for India",
+                    listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                    mapOf(
+                        "Option A1" to 1, // Assigning marks to each option
+                        "Option B1" to 2,
+                        "Option C1" to 3,
+                        "Option D1" to 4
+                    )
+                ),
+                Triple(
+                    "Q2. This is Question 2 for India",
+                    listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                    mapOf(
+                        "Option A1" to 5, // Assigning marks to each option
+                        "Option B1" to 6,
+                        "Option C1" to 7,
+                        "Option D1" to 8
+                    )
+                ),
+
+                // Add more questions for India
             )
-            "Malawi" -> listOf(
-                "Q1. HOW MANY HOUSEHOLD MEMBERS LIVE IN THE HOUSEHOLD?" to listOf("1-5", "5-10", "10-15", "15-20"),
-                "Q2. IS THE HOUSEHOLD HEAD ABLE TO READ AND WRITE IN ENGLISH?" to listOf("Yes", "No"),
-                "Q3. THE ROOF OF THE MAIN DWELLING IS PREDOMINANTLY MADE OF WHAT MATERIAL?" to listOf("Stones", "Earth-based bricks","Sand-cement","Other"),
-                "Q4. THE FLOOR OF THE MAIN DWELLING IS PREDOMINANTLY MADE OF WHAT MATERIAL?" to listOf("Stones", "Earth-based bricks","Sand-cement","Other"),
-                "Q5. WHAT IS THE MAIN SOURCE OF COOKING FUEL IN YOUR HOUSEHOLD?" to listOf("Wood", "Charcoal", "Crop residue", "Gas"),
-                "Q6. OVER THE PAST ONE WEEK (7 DAYS), DID YOU OR OTHERS IN YOUR HOUSEHOLD CONSUME ANY SUGAR?" to listOf("Yes", "No"),
+            "Afghanistan" -> listOf(
+                Triple(
+                    "Q1. This is Question 1 for Afghanistan",
+                    listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                    mapOf(
+                        "Option A1" to 9, // Assigning marks to each option
+                        "Option B1" to 10,
+                        "Option C1" to 11,
+                        "Option D1" to 12
+                    )
+                ),
+                Triple(
+                    "Q2. This is Question 2 for Afghanistan",
+                    listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                    mapOf(
+                        "Option A1" to 13, // Assigning marks to each option
+                        "Option B1" to 14,
+                        "Option C1" to 15,
+                        "Option D1" to 16
+                    )
+                ),
+                // Add more questions for Afghanistan
             )
-            "Burkina Faso" -> listOf(
-                "Q1. HOW MANY MEMBERS ARE THERE IN THE HOUSEHOLD?" to listOf("1-5", "5-10", "10-15", "15-20"),
-                "Q2. DOES THE MALE HOUSEHOLD HEAD OR SPOUSE READ AND WRITE IN ANY LANGUAGE?" to listOf("Yes", "No"),
-                "Q3. DID EVERY CHILD AGED 7 TO 14 ATTEND FORMAL SCHOOL DURING THE LAST SCHOOL YEAR?" to listOf("Yes", "No"),
-                "Q4. WHAT IS THE MATERIAL USED TO CONSTRUCT THE FLOOR?" to listOf("Stones", "Earth-based bricks","Sand-cement","Other"),
-                "Q5. HAS YOUR HOUSEHOLD CONSUMED MILK AND/OR DAIRY PRODUCTS IN THE LAST DAYS?" to listOf("Yes", "No"),
-                "Q6. HAS YOUR HOUSEHOLD CONSUMED SUGAR (GRANULATED OR IN THE FORM OF CUBES) IN THE LAST 7 DAYS??" to listOf("Yes", "No"),
-                "Q7. WHAT IS THE MAIN SOURCE OF HOUSEHOLD LIGHTING?" to listOf("Firewood", "Charcoal", "Kerosene", "Animal dung"),
+            "Nepal" -> listOf(
+                Triple(
+                    "Q1. This is Question 1 for Nepal",
+                    listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                    mapOf(
+                        "Option A1" to 17, // Assigning marks to each option
+                        "Option B1" to 18,
+                        "Option C1" to 19,
+                        "Option D1" to 20
+                    )
+                ),
+                Triple(
+                    "Q2. This is Question 2 for Nepal",
+                    listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                    mapOf(
+                        "Option A1" to 21, // Assigning marks to each option
+                        "Option B1" to 22,
+                        "Option C1" to 23,
+                        "Option D1" to 24
+                    )
+                ),
+                // Add more questions for Nepal
             )
             else -> emptyList()
         }
@@ -114,12 +160,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setQuestionAndOptions(index: Int) {
-        val (question, options) = questionsWithOptions[index]
+        val (question, options, optionMarks) = questionsWithOptions[index]
         binding.tvQuestion.text = question
-        binding.optionA.text = options[0]
-        binding.optionB.text = options[1]
-        binding.optionC.text = options[2]
-        binding.optionD.text = options[3]
+        binding.optionA.text = "${options[0]} (${optionMarks[options[0]]} marks)"
+        binding.optionB.text = "${options[1]} (${optionMarks[options[1]]} marks)"
+        binding.optionC.text = "${options[2]} (${optionMarks[options[2]]} marks)"
+        binding.optionD.text = "${options[3]} (${optionMarks[options[3]]} marks)"
+
 
         // Check if a selection was made for this question
         if (selectedOptions.containsKey(question)) {
@@ -140,7 +187,9 @@ class MainActivity : AppCompatActivity() {
     private fun updateSelectedOption(radioButton: RadioButton) {
         val question = questionsWithOptions[currentQuestionIndex].first
         selectedOptions[question] = radioButton.text.toString()
-        Log.d("SelectedOption", "Question ${currentQuestionIndex + 1}: ${selectedOptions[question]}")
+        val selectedMarks = questionsWithOptions[currentQuestionIndex].third[radioButton.text.toString()]
+        Log.d("SelectedOption", "Question ${currentQuestionIndex + 1}: ${selectedOptions[question]} ($selectedMarks marks)")
+
         // Add the selected answer to the dictionary
         answers["Question ${currentQuestionIndex + 1}"] = selectedOptions[question] ?: "Not answered"
     }
