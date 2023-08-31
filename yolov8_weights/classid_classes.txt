@@ -1,0 +1,10 @@
+classid   class
+1         bicycle
+2         car
+3         motorcycle
+7         truck
+56        chair
+59        bed
+60        dining table
+62        tv
+72        refrigerator
