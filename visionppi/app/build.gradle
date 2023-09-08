@@ -111,6 +111,9 @@ dependencies {
     implementation "androidx.preference:preference:1.1.1"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.vectordrawable:vectordrawable:1.1.0"
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
     //Square dependencies
     implementation("com.squareup.retrofit2:retrofit:2.2.0") {

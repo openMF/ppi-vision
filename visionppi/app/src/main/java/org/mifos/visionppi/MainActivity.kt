@@ -2,6 +2,7 @@ package org.mifos.visionppi
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
@@ -14,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 //import kotlinx.android.synthetic.main.toolbar.*
 import org.mifos.visionppi.api.local.PreferencesHelper
 import org.mifos.visionppi.databinding.ToolbarBinding
+import org.mifos.visionppi.objects.Client
 import org.mifos.visionppi.ui.AboutActivity
 import org.mifos.visionppi.ui.activities.LoginActivity
 import org.mifos.visionppi.utils.PrefManager
@@ -36,6 +38,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val clientDetails = intent.getParcelableExtra<Client>("clientDetails")
+
+        if (clientDetails != null) {
+            // Do something with clientDetails, e.g., pass it to a fragment
+            val navController = findNavController(R.id.nav_host_fragment)
+            val bundle = Bundle().apply {
+                putParcelable("clientDetails", clientDetails)
+            }
+            navController.navigate(R.id.navigation_dashboard, bundle)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

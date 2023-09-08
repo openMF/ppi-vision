@@ -51,11 +51,25 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <TextView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="New Client"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <GridView
+            android:id="@+id/imageGridView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:numColumns="auto_fit"
+            android:columnWidth="100dp"
+            android:stretchMode="columnWidth"
+            android:horizontalSpacing="8dp"
+            android:verticalSpacing="8dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             />
 
