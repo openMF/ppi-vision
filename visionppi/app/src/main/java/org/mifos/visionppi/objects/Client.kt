@@ -46,6 +46,7 @@ data class Client constructor(
             parcel.writeString(parentName)
             parcel.writeString(entityMobileNo)
             parcel.writeParcelable(entityStatus, flags)
+            parcel.writeParcelable(entityStatus, flags)
         }
 
         override fun create(parcel: Parcel): Client {

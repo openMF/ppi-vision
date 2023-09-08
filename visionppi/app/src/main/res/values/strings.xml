@@ -77,9 +77,9 @@
     <string name="contact_email" translatable="false">support@mifos.org</string>
 
     <string-array name="country_options">
-        <item>India</item>
-        <item>Afghanistan</item>
         <item>Nepal</item>
+        <item>Afghanistan</item>
+        <item>India</item>
     </string-array>
 
 </resources>

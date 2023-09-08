@@ -1,16 +1,27 @@
 package org.mifos.visionppi.ui
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import org.mifos.visionppi.MainActivity
 import org.mifos.visionppi.R
 import org.mifos.visionppi.databinding.ActivitySurveyBinding
+import java.io.IOException
+import java.util.*
 
 class SurveyActivity : AppCompatActivity() {
 
@@ -19,17 +30,38 @@ class SurveyActivity : AppCompatActivity() {
     private var questionsWithOptions: List<Pair<String, List<String>>> = emptyList()
     private val answers: MutableMap<String, String> = mutableMapOf()
     private val selectedOptions: MutableMap<String, String?> = mutableMapOf()
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1001
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var geocoder: Geocoder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activitySurveyBinding = ActivitySurveyBinding.inflate(layoutInflater)
         setContentView(activitySurveyBinding.root)
 
-        // Set up the spinner
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        geocoder = Geocoder(this, Locale.getDefault())
+        var country:String?=null
         val countryOptions = resources.getStringArray(R.array.country_options)
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, countryOptions)
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        activitySurveyBinding.spinnerCountry.adapter = spinnerAdapter
+
+        if (isLocationPermissionGranted()) {
+            lifecycleScope.launch(Dispatchers.Main) {
+
+                country = getLastKnownLocation()
+
+                // Set up the spinner
+                val spinnerAdapter = ArrayAdapter(this@SurveyActivity, android.R.layout.simple_spinner_item, countryOptions)
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                activitySurveyBinding.spinnerCountry.adapter = spinnerAdapter
+
+                if (country!=null){
+                    val position = countryOptions.indexOf(country)
+                    if (position != -1) {
+                        activitySurveyBinding.spinnerCountry.setSelection(position)
+                    }
+                }
+            }
+        }
 
         // Handle spinner item selection
         activitySurveyBinding.spinnerCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -172,9 +204,102 @@ class SurveyActivity : AppCompatActivity() {
             currentQuestionIndex = 0
             setQuestionAndOptions(currentQuestionIndex)
             dialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         // Show the Dialog
         dialog.show()
     }
+
+    private fun isLocationPermissionGranted(): Boolean {
+        return if (ActivityCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(this, "Permissions Not Granted", Toast.LENGTH_SHORT).show()
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                            android.Manifest.permission.ACCESS_FINE_LOCATION,
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION
+                    ),
+                    LOCATION_PERMISSION_REQUEST_CODE
+            )
+            false
+        } else {
+            true
+        }
+    }
+
+    private suspend fun getLastKnownLocation(): String? {
+        var countryName: String? = null
+
+        if (ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(this, "Permissions Not Granted", Toast.LENGTH_SHORT).show()
+            return countryName
+        }
+
+        try {
+            val location = fusedLocationProviderClient.lastLocation.await()
+            if (location != null) {
+                val latitude = location.latitude
+                val longitude = location.longitude
+                val coordinates = "Latitude: $latitude, Longitude: $longitude"
+                countryName = getCountryName(latitude, longitude)
+                if (countryName == null) {
+                    Toast.makeText(this, "Country name not found", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(this, "Location Not Found", Toast.LENGTH_SHORT).show()
+            }
+        } catch (exception: Exception) {
+            Toast.makeText(this, "Location Not Found", Toast.LENGTH_SHORT).show()
+        }
+
+        return countryName
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                lifecycleScope.launch(Dispatchers.Main) {
+                    val country = getLastKnownLocation()
+                }
+            } else {
+                Toast.makeText(this, "Permissions Not Granted", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun getCountryName(latitude: Double, longitude: Double): String? {
+        return try {
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+            if (addresses != null && addresses.isNotEmpty()) {
+                addresses[0].countryName
+            } else {
+                null
+            }
+        } catch (e: IOException) {
+            null
+        }
+    }
+
 }

@@ -38,17 +38,16 @@ class ComputerVisionActivity : AppCompatActivity(), ComputerVisionMVPView {
     private val myCameraPermissionCode = 100
     private val threshold = .6
     private val labelList: MutableList<String> = ArrayList()
-
-    companion object {
-        @JvmStatic
-        var finalLabels: MutableList<List<String>> = ArrayList()
-    }
-
     lateinit var localModel: LocalModel
     lateinit var customImageLabelerOptions: CustomImageLabelerOptions
     lateinit var imageLabeler: ImageLabeler
     var counter = 0
     var imageNos = 0
+
+    companion object {
+        @JvmStatic
+        var finalLabels: MutableList<List<String>> = ArrayList()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

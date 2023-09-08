@@ -26,6 +26,23 @@
         <entry key="..\:/GSOC 2023/My Forks/ppi-vision/visionppi/app/src/main/res/menu/options_menu.xml" value="0.25" />
         <entry key="..\:/Users/DELL/Desktop/from github/visionppi/app/src/main/res/layout/activity_about.xml" value="0.1" />
         <entry key="..\:/Users/DELL/Desktop/from github/visionppi/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_analyze.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_client_profile.xml" value="0.215625" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_computer_vision.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_main.xml" value="0.12447916666666667" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_main2.xml" value="0.12447916666666667" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_new_survey.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_submit.xml" value="0.1046875" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/activity_user_profile.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/child_grid.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/client_search_row.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/content_main.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/image_grid_layout.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/new_survey_toolbar.xml" value="0.1046875" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/object_detection_result.xml" value="0.1046875" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/ppi_question_layout.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/ppi_response_row.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/itsar/Desktop/New folder/ppi-vision/visionppi/app/src/main/res/layout/toolbar.xml" value="0.1046875" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.22395833333333334" />
