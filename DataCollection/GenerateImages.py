@@ -11,6 +11,8 @@ import decimal
 import random
 import glob
 import cv2
+from scipy.ndimage.interpolation import map_coordinates
+from scipy.ndimage.filters import gaussian_filter
 
 # Helper function to generate a mask for parallel light method
 def generate_parallel_light_mask(mask_size,
@@ -121,6 +123,74 @@ def _decay_value_radically_norm(x, centers, max_value, min_value, dev):
     x_value = 255 if x_value > 255 else x_value
     
     return x_value
+
+def add_shadow(image, darkness_factor=0.5, x_offset=25, y_offset=25):
+    # Convert image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # Apply a binary threshold to create a mask of the image
+    ret, mask = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    # Blur the mask to create a softer shadow effect
+    mask_blur = cv2.GaussianBlur(mask, (21, 21), 0)
+    # Create a copy of the original image and apply the mask to it
+    shadow = np.copy(image)
+    shadow[mask_blur>0] = (shadow[mask_blur>0]*darkness_factor).astype(np.uint8)
+    # Shift the shadow image by the specified x and y offsets
+    M = np.float32([[1, 0, x_offset], [0, 1, y_offset]])
+    shadow = cv2.warpAffine(shadow, M, (image.shape[1], image.shape[0]))
+    # Combine the original image and the shadow image using a bitwise OR operation
+    result = cv2.bitwise_or(image, shadow)
+    return result
+
+def add_glare(image, brightness_factor=0.5, x_offset=25, y_offset=25):
+    # Create a copy of the original image
+    glare = np.copy(image)
+    # Set the pixels in the top left corner of the image to white
+    glare[:100, :100, :] = [255, 255, 255]
+    # Blend the glare image with the original image using the specified brightness factor
+    glare = cv2.addWeighted(image, 1 - brightness_factor, glare, brightness_factor, 0)
+    # Shift the glare image by the specified x and y offsets
+    M = np.float32([[1, 0, x_offset], [0, 1, y_offset]])
+    glare = cv2.warpAffine(glare, M, (image.shape[1], image.shape[0]))
+    # Combine the original image and the glare image using a bitwise OR operation
+    result = cv2.bitwise_or(image, glare)
+    return result
+
+def add_fog(image, brightness=50, density=0.5):
+    # Convert the image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # Generate a mask with random noise
+    mask = np.zeros_like(gray)
+    h, w = mask.shape[:2]
+    noise = cv2.randu(mask, 0, 255)
+    mask = cv2.GaussianBlur(mask, (51, 51), 0)
+    mask = cv2.threshold(mask, 240, 255, cv2.THRESH_BINARY)[1]
+    # Blend the mask with the original image
+    mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
+    mask = np.float32(mask) / 255.0
+    result = ((1.0 - density) * image + density * (brightness * mask))
+    result = np.clip(result, 0, 255)
+    result = np.uint8(result)
+    return result
+
+def add_speckle_noise(image, mean=0, std=50):
+    # Generate random noise
+    h, w, c = image.shape
+    noise = np.random.normal(mean, std, size=(h, w, c))
+    # Add noise to the image
+    noisy_image = image + image * noise / 255.0
+    noisy_image = np.clip(noisy_image, 0, 255).astype(np.uint8)
+    return noisy_image
+
+def apply_local_distortion(image, distortion_intensity=0.5):
+    # Generate random noise with the same shape as the image
+    noise = np.random.normal(scale=distortion_intensity, size=image.shape)
+    # Add the noise to the image
+    distorted_image = image + noise
+    # Clip the pixel values to [0, 255] range
+    distorted_image = np.clip(distorted_image, 0, 255)
+    # Convert the image to uint8 format
+    distorted_image = distorted_image.astype(np.uint8)
+    return distorted_image
 
 # Allowing users to give input as command line arguments
 ap = argparse.ArgumentParser()
@@ -406,3 +476,249 @@ for image in images:
     savePath = output + str(i) + ".png"
     i += 1
     cv2.imwrite(savePath, frame)
+
+    # Augmentation by scaling images
+    height, width = image.shape[:2]
+    
+    # Scale the image by a factor of 0.5
+    scale = 0.5
+    resized = cv2.resize(image, (int(width*scale), int(height*scale)))
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, resized)
+
+    # Scale the image by a factor of 1.5
+    scale = 1.5
+    resized = cv2.resize(image, (int(width*scale), int(height*scale)))
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, resized)
+    
+    # Scale the image by a factor of 2
+    scale = 2
+    resized = cv2.resize(image, (int(width*scale), int(height*scale)))
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, resized)
+
+    # Augmentation by color channel swapping
+    # Swap Red and Blue channels
+    swapped = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, swapped)
+
+    # Swap Green and Blue channels
+    swapped = image[:, :, ::-1]
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, swapped)
+
+    # Swap Red and Green channels
+    swapped = image[:, ::-1, :]
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, swapped)
+
+    # Augmentation by adding random noise and blurring
+    # Add Gaussian noise to the image
+    mean = 0
+    variance = 50
+    noise = np.random.normal(mean, variance, image.shape)
+    noisy_image = np.clip(image + noise, 0, 255).astype(np.uint8)
+
+    # Apply Gaussian blur to the noisy image
+    ksize = (5, 5)
+    sigmaX = 5
+    blurred = cv2.GaussianBlur(noisy_image, ksize, sigmaX)
+
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, blurred)
+
+    # Add Salt-and-Pepper noise to the image
+    s_vs_p = 0.5
+    amount = 0.05
+    noisy_image = image.copy()
+    # Salt mode
+    num_salt = np.ceil(amount * image.size * s_vs_p)
+    coords = [np.random.randint(0, i - 1, int(num_salt)) for i in image.shape]
+    noisy_image[coords] = 255
+
+    # Pepper mode
+    num_pepper = np.ceil(amount * image.size * (1. - s_vs_p))
+    coords = [np.random.randint(0, i - 1, int(num_pepper)) for i in image.shape]
+    noisy_image[coords] = 0
+
+    # Apply Median blur to the noisy image
+    ksize = 5
+    blurred = cv2.medianBlur(noisy_image, ksize)
+
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, blurred)
+
+    # Augmentation by randomly rotating and zooming
+    # Randomly rotate the image by a random angle between -10 and 10 degrees
+    angle = np.random.uniform(-10, 10)
+    rotated = ndimage.rotate(image, angle, reshape=False)
+
+    # Randomly zoom the rotated image by a random factor between 0.9 and 1.1
+    zoom_factor = np.random.uniform(0.9, 1.1)
+    zoomed = ndimage.zoom(rotated, zoom_factor)
+
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, zoomed)
+
+        # Augmentation by randomly dropping color channels
+    channels = cv2.split(image)
+    num_channels = len(channels)
+
+    # Randomly drop one or more color channels
+    num_dropped = np.random.randint(1, num_channels + 1)
+    dropped_channels = np.random.choice(num_channels, num_dropped, replace=False)
+    for j in dropped_channels:
+        channels[j][:] = 0
+
+    # Merge the remaining channels
+    merged = cv2.merge(channels)
+
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, merged)
+
+    # Augmentation by cutout with random erasing
+    height, width, channels = image.shape
+
+    # Define the size and position of the cutout
+    cutout_size = int(min(height, width) * 0.2) # Cutout size is 20% of the smaller dimension
+    cutout_x = np.random.randint(0, width - cutout_size + 1)
+    cutout_y = np.random.randint(0, height - cutout_size + 1)
+
+    # Apply cutout to the image
+    cutout_image = np.copy(image)
+    cutout_image[cutout_y:cutout_y+cutout_size, cutout_x:cutout_x+cutout_size, :] = 0
+
+    # Define the size and position of the random erasing
+    erase_size = int(min(height, width) * 0.1) # Erase size is 10% of the smaller dimension
+    erase_x = np.random.randint(0, width - erase_size + 1)
+    erase_y = np.random.randint(0, height - erase_size + 1)
+
+    # Apply random erasing to the image
+    erase_image = np.copy(cutout_image)
+    erase_image[erase_y:erase_y+erase_size, erase_x:erase_x+erase_size, :] = np.random.randint(0, 256, (erase_size, erase_size, channels))
+
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, erase_image)
+
+    # Augmentation by geometric transformations
+    height, width, channels = image.shape
+
+    # Skew transformation
+    skew_x = np.random.randint(-int(width * 0.1), int(width * 0.1))
+    skew_y = np.random.randint(-int(height * 0.1), int(height * 0.1))
+    pts1 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
+    pts2 = np.float32([[0, 0], [width, 0], [skew_x, height+skew_y], [width+skew_x, height+skew_y]])
+    M = cv2.getPerspectiveTransform(pts1, pts2)
+    skew_image = cv2.warpPerspective(image, M, (width, height))
+
+    # Stretch transformation
+    stretch_x = np.random.uniform(0.8, 1.2)
+    stretch_y = np.random.uniform(0.8, 1.2)
+    stretch_image = cv2.resize(image, (int(width*stretch_x), int(height*stretch_y)))
+
+    # Twist transformation
+    twist_x = np.random.randint(-int(width * 0.1), int(width * 0.1))
+    twist_y = np.random.randint(-int(height * 0.1), int(height * 0.1))
+    M = cv2.getRotationMatrix2D((width/2, height/2), 15, 1)
+    M[0][2] += twist_x
+    M[1][2] += twist_y
+    twist_image = cv2.warpAffine(image, M, (width, height))
+
+    # Save the transformed images
+    savePath = output + str(i) + "_skew.png"
+    cv2.imwrite(savePath, skew_image)
+    i += 1
+    savePath = output + str(i) + "_stretch.png"
+    cv2.imwrite(savePath, stretch_image)
+    i += 1
+    savePath = output + str(i) + "_twist.png"
+    cv2.imwrite(savePath, twist_image)
+    i += 1
+
+    # Augmentation by local pixelization
+    height, width, channels = image.shape
+    pixel_size = int(min(height, width) * 0.1) # Size of each pixel is 10% of the smaller dimension
+    for y in range(0, height, pixel_size):
+        for x in range(0, width, pixel_size):
+            image[y:y+pixel_size, x:x+pixel_size, :] = np.mean(image[y:y+pixel_size, x:x+pixel_size, :], axis=(0,1), keepdims=True)
+
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, image)
+
+    
+    # Shadow Effect
+    shadow_image = add_shadow(image, darkness_factor=0.7, x_offset=50, y_offset=50)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, shadow_image)
+
+    # Glare Effect
+    glare_image = add_glare(image, brightness_factor=0.7, x_offset=50, y_offset=50)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, glare_image)
+
+    # Fog Effect
+    fog_image = add_fog(image, brightness=80, density=0.6)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, fog_image)
+
+    # Speckle Noise
+    noisy_image = add_speckle_noise(image, mean=0, std=50)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, noisy_image)
+
+    # Local Distortion
+    distorted_image  = apply_local_distortion(image, distortion_intensity=0.5)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, distorted_image)
+
+    # Applying the Patch Gaussian augmentation
+    augmented_image = image.copy()
+    rows, cols, channels = augmented_image.shape
+    for _ in range(5):
+        # Generate random patch
+        patch_size = np.random.randint(20, 50)
+        x = np.random.randint(0, cols - patch_size)
+        y = np.random.randint(0, rows - patch_size)
+        patch = augmented_image[y:y+patch_size, x:x+patch_size].copy()
+
+        # Apply Gaussian blur to patch
+        patch = cv2.GaussianBlur(patch, (15, 15), 0)
+
+        # Blend patch into original image
+        alpha = np.random.uniform(0.3, 0.7)
+        augmented_image[y:y+patch_size, x:x+patch_size] = cv2.addWeighted(patch, alpha, augmented_image[y:y+patch_size, x:x+patch_size], 1-alpha, 0)
+    
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, augmented_image)
+
+    # Perspective cropping
+    height, width = image.shape[:2]
+    pts1 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
+    pt1 = 0.15*width
+    pt2 = 0.85*width
+    pts2 = np.float32([[pt1, 0], [pt2, 0], [0, height], [width, height]])
+    M = cv2.getPerspectiveTransform(pts1, pts2)
+    perspective = cv2.warpPerspective(image, M, (width, height))
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, perspective)
