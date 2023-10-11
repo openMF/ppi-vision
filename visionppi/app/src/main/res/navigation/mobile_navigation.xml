@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="org.mifos.visionppi.ui.home.MainActivity"
+        android:name="org.mifos.visionppi.ui.AnalyzeActvity"
         android:label="@string/title_analyze"
-        tools:layout="@layout/content_main" />
+        tools:layout="@layout/activity_analyze" />
 
     <fragment
         android:id="@+id/navigation_menu"
