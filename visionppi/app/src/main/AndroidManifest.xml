@@ -65,12 +65,12 @@
             android:name=".ui.user_profile.UserProfileActivity"
             android:label="User Profile"
             android:theme="@style/AppTheme.NoActionBar"/>
-
+      
         <activity
             android:name=".ui.SurveyActivity"
             android:label="Survey"
             android:theme="@style/AppTheme.NoActionBar"/>
-
+      
     </application>
 
 </manifest>
