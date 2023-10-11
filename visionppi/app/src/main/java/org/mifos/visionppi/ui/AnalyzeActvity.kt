@@ -201,7 +201,7 @@ class AnalyzeActvity : Fragment() {
         }
     }
 
-    private fun onAnalysisButtonClick() 
+    private fun onAnalysisButtonClick() {
         imageGridView.adapter = imageAdapter
         finalLabels.clear()
         counter = 0
