@@ -1,6 +1,7 @@
 package org.mifos.visionppi.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -27,7 +28,7 @@ class SurveyActivity : AppCompatActivity() {
 
     private lateinit var activitySurveyBinding: ActivitySurveyBinding
     private var currentQuestionIndex = 0
-    private var questionsWithOptions: List<Pair<String, List<String>>> = emptyList()
+    private var questionsWithOptions: List<Triple<String, List<String>, Map<String, Int>>> = emptyList()
     private val answers: MutableMap<String, String> = mutableMapOf()
     private val selectedOptions: MutableMap<String, String?> = mutableMapOf()
     private val LOCATION_PERMISSION_REQUEST_CODE = 1001
@@ -115,18 +116,73 @@ class SurveyActivity : AppCompatActivity() {
         // Update the list of questionsWithOptions based on the selected country
         questionsWithOptions = when (country) {
             "India" -> listOf(
-                    "Q1. This is Question 1 for India" to listOf("Option A1", "Option B1", "Option C1", "Option D1"),
-                    "Q2. This is 2nd one for India" to listOf("Option A2", "Option B2", "Option C2", "Option D2"),
+                    Triple(
+                            "Q1. This is Question 1 for India",
+                            listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                            mapOf(
+                                    "Option A1" to 1, // Assigning marks to each option
+                                    "Option B1" to 2,
+                                    "Option C1" to 3,
+                                    "Option D1" to 4
+                            )
+                    ),
+                    Triple(
+                            "Q2. This is Question 2 for India",
+                            listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                            mapOf(
+                                    "Option A1" to 5, // Assigning marks to each option
+                                    "Option B1" to 6,
+                                    "Option C1" to 7,
+                                    "Option D1" to 8
+                            )
+                    ),
+
                     // Add more questions for India
             )
             "Afghanistan" -> listOf(
-                    "Q1. This is Question 1 for Afghanistan" to listOf("Option A1", "Option B1", "Option C1", "Option D1"),
-                    "Q2. This is 2nd one for Afghanistan" to listOf("Option A2", "Option B2", "Option C2", "Option D2"),
+                    Triple(
+                            "Q1. This is Question 1 for Afghanistan",
+                            listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                            mapOf(
+                                    "Option A1" to 9, // Assigning marks to each option
+                                    "Option B1" to 10,
+                                    "Option C1" to 11,
+                                    "Option D1" to 12
+                            )
+                    ),
+                    Triple(
+                            "Q2. This is Question 2 for Afghanistan",
+                            listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                            mapOf(
+                                    "Option A1" to 13, // Assigning marks to each option
+                                    "Option B1" to 14,
+                                    "Option C1" to 15,
+                                    "Option D1" to 16
+                            )
+                    ),
                     // Add more questions for Afghanistan
             )
             "Nepal" -> listOf(
-                    "Q1. This is Question 1 for Nepal" to listOf("Option A1", "Option B1", "Option C1", "Option D1"),
-                    "Q2. This is 2nd one for Nepal" to listOf("Option A2", "Option B2", "Option C2", "Option D2"),
+                    Triple(
+                            "Q1. This is Question 1 for Nepal",
+                            listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                            mapOf(
+                                    "Option A1" to 17, // Assigning marks to each option
+                                    "Option B1" to 18,
+                                    "Option C1" to 19,
+                                    "Option D1" to 20
+                            )
+                    ),
+                    Triple(
+                            "Q2. This is Question 2 for Nepal",
+                            listOf("Option A1", "Option B1", "Option C1", "Option D1"),
+                            mapOf(
+                                    "Option A1" to 21, // Assigning marks to each option
+                                    "Option B1" to 22,
+                                    "Option C1" to 23,
+                                    "Option D1" to 24
+                            )
+                    ),
                     // Add more questions for Nepal
             )
             else -> emptyList()
@@ -137,13 +193,14 @@ class SurveyActivity : AppCompatActivity() {
         setQuestionAndOptions(currentQuestionIndex)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setQuestionAndOptions(index: Int) {
-        val (question, options) = questionsWithOptions[index]
+        val (question, options, optionMarks) = questionsWithOptions[index]
         activitySurveyBinding.tvQuestion.text = question
-        activitySurveyBinding.optionA.text = options[0]
-        activitySurveyBinding.optionB.text = options[1]
-        activitySurveyBinding.optionC.text = options[2]
-        activitySurveyBinding.optionD.text = options[3]
+        activitySurveyBinding.optionA.text = "${options[0]} (${optionMarks[options[0]]} marks)"
+        activitySurveyBinding.optionB.text = "${options[1]} (${optionMarks[options[1]]} marks)"
+        activitySurveyBinding.optionC.text = "${options[2]} (${optionMarks[options[2]]} marks)"
+        activitySurveyBinding.optionD.text = "${options[3]} (${optionMarks[options[3]]} marks)"
 
         // Check if a selection was made for this question
         if (selectedOptions.containsKey(question)) {
@@ -164,7 +221,8 @@ class SurveyActivity : AppCompatActivity() {
     private fun updateSelectedOption(radioButton: RadioButton) {
         val question = questionsWithOptions[currentQuestionIndex].first
         selectedOptions[question] = radioButton.text.toString()
-        Log.d("SelectedOption", "Question ${currentQuestionIndex + 1}: ${selectedOptions[question]}")
+        val selectedMarks = questionsWithOptions[currentQuestionIndex].third[radioButton.text.toString()]
+        Log.d("SelectedOption", "Question ${currentQuestionIndex + 1}: ${selectedOptions[question]} ($selectedMarks marks)")
         // Add the selected answer to the dictionary
         answers["Question ${currentQuestionIndex + 1}"] = selectedOptions[question] ?: "Not answered"
     }
