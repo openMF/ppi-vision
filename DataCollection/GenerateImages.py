@@ -233,7 +233,7 @@ for image in images:
     cv2.imwrite(savePath, flip)
 
     # Changing brightness out an image
-    for num in range (0, 5):
+    for num in range (0, 6):
         gamma = float(decimal.Decimal(random.randrange(10, 1000))/100)
         invGamma = 1.0 / gamma
         table = np.array([((i / 255.0) ** invGamma) * 255
@@ -256,7 +256,7 @@ for image in images:
 
     l, a, b = cv2.split(lab)
     
-    for num in range(0, 5):
+    for num in range(0, 6):
         value = float(decimal.Decimal(random.randrange(10, 1000))/100)
         clahe = cv2.createCLAHE(clipLimit=value, tileGridSize=(8,8))
         cl = clahe.apply(l)
@@ -312,6 +312,91 @@ for image in images:
     savePath = output + str(i) + ".png"
     i += 1
     cv2.imwrite(savePath, median)
+
+    # rotation of image to 90^
+    imgRot90=cv2.rotate(image,cv2.ROTATE_90_CLOCKWISE)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRot90)
+
+    # rotation of image to 180^
+    imgRot180=cv2.rotate(image,cv2.ROTATE_180)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRot180)
+
+    # rotation of image to 270^
+    imgRot270=cv2.rotate(image,cv2.ROTATE_90_COUNTERCLOCKWISE)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRot270)
+
+    # bgr image
+    bgrImg=cv2.imread(path)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, bgrImg)
+
+    # rgb image
+    imgRGB=cv2.imread(path,cv2.COLOR_BAYER_BG2RGB)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRGB)
+
+    # lab image
+    imgLAB=cv2.imread(path,cv2.COLOR_BGR2LAB)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgLAB)
+
+    # xyz image
+    imgXYZ=cv2.imread(path,cv2.COLOR_BGR2XYZ)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgXYZ)
+
+    # center crop
+    height, width = image.shape[:2]
+    crop_width = crop_height = min(width, height)
+    center_x = int(width/2)
+    center_y = int(height/2)
+    x = center_x - int(crop_width/2)
+    y = center_y - int(crop_height/2)
+    w = h = crop_width
+    cropImg=image[y:y+h, x:x+w]
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, cropImg)
+
+    # mean blur of image
+    kernel_size = 3
+    mean_filtered = cv2.blur(image, (kernel_size, kernel_size)) 
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, mean_filtered)
+
+    #median blur
+    kernel_size = 3
+    median_filtered = cv2.medianBlur(image, kernel_size)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, median_filtered)
+
+    #interpolation of image
+    height,width,ch=image.shape
+    dim=[height//2,width//2]
+    imgAreaResize=cv2.resize(image,dim,interpolation=cv2.INTER_AREA)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgAreaResize)
+
+    #interpolation 2nd technique
+    height,width,ch=image.shape
+    dim=[height//2,width//2]
+    imgCubicResize=cv2.resize(image,dim,interpolation=cv2.INTER_CUBIC)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgCubicResize)
 
     # Bilateral Filtering
     blur = cv2.bilateralFilter(image,9,75,75)
