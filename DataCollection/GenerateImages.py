@@ -313,6 +313,24 @@ for image in images:
     i += 1
     cv2.imwrite(savePath, median)
 
+    # rotation of image to 90 degree
+    imgRot90=cv2.rotate(image,cv2.ROTATE_90_CLOCKWISE)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRot90)
+
+    # rotation of image to 180 degree
+    imgRot180=cv2.rotate(image,cv2.ROTATE_180)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRot180)
+
+    # rotation of image to 270 degree
+    imgRot270=cv2.rotate(image,cv2.ROTATE_90_COUNTERCLOCKWISE)
+    savePath = output + str(i) + ".png"
+    i += 1
+    cv2.imwrite(savePath, imgRot270)
+
     # Bilateral Filtering
     blur = cv2.bilateralFilter(image,9,75,75)
     savePath = output + str(i) + ".png"
