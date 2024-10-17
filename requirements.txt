@@ -2,7 +2,7 @@ numpy==1.19.2
 matplotlib==3.3.2
 sklearn==0.0
 torch==1.6.0
-torchvision==0.7.0
+torchvision==0.20.0
 opencv-contrib-python==4.3.0.36
 opencv-python==4.3.0.36
 scikit-image==0.17.2
