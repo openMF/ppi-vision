@@ -256,7 +256,7 @@ for image in images:
 
     l, a, b = cv2.split(lab)
     
-    for num in range(0, 5):
+    for num in range(0, 6):
         value = float(decimal.Decimal(random.randrange(10, 1000))/100)
         clahe = cv2.createCLAHE(clipLimit=value, tileGridSize=(8,8))
         cl = clahe.apply(l)
